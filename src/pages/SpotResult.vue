@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-lg-16 mt-lg-10" style="color: #455A64;">
+  <div style="color: #455A64;">
     <h2>{{ area.name }}</h2>
     <v-divider class="mb-2"></v-divider>
     <v-row no-gutters class="my-5">

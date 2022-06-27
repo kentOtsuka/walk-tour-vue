@@ -8,9 +8,12 @@
       fixed
       temporary
     >
+      <!-- 線 -->
+      <v-divider></v-divider>
+
       <!-- メニュー表のリスト -->
       <v-list>
-        <!-- <template v-if="!authUser">
+        <template v-if="!authUser">
           <v-list-item
             v-for="item in items"
             :key="item.title"
@@ -26,10 +29,9 @@
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        </template> -->
+        </template>
 
-        <!-- <template v-else> -->
-        <template>
+        <template v-else>
           <!-- リストを繰り返し処理で全て表示 -->
           <v-list-item
             v-for="item in itemsLogin"
@@ -55,7 +57,7 @@
 </template>
 
 <script>
-// import { mapGetters, mapActions } from "vuex"
+import { mapGetters, mapActions } from "vuex"
 
 export default {
   // 親のHeader.vueから引き継ぎ
@@ -70,18 +72,43 @@ export default {
       // 未ログインのメニューリスト
       items: [
         { title: 'トップページ', icon: 'mdi-home-outline', url: '/' },
-        // { title: 'ログイン', icon: 'mdi-login', url: '/login' },
-        // { title: '新規登録', icon: 'mdi-account-plus', url: '/register' },
+        { title: 'ログイン', icon: 'mdi-login', url: '/login' },
+        { title: '新規登録', icon: 'mdi-account-plus', url: '/register' },
       ],
       // ログイン中のメニューリスト
       itemsLogin: [
         { title: 'トップページ', icon: 'mdi-home-outline', url: '/' },
-        { title: 'お気に入り地点', icon: 'mdi-heart-outline', url: '' },
-        { title: '地点リクエスト', icon: 'mdi-send-outline', url: '' },
-        // { title: 'ログアウト', icon: 'mdi-logout', action: "logout" },
+        // { title: 'お気に入り地点', icon: 'mdi-heart-outline', url: '' },
+        // { title: '地点リクエスト', icon: 'mdi-send-outline', url: '' },
+        { title: 'ログアウト', icon: 'mdi-logout', action: "logout" },
       ],
       right: null,
     }
   },
+  computed: {
+    // mapGettersでログイン中のユーザを取得
+    ...mapGetters("users", ["authUser"])
+  },
+  methods: {
+    // mapActionでログアウト処理を呼び出し
+    ...mapActions("users", ["logoutUser"]),
+    // メニューの中でログアウトメニューをクリックした時のみ発火
+    triggerClick(action) {
+      if (action === 'logout') {
+        this.logout()
+      }
+    },
+    // ログアウトを実行するメソッド
+    async logout() {
+      try {
+        // ログアウト処理
+        await this.logoutUser()
+        // // ログアウト後、ログインページに遷移させる
+        this.$router.push({name: 'Login'})
+      } catch (error) {
+        console.log(error)
+      }
+    },
+  }
 }
 </script>
