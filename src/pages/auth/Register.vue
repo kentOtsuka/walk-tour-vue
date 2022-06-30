@@ -43,7 +43,7 @@
                 prepend-icon="mdi-lock-outline"
                 :append-icon="showPasswordConfirmation ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="showPasswordConfirmation ? 'text' : 'password'"
-                label="パスワー確認"
+                label="パスワード確認"
                 placeholder="8〜12文字"
                 validate-on-blur
                 required

@@ -1,9 +1,16 @@
 <template>
-  <div class="d-flex justify-center mt-5" style="margin: auto;" >
-    <div
-      id="vmap"
-      style="width: 900px; height: 600px; margin: auto;"
-    ></div>
+  <div>
+    <h2 class="mb-1 d-flex align-center justify-center">
+      <v-icon left bottom>mdi-map-outline</v-icon>
+      地図から探す
+    </h2>
+    <v-divider class="mb-2"></v-divider>
+    <div class="d-flex justify-center mt-5" style="margin: auto;" >
+      <div
+        id="vmap"
+        style="width: 900px; height: 600px; margin: auto;"
+      ></div>
+    </div>
   </div>
 </template>
 
@@ -51,8 +58,21 @@ export default {
     },
     // クリックされた国の詳細ページに遷移させる処理
     setArea(iso) {
-      this.$emit("set-area", iso);
-    }
+      // iso二桁コードをもとにクリックされた国を取得
+      axios.get('/countries', {
+        params: {
+          iso: iso
+        }
+      })
+      .then( res => {
+        this.$router.push({ name: "SpotResult", params: { id: res.data.id } });
+      })
+      .catch( res => {
+        // 地点登録がない場合は遷移せずアラートで表示
+        var message = res.response.data.name + 'の登録情報はありません';
+        alert(message);
+      });
+    },
   }
 }
 </script>
