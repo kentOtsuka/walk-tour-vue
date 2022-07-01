@@ -72,6 +72,7 @@ export default {
       // 未ログインのメニューリスト
       items: [
         { title: 'トップページ', icon: 'mdi-home-outline', url: '/' },
+        { title: 'ホットスポット', icon: 'mdi-fire', url: '/spotRanking' },
         { title: 'ログイン', icon: 'mdi-login', url: '/login' },
         { title: '新規登録', icon: 'mdi-account-plus', url: '/register' },
       ],
