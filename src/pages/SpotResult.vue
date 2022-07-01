@@ -1,7 +1,10 @@
 <template>
   <div>
-    <h2>{{ area.name }}</h2>
-    <v-divider class="mb-2"></v-divider>
+    <h2 class="mb-1 d-flex align-center justify-center">
+      <v-icon left bottom>mdi-earth</v-icon>
+      {{ area.name }}
+    </h2>
+    <v-divider class="mb-2" style="max-width: 700px; margin: auto;"></v-divider>
     <v-row no-gutters class="my-5">
       <v-col>
         <GoogleMap :area="area" :spots="spots" :spot="spot" @get-video="getVideo" @click-count="clickCount"></GoogleMap>
@@ -9,21 +12,24 @@
     </v-row>
 
     <template v-if="videos.length != 0">
-      <v-row>
-        <v-col lg="6" class="d-flex align-end">
-          <h3>{{ spot_name }}</h3>
+      <v-row style="max-width: 1200px; margin: auto;">
+        <v-col lg="6" class="d-flex align-end pb-0">
+          <h3 class="mb-2 d-flex align-center justify-center">
+            <v-icon left bottom>mdi-map-marker</v-icon>
+            {{ spot_name }}
+          </h3>
         </v-col>
-        <v-col lg="6">
+        <v-col lg="6 pb-0">
           <v-tabs right v-model="currentTab">
             <v-tab @click="viewOrder(videos)" :value="'viewTab'">閲覧順</v-tab>
             <v-tab @click="newOrder(videos)">新着順</v-tab>
           </v-tabs>
         </v-col>
       </v-row>
-      <v-divider class="mb-2"></v-divider>
+      <v-divider style="max-width: 1200px; margin: auto;"></v-divider>
     </template>
     <template v-else>
-      <v-chip label large class="mt-10 d-flex justify-center" color="light-blue lighten-1" text-color="white">
+      <v-chip label large class="mt-10 d-flex justify-center" color="light-blue lighten-1" text-color="white" style="max-width: 700px; margin: auto;">
         <v-icon left>mdi-cursor-default-click-outline</v-icon>
         マーカーをクリックしてください
       </v-chip>
