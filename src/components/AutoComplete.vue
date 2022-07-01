@@ -6,10 +6,12 @@
       label="国名から検索しよう"
       no-data-text="データがありません"
       dense
+      solo
     >
     </v-autocomplete>
     <v-btn
-      class="ml-2"
+      class="ml-2 mt-1"
+      bottom
       outlined
       x-small
       fab

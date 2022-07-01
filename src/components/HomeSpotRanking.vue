@@ -2,12 +2,14 @@
   <div>
     <router-link to="/spotRanking" style="color: #455A64; text-decoration: none;">
       <h2 class="mb-1 d-flex align-center justify-center">
-        <v-icon left bottom>mdi-map-marker-outline</v-icon>
+        <v-icon left bottom>mdi-fire</v-icon>
         ホットスポット
       </h2>
     </router-link>
     <v-divider class="mb-2"></v-divider>
-    <v-row>
+
+    <!-- 画面幅がxs,smの時に表示 -->
+    <v-row class="mx-auto hidden-md-and-up">
       <v-col cols="12" sm="12" md="4" lg="4" class="my-1">
         <v-hover v-slot="{ hover }">
           <v-card  :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
@@ -64,6 +66,31 @@
       </v-col>
     </v-row>
 
+    <!-- 画面幅がmd, lg, xlで表示 -->
+    <v-sheet class="mx-auto hidden-sm-and-down" max-width="1400">
+      <v-slide-group class="pa-4" active-class="success" show-arrows  height="400">
+        <v-slide-item
+          v-for="spotDetail in spotDetails" :key="spotDetail.id">
+          <v-hover v-slot="{ hover }">
+            <v-card  :elevation="hover ? 12 : 2" width="300" class="ma-2" style="margin: auto;">
+              <v-img :src="spotDetail.video.thumbnail" alt="サムネイル"  @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video);" style="cursor: pointer"></v-img>
+              <div class="d-flex justify-space-between">
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                    <v-list-item-subtitle class="mt-1">{{ spotDetail.area.name }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-card-actions>
+                  <v-btn color="blue darken-1 align-center" text  @click="setSpot(spotDetail.area, spotDetail.spot)">行ってみる！</v-btn>
+                </v-card-actions>
+              </div>
+            </v-card>
+          </v-hover>
+        </v-slide-item>
+      </v-slide-group>
+    </v-sheet>
+
     <!-- ダイアログボックス -->
     <v-dialog v-model="dialog" max-width="1200px">
       <v-card>
@@ -82,7 +109,7 @@
         </v-col>
         <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
         <v-card-subtitle class="my-0 pb-1">{{ view_count.toLocaleString() }}回視聴・{{ published_at }}</v-card-subtitle>
-        <v-space></v-space>
+        <v-spacer></v-spacer>
         <v-col class="d-flex justify-center pt-0">
           <v-btn
             color="blue darken-1"
@@ -125,6 +152,8 @@ export default {
       firstVideo: {},
       secondVideo: {},
       thirdVideo: {},
+      // すべての地点その国、動画オブジェクトを格納する配列
+      spotDetails: [],
       // ダイアログに渡すdata
       dialog: false,
       title: '',
@@ -132,8 +161,8 @@ export default {
       view_count: '',
       published_at: '',
       urlForEmbedVideo: '',
-      area: [],
-      spot: [],
+      area: {},
+      spot: {},
     }
   },
   created() {
@@ -153,6 +182,9 @@ export default {
     getSpot() {
       axios.get('/all_spot')
       .then( res => {
+        for(let i = 0; i < 12; i++) {
+          this.spotDetails.push( {id: i, spot: res.data.spots[i], area: res.data.areas[i], video: res.data.videos[i]} )
+        };
         this.firstSpot = res.data.spots[0]
         this.secondSpot = res.data.spots[1]
         this.thirdSpot = res.data.spots[2]

@@ -12,7 +12,7 @@
 <script>
 import AutoComplete from '../components/AutoComplete.vue'
 import WorldMap from '../components/WorldMap.vue'
-import HomeRanking from '../components/HomeRanking.vue'
+import HomeRanking from '../components/HomeSpotRanking.vue'
 
 export default {
   components: { WorldMap, AutoComplete, HomeRanking },
