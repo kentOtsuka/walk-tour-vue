@@ -3,6 +3,7 @@ import Router from "vue-router";
 import store from "./store"
 import Home from "./pages/Home.vue"
 import SpotResult from "./pages/SpotResult.vue"
+import SpotRanking from "./pages/SpotRanking.vue"
 import Login from "./pages/auth/Login.vue"
 import Register from "./pages/auth/Register.vue"
 
@@ -25,6 +26,9 @@ const router = new Router({
     },
     {
       path: "/register", component: Register, name: "Register",
+    },
+    {
+      path: "/spotRanking", component: SpotRanking, name: "SpotRanking",
     },
   ]
 })

@@ -1,15 +1,17 @@
 <template>
-  <div class="d-flex justify-center mt-5" style="margin: auto;" >
+  <div class="d-flex justify-center mt-5" style="margin: auto;" max-width="1000px" >
     <v-autocomplete
       v-model="value"
       :items="area_name"
-      label="地点名"
+      label="国名から検索しよう"
       no-data-text="データがありません"
       dense
+      solo
     >
     </v-autocomplete>
     <v-btn
-      class="ml-2"
+      class="ml-2 mt-1"
+      bottom
       outlined
       x-small
       fab

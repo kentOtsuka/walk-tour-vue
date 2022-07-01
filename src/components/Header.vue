@@ -9,7 +9,7 @@
     >
       <!-- ヘッダータイトル -->
       <v-icon color="blue-grey lighten-1">
-        WALKTOUR
+        VtourHub
       </v-icon>
       <v-spacer></v-spacer>
       <!-- メニューアイコン -->

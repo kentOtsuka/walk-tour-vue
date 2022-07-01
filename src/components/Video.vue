@@ -1,21 +1,23 @@
 <template>
   <div>
-    <v-row>
+    <v-row style="max-width: 1200px; margin: auto;">
       <v-col v-for="video in videos" :key="video.videoId" cols="12" sm="6" md="6" lg="4" class="my-1">
-        <v-card>
-          <v-img :src="video.thumbnail" alt="サムネイル"  @click="openDialog(video);" style="cursor: pointer"></v-img>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>{{ video.title }}</v-list-item-title>
-              <v-list-item-subtitle class="mt-1">{{ video.view_count.toLocaleString() }}回視聴・{{ video.published_at }}</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
+        <v-hover v-slot="{ hover }">
+          <v-card :elevation="hover ? 12 : 2" max-width="400px" style="margin: auto;">
+            <v-img :src="video.thumbnail" alt="サムネイル"  @click="openDialog(video);" style="cursor: pointer"></v-img>
+            <v-list-item>
+              <v-list-item-content>
+                <v-list-item-title>{{ video.title }}</v-list-item-title>
+                <v-list-item-subtitle class="mt-1">{{ video.view_count.toLocaleString() }}回視聴・{{ video.published_at }}</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+          </v-card>
+        </v-hover>
       </v-col>
     </v-row>
 
     <!-- ダイアログボックス -->
-    <v-dialog v-model="dialog">
+    <v-dialog v-model="dialog" max-width="1300px">
       <v-card>
         <v-col>
           <v-responsive :aspect-ratio="16/9">
@@ -31,13 +33,13 @@
           </v-responsive>
         </v-col>
         <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-        <v-card-subtitle class="my-0 pb-1">{{ view_count }}回視聴・{{ published_at }}</v-card-subtitle>
+        <v-card-subtitle class="my-0 pb-1">{{ view_count.toLocaleString() }}回視聴・{{ published_at }}</v-card-subtitle>
         <v-divider></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
             color="blue darken-1"
-            outlined
+            text
             @click="resetDialog()"
           >
             CLOSE
