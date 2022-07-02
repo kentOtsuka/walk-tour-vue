@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container class="my-16">
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom>mdi-earth</v-icon>
       {{ area.name }}
@@ -14,10 +14,10 @@
     <template v-if="videos.length != 0">
       <v-row style="max-width: 1200px; margin: auto;">
         <v-col lg="6" class="d-flex align-end pb-0">
-          <h3 class="mb-2 d-flex align-center justify-center">
-            <v-icon left bottom>mdi-map-marker</v-icon>
+          <h4 class="mb-2 d-flex align-center justify-center">
+            <v-icon left bottom class="hidden-sm-and-down">mdi-map-marker</v-icon>
             {{ spot_name }}
-          </h3>
+          </h4>
         </v-col>
         <v-col lg="6 pb-0">
           <v-tabs right v-model="currentTab">
@@ -35,7 +35,7 @@
       </v-chip>
     </template>
     <Video :videos="videos"></Video>
-  </div>
+  </v-container>
 </template>
 
 <script>

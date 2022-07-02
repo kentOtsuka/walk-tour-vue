@@ -1,18 +1,18 @@
 <template>
-  <div>
+  <v-container class="my-16">
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom>mdi-fire</v-icon>
       ホットスポット
     </h2>
     <v-divider class="mb-2" style="max-width: 700px; margin: auto;"></v-divider>
     <div class="d-flex justify-center">
-      <v-row>
-        <v-col v-for="spotDetail in spotDetails" :key="spotDetail.id" cols="12">
+      <v-row style="max-width: 1000px; margin: auto;">
+        <v-col v-for="spotDetail in spotDetails" :key="spotDetail.id" cols="12" lg="6" md="12" sm="12">
           <v-hover v-slot="{ hover }">
-            <v-card  :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
+            <v-card :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
               <div class="d-flex justify-space-between">
                 <div class="d-flex flex-column">
-                  <v-list-item>
+                  <v-list-item style="width: 150px;">
                     <v-list-item-content>
                       <v-list-item-subtitle class="mb-2">過去{{ spotDetail.spot.click_count }}回の渡航歴</v-list-item-subtitle>
                       <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
@@ -75,7 +75,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </div>
+  </v-container>
 </template>
 
 <script>

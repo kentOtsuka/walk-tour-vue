@@ -4,7 +4,7 @@
       <v-icon left bottom>mdi-map-outline</v-icon>
       地図から探す
     </h2>
-    <v-divider class="mb-2"></v-divider>
+    <v-divider class="mb-2 mx-auto" style="max-width: 1200px; width: 90%;" ></v-divider>
     <div class="d-flex justify-center mt-5" style="margin: auto;" >
       <div
         id="vmap"

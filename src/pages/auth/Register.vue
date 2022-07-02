@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container class="my-16">
     <v-row justify="center">
       <v-col cols="11" sm="10" md="8" lg="6">
         <v-card>
@@ -74,7 +74,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script>
