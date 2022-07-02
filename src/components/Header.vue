@@ -3,14 +3,16 @@
     <!-- ヘッダー（ナビゲーションバー） -->
     <v-app-bar
       app
+      outlined
       color="#fff"
-      class="elevation-0"
-      style="border-bottom: 2px solid #B3E5FC;"
+      class="elevation-2"
     >
       <!-- ヘッダータイトル -->
-      <v-icon color="blue-grey lighten-1">
-        VtourHub
-      </v-icon>
+      <router-link to="/" style="text-decoration: none;">
+        <v-icon color="blue-grey lighten-1">
+          VtourHub
+        </v-icon>
+      </router-link>
       <v-spacer></v-spacer>
       <!-- メニューアイコン -->
       <v-btn color="blue-grey lighten-1" icon @click.stop="drawer = !drawer">
