@@ -24,3 +24,4 @@ pnpm-debug.log*
 *.sw?
 
 src/plugins/jqvmap-master
+src/assets

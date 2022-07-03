@@ -1,19 +1,15 @@
 <template>
-  <v-app id="inspire">
+  <v-app id="inspire" style="color: #455A64; font-family: 'Tsukushi A Round Gothic','筑紫A丸ゴシック';">
     <Header></Header>
     <!-- ルートコンポーネントでページのメイン部分の表示 -->
-    <v-container class="my-16">
-      <router-view class="mx-lg-16 my-lg-8" style="color: #455A64;"></router-view>
-    </v-container>
+    <router-view></router-view>
   </v-app>
 </template>
 
 <script>
-  import Header from './components/Header.vue'
+import Header from './components/Header.vue'
 
-  export default {
-    components: {
-      Header,
-    },
-  }
+export default {
+  components: { Header },
+}
 </script>

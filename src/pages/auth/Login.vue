@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <v-container class="my-16">
+    <h2 class="mb-1 d-flex align-center justify-center">
+      <v-icon left bottom>mdi-login</v-icon>
+      ログイン
+    </h2>
+    <v-divider class="mb-4" style="max-width: 700px; margin: auto;"></v-divider>
+
     <v-row justify="center">
       <v-col cols="11" sm="10" md="8" lg="6">
         <v-card>
@@ -53,7 +59,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -77,7 +83,7 @@ export default {
       // パスワードのバリデーション
       passwordRules: [
         v => !!v || 'パスワードを入力してください',
-        v => v.length <= 12 || '6〜12文字が有効です',
+        v => v.length <= 12 || '8〜12文字が有効です',
         v => v.length >= 8 || '8〜12文字が有効です',
       ],
       // パスワードの表示状態を表す(trueで表示)

@@ -1,16 +1,16 @@
 <template>
   <div>
     <router-link to="/spotRanking" style="color: #455A64; text-decoration: none;">
-      <h2 class="mb-1 d-flex align-center justify-center">
+      <h2 class="d-flex align-center justify-center">
         <v-icon left bottom>mdi-fire</v-icon>
         ホットスポット
       </h2>
     </router-link>
-    <v-divider class="mb-2"></v-divider>
+    <v-divider class="mb-2 mx-auto" style="max-width: 1200px; width: 90%;"></v-divider>
 
     <!-- 画面幅がxs,smの時に表示 -->
     <v-row class="mx-auto hidden-md-and-up">
-      <v-col cols="12" sm="12" md="4" lg="4" class="my-1">
+      <v-col cols="12" sm="12" md="4" lg="4" class="">
         <v-hover v-slot="{ hover }">
           <v-card  :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
             <v-img :src="firstVideo.thumbnail" alt="サムネイル"  @click="openDialog(firstArea, firstSpot, firstVideo);" style="cursor: pointer"></v-img>
@@ -28,7 +28,7 @@
           </v-card>
         </v-hover>
       </v-col>
-      <v-col cols="12" sm="12" md="4" lg="4" class="my-1">
+      <v-col cols="12" sm="12" md="4" lg="4" class="">
         <v-hover v-slot="{ hover }">
           <v-card  :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
             <v-img :src="secondVideo.thumbnail" alt="サムネイル"  @click="openDialog(secondArea, secondSpot, secondVideo);" style="cursor: pointer"></v-img>
@@ -46,7 +46,7 @@
           </v-card>
         </v-hover>
       </v-col>
-      <v-col cols="12" sm="12" md="4" lg="4" class="my-1">
+      <v-col cols="12" sm="12" md="4" lg="4" class="">
         <v-hover v-slot="{ hover }">
           <v-card  :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
             <v-img :src="thirdVideo.thumbnail" alt="サムネイル"  @click="openDialog(thirdArea, thirdSpot, thirdVideo);" style="cursor: pointer"></v-img>

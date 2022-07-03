@@ -1,11 +1,10 @@
 <template>
-  <div class="d-flex justify-center mt-5" style="margin: auto;" max-width="1000px" >
+  <div class="d-flex justify-center" style="margin: auto;" max-width="1000px" >
     <v-autocomplete
       v-model="value"
       :items="area_name"
       label="国名から検索しよう"
       no-data-text="データがありません"
-      dense
       solo
     >
     </v-autocomplete>
@@ -13,9 +12,9 @@
       class="ml-2 mt-1"
       bottom
       outlined
-      x-small
+      small
       fab
-      color="indigo"
+      color="white"
       @click="getMap"
     >
       <v-icon>mdi-magnify</v-icon>
