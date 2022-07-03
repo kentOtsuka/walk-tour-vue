@@ -4,6 +4,7 @@ import store from "./store"
 import Home from "./pages/Home.vue"
 import SpotResult from "./pages/SpotResult.vue"
 import SpotRanking from "./pages/SpotRanking.vue"
+import SpotRequest from "./pages/SpotRequest.vue"
 import Login from "./pages/auth/Login.vue"
 import Register from "./pages/auth/Register.vue"
 
@@ -29,6 +30,9 @@ const router = new Router({
     },
     {
       path: "/spotRanking", component: SpotRanking, name: "SpotRanking",
+    },
+    {
+      path: "/spotRequest", component: SpotRequest, name: "SpotRequest", meta: { requiredAuth: true }
     },
   ]
 })
