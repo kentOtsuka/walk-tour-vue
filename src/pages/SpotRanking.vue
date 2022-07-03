@@ -12,7 +12,7 @@
             <v-card :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
               <div class="d-flex justify-space-between">
                 <div class="d-flex flex-column">
-                  <v-list-item style="width: 150px;">
+                  <v-list-item style="width: 160px;">
                     <v-list-item-content>
                       <v-list-item-subtitle class="mb-2">過去{{ spotDetail.spot.click_count }}回の渡航歴</v-list-item-subtitle>
                       <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>

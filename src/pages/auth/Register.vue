@@ -1,5 +1,11 @@
 <template>
   <v-container class="my-16">
+    <h2 class="mb-1 d-flex align-center justify-center">
+      <v-icon left bottom>mdi-account-plus</v-icon>
+      新規登録
+    </h2>
+    <v-divider class="mb-4" style="max-width: 700px; margin: auto;"></v-divider>
+
     <v-row justify="center">
       <v-col cols="11" sm="10" md="8" lg="6">
         <v-card>
