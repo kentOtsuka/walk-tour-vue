@@ -73,6 +73,7 @@ export default {
       items: [
         { title: 'トップページ', icon: 'mdi-home-outline', url: '/' },
         { title: 'ホットスポット', icon: 'mdi-fire', url: '/spotRanking' },
+        { title: 'お知らせ', icon: 'mdi-information-outline', url: '/newsList' },
         // { title: 'スポットをリクエスト', icon: 'mdi-send-circle', url: '/spotRequest' },
         { title: 'ログイン', icon: 'mdi-login', url: '/login' },
         { title: '新規登録', icon: 'mdi-account-plus', url: '/register' },
@@ -81,6 +82,7 @@ export default {
       itemsLogin: [
         { title: 'トップページ', icon: 'mdi-home-outline', url: '/' },
         { title: 'ホットスポット', icon: 'mdi-fire', url: '/spotRanking' },
+        { title: 'お知らせ', icon: 'mdi-information-outline', url: '/newsList' },
         // { title: 'お気に入り地点', icon: 'mdi-heart-outline', url: '' },
         { title: 'スポットをリクエスト', icon: 'mdi-send-circle', url: '/spotRequest' },
         { title: 'ログアウト', icon: 'mdi-logout', action: "logout" },
