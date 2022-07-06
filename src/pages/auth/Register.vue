@@ -116,9 +116,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions("users", [
-      "registerUser"
-    ]),
+    ...mapActions("users", ["registerUser"]),
     // 新規登録を実行するメソッド
     register() {
       try {

@@ -1,7 +1,7 @@
 <template>
   <v-container class="my-16">
     <h2 class="mb-1 d-flex align-center justify-center">
-      <v-icon left bottom>mdi-fire</v-icon>
+      <v-icon left bottom color="red">mdi-fire</v-icon>
       ホットスポット
     </h2>
     <v-divider class="mb-2" style="max-width: 700px; margin: auto;"></v-divider>

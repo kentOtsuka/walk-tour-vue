@@ -2,7 +2,7 @@
   <div>
     <router-link to="/spotRanking" style="color: #455A64; text-decoration: none;">
       <h2 class="d-flex align-center justify-center">
-        <v-icon left bottom>mdi-fire</v-icon>
+        <v-icon left bottom color="red">mdi-fire</v-icon>
         ホットスポット
       </h2>
     </router-link>
@@ -10,7 +10,7 @@
 
     <!-- 画面幅がxs,smの時に表示 -->
     <v-row class="mx-auto hidden-md-and-up">
-      <v-col cols="12" sm="12" md="4" lg="4" class="">
+      <v-col cols="12" sm="12" md="4" lg="4">
         <v-hover v-slot="{ hover }">
           <v-card  :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
             <v-img :src="firstVideo.thumbnail" alt="サムネイル"  @click="openDialog(firstArea, firstSpot, firstVideo);" style="cursor: pointer"></v-img>
@@ -28,7 +28,7 @@
           </v-card>
         </v-hover>
       </v-col>
-      <v-col cols="12" sm="12" md="4" lg="4" class="">
+      <v-col cols="12" sm="12" md="4" lg="4">
         <v-hover v-slot="{ hover }">
           <v-card  :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
             <v-img :src="secondVideo.thumbnail" alt="サムネイル"  @click="openDialog(secondArea, secondSpot, secondVideo);" style="cursor: pointer"></v-img>
