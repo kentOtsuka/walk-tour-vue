@@ -6,6 +6,7 @@ import SpotResult from "./pages/SpotResult.vue"
 import SpotRanking from "./pages/SpotRanking.vue"
 import SpotRequest from "./pages/SpotRequest.vue"
 import NewsList from "./pages/NewsList.vue"
+import UserProfile from "./pages/UserProfile.vue"
 import Login from "./pages/auth/Login.vue"
 import Register from "./pages/auth/Register.vue"
 
@@ -24,10 +25,13 @@ const router = new Router({
       path: "/countries/:id", component: SpotResult, name: "SpotResult", props: true,
     },
     {
-      path: "/login", component: Login, name: "Login"
+      path: "/profile/:id", component: UserProfile, name: "UserProfile", props: true, meta: { requiredAuth: true }
     },
     {
-      path: "/register", component: Register, name: "Register",
+      path: "/login", component: Login, name: "Login", meta: { loggedIn: true }
+    },
+    {
+      path: "/register", component: Register, name: "Register", meta: { loggedIn: true }
     },
     {
       path: "/spotRanking", component: SpotRanking, name: "SpotRanking",
@@ -46,9 +50,12 @@ router.beforeEach((to, from, next) => {
   // storeに認証済みのユーザが存在するかを問合せる
   store.dispatch("users/fetchAuthUser")
   .then(authUser => {
-    // 認証済みユーザーが存在しないかつ遷移先のページが要ログインのページであればログインページに飛ばすという処理
     if (to.matched.some(record => record.meta.requiredAuth) && !authUser) {
+      // 認証済みユーザーが存在しないかつ遷移先のページが要ログインのページであればログインページに飛ばすという処理
       next({ name: "Login" });
+    } else if (to.matched.some(record => record.meta.loggedIn) && authUser) {
+      // ログイン済みの時にログイン、新規登録ページにリダイレクトされないようにする処理
+      next({ name: "UserProfile", params: { id: authUser.id } });
     } else {
       next();
     }
