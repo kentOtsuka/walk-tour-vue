@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2 class="mb-1 d-flex align-center justify-center">
-      <v-icon left bottom>mdi-map-outline</v-icon>
+      <v-icon left bottom color="blue darken-1">mdi-map-outline</v-icon>
       地図から探す
     </h2>
     <v-divider class="mb-2 mx-auto" style="max-width: 1200px; width: 90%;" ></v-divider>

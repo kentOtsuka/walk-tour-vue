@@ -1,7 +1,7 @@
 <template>
   <v-container class="my-16">
     <h2 class="mb-1 d-flex align-center justify-center">
-      <v-icon left bottom>mdi-earth</v-icon>
+      <v-icon left bottom color="cyan darken-1">mdi-earth</v-icon>
       {{ area.name }}
     </h2>
     <v-divider class="mb-2" style="max-width: 700px; margin: auto;"></v-divider>
@@ -13,19 +13,30 @@
 
     <template v-if="videos.length != 0">
       <v-row style="max-width: 1200px; margin: auto;">
-        <v-col lg="6" class="d-flex align-end pb-0">
+        <v-col cols="12" sm="6" md="6" lg="6" class="d-lg-flex align-lg-end d-md-flex align-md-end d-sm-flex align-sm-end pb-0">
           <h4 class="mb-2 d-flex align-center justify-center">
-            <v-icon left bottom class="hidden-sm-and-down">mdi-map-marker</v-icon>
-            {{ spot_name }}
+            <v-icon left bottom>mdi-map-marker</v-icon>
+            {{ spotName }}
+            <!--  ログイン中のユーザーにのみお気に入りマークを表示 -->
+            <template v-if="authUser">
+              <v-icon v-if="heart" right bottom class="d-flex d-sm-none" color="pink" @click="unBookmark()">mdi-heart</v-icon>
+              <v-icon v-else right bottom class="d-flex d-sm-none" color="pink" @click="bookmark()">mdi-heart-outline</v-icon>
+            </template>
           </h4>
+          <!--  ログイン中のユーザーにのみお気に入りマークを表示 -->
+          <template v-if="authUser">
+            <v-icon v-if="heart" right bottom class="mb-2 d-none d-sm-flex" color="pink" @click="unBookmark()">mdi-heart</v-icon>
+            <v-icon v-else right bottom class="mb-2 d-none d-sm-flex" color="pink" @click="bookmark()">mdi-heart-outline</v-icon>
+          </template>
         </v-col>
-        <v-col lg="6 pb-0">
+        <v-col cols="12" sm="6" md="6" lg="6" class="pa-0">
           <v-tabs right v-model="currentTab">
             <v-tab @click="viewOrder(videos)" :value="'viewTab'">閲覧順</v-tab>
             <v-tab @click="newOrder(videos)">新着順</v-tab>
           </v-tabs>
         </v-col>
       </v-row>
+
       <v-divider style="max-width: 1200px; margin: auto;"></v-divider>
     </template>
     <template v-else>
@@ -40,6 +51,7 @@
 
 <script>
 import axios from '../plugins/axios'
+import { mapGetters } from "vuex"
 import GoogleMap from '../components/GoogleMap.vue'
 import Video from '../components/Video.vue'
 
@@ -54,7 +66,10 @@ export default {
       area: {},
       spots: [],
       spot: {},
-      spot_name: '',
+      // お気に入り登録する際に使うspotデータ
+      markSpot: {},
+      heart: false,
+      spotName: '',
       videos: [],
       // タブのフォーカス
       currentTab: "viewTab",
@@ -67,7 +82,10 @@ export default {
     } else {
       this.setSpotAndVideo()
     }
-    // 立ち上がり時に国に関する地点を取得
+  },
+  computed: {
+    // mapGettersでログイン中のユーザを取得
+    ...mapGetters("users", ["authUser"]),
   },
   methods: {
     // 国に関する地点を取得
@@ -97,7 +115,9 @@ export default {
       })
       .then(res => {
         this.videos = res.data;
-        this.spot_name = spot.name
+        this.spotName = spot.name
+        // お気に入り登録されているかを確認
+        this.bookmarked(spot);
       })
       .catch(error => {
         console.log(error)
@@ -120,6 +140,8 @@ export default {
         };
         // propsで引き継いだ地点の動画を取得
         this.getVideo(this.spot, this.area);
+        // お気に入り登録されているかを確認
+        this.bookmarked(this.spot);
       })
       .catch(error => {
         console.log(error)
@@ -128,13 +150,74 @@ export default {
     },
     // マーカー(地点)がクリックされた時に+1カウントされる
     clickCount(spot, area) {
+      this.markSpot = spot;
       axios.get(`/countries/${area.id}/spots/${spot.id}/edit`)
+      // .then(res => {
+      //   console.log(res.data.status);
+      // })
+      .catch(error => {
+        console.log(error);
+      });
+    },
+    // お気に入り済みかを確認
+    bookmarked(spot) {
+      axios.get('/bookmarked', {
+        params: {
+          spot_id: spot.id
+        }
+      })
       .then(res => {
-        console.log(res.data.status);
+        if(res.data.status == 'yes') {
+          this.heart = true;
+        } else {
+          this.heart = false;
+        }
       })
       .catch(error => {
         console.log(error);
-      })
+      });
+    },
+    // お気に入りに登録する
+    bookmark() {
+      this.heart = true;
+      if(this.markSpot.id == undefined) {
+        axios.post('/bookmarks', { spot_id: this.spot.id })
+        // .then(res => {
+        //   console.log(res.data.status);
+        // })
+        .catch(error => {
+          console.log(error);
+        });
+      } else {
+        axios.post('/bookmarks', { spot_id: this.markSpot.id })
+        // .then(res => {
+        //   console.log(res.data.status);
+        // })
+        .catch(error => {
+          console.log(error);
+        });
+      }
+    },
+    // お気に入り登録を解除する
+    unBookmark() {
+      this.heart = false;
+      if(this.markSpot.id == undefined) {
+        axios.delete(`/bookmarks/${this.spot.id}`)
+        // .then(res => {
+        //   console.log(res.data.status);
+        // })
+        .catch(error => {
+          console.log(error);
+        });
+      } else {
+        axios.delete(`/bookmarks/${this.markSpot.id}`)
+        // .then(res => {
+        //   console.log(res.data.status);
+        // })
+        .catch(error => {
+          console.log(error);
+        });
+      }
     },
     // 動画を新着順に並び替える
     newOrder(videos) {

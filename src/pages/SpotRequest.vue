@@ -1,7 +1,7 @@
 <template>
   <v-container class="my-16">
     <h2 class="mb-1 d-flex align-center justify-center">
-      <v-icon left bottom>mdi-send-circle</v-icon>
+      <v-icon left bottom color="green darken-1">mdi-send-circle</v-icon>
       スポットをリクエスト
     </h2>
     <v-divider class="mb-4" style="max-width: 700px; margin: auto;"></v-divider>
