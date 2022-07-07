@@ -66,7 +66,7 @@ export default {
       area: {},
       spots: [],
       spot: {},
-      // ブックマーク登録する際に使うspotデータ
+      // お気に入り登録する際に使うspotデータ
       markSpot: {},
       heart: false,
       spotName: '',
@@ -116,9 +116,8 @@ export default {
       .then(res => {
         this.videos = res.data;
         this.spotName = spot.name
-        // ===================
+        // お気に入り登録されているかを確認
         this.bookmarked(spot);
-        // ===================
       })
       .catch(error => {
         console.log(error)
@@ -141,9 +140,8 @@ export default {
         };
         // propsで引き継いだ地点の動画を取得
         this.getVideo(this.spot, this.area);
-        // ===================
+        // お気に入り登録されているかを確認
         this.bookmarked(this.spot);
-        // ===================
       })
       .catch(error => {
         console.log(error)
@@ -154,14 +152,14 @@ export default {
     clickCount(spot, area) {
       this.markSpot = spot;
       axios.get(`/countries/${area.id}/spots/${spot.id}/edit`)
-      .then(res => {
-        console.log(res.data.status);
-      })
+      // .then(res => {
+      //   console.log(res.data.status);
+      // })
       .catch(error => {
         console.log(error);
       });
     },
-    // ブックマーク済みかを確認
+    // お気に入り済みかを確認
     bookmarked(spot) {
       axios.get('/bookmarked', {
         params: {
@@ -179,43 +177,43 @@ export default {
         console.log(error);
       });
     },
-    // ブックマークに登録する
+    // お気に入りに登録する
     bookmark() {
       this.heart = true;
       if(this.markSpot.id == undefined) {
         axios.post('/bookmarks', { spot_id: this.spot.id })
-        .then(res => {
-          console.log(res.data.status);
-        })
+        // .then(res => {
+        //   console.log(res.data.status);
+        // })
         .catch(error => {
           console.log(error);
         });
       } else {
         axios.post('/bookmarks', { spot_id: this.markSpot.id })
-        .then(res => {
-          console.log(res.data.status);
-        })
+        // .then(res => {
+        //   console.log(res.data.status);
+        // })
         .catch(error => {
           console.log(error);
         });
       }
     },
-    // ブックマーク登録を解除する
+    // お気に入り登録を解除する
     unBookmark() {
       this.heart = false;
       if(this.markSpot.id == undefined) {
         axios.delete(`/bookmarks/${this.spot.id}`)
-        .then(res => {
-          console.log(res.data.status);
-        })
+        // .then(res => {
+        //   console.log(res.data.status);
+        // })
         .catch(error => {
           console.log(error);
         });
       } else {
         axios.delete(`/bookmarks/${this.markSpot.id}`)
-        .then(res => {
-          console.log(res.data.status);
-        })
+        // .then(res => {
+        //   console.log(res.data.status);
+        // })
         .catch(error => {
           console.log(error);
         });

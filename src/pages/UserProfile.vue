@@ -66,11 +66,11 @@
               <v-card :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
                 <div class="d-flex justify-space-between">
                   <div class="d-flex flex-column">
-                    <v-btn class="ma-2" fab small color="white" @click="unBookmark(spotDetail.id, spotDetail.spot.id)">
+                    <v-btn class="btn ma-2" fab small color="white" @click="unBookmark(spotDetail.id, spotDetail.spot.id)">
                       <v-icon color="pink">mdi-heart</v-icon>
                     </v-btn>
                     <v-list-item style="width: 160px;">
-                      <v-list-item-content>
+                      <v-list-item-content class="mt-3">
                         <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
                         <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
                       </v-list-item-content>
@@ -162,7 +162,7 @@ export default {
     }
   },
   created() {
-    this.getBookmarks()
+    this.getBookmarks();
   },
   watch: {
     // ダイアログの状態を監視（表示、非表示の切り替えと同時にdataをリセット）
@@ -196,7 +196,7 @@ export default {
         console.log(error);
       })
     },
-    // ブックマークに登録されている地点を取得
+    // お気に入りに登録されている地点を取得
     getBookmarks() {
       axios.get('/bookmarks')
       .then(res => {
@@ -208,14 +208,14 @@ export default {
         console.log(error);
       });
     },
-    // ブックマーク登録を解除する
+    // お気に入り登録を解除する
     unBookmark(id, spot) {
       // お気に入りスポットの配列から削除（非同期処理）
       this.spotDetails = this.spotDetails.filter((item) => item.id !== id);
       axios.delete(`/bookmarks/${spot}`)
-      .then(res => {
-        console.log(res.data.status);
-      })
+      // .then(res => {
+      //   console.log(res.data.status);
+      // })
       .catch(error => {
         console.log(error);
       });
@@ -252,6 +252,8 @@ export default {
 }
 .btn{
   position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 2;
 }
-
 </style>
