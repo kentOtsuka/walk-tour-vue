@@ -1,7 +1,7 @@
 <template>
   <v-container class="my-16">
     <h2 class="mb-1 d-flex align-center justify-center">
-      <v-icon left bottom>mdi-earth</v-icon>
+      <v-icon left bottom color="cyan darken-1">mdi-earth</v-icon>
       {{ area.name }}
     </h2>
     <v-divider class="mb-2" style="max-width: 700px; margin: auto;"></v-divider>
@@ -19,14 +19,14 @@
             {{ spotName }}
             <!--  ログイン中のユーザーにのみお気に入りマークを表示 -->
             <template v-if="authUser">
-              <v-icon v-if="heart" right bottom class="d-flex d-sm-none" color="pink" @click="unBookmark()">mdi-cards-heart</v-icon>
-              <v-icon v-else right bottom class="d-flex d-sm-none" color="pink" @click="bookmark()">mdi-cards-heart-outline</v-icon>
+              <v-icon v-if="heart" right bottom class="d-flex d-sm-none" color="pink" @click="unBookmark()">mdi-heart</v-icon>
+              <v-icon v-else right bottom class="d-flex d-sm-none" color="pink" @click="bookmark()">mdi-heart-outline</v-icon>
             </template>
           </h4>
           <!--  ログイン中のユーザーにのみお気に入りマークを表示 -->
           <template v-if="authUser">
-            <v-icon v-if="heart" right bottom class="mb-2 d-none d-sm-flex" color="pink" @click="unBookmark()">mdi-cards-heart</v-icon>
-            <v-icon v-else right bottom class="mb-2 d-none d-sm-flex" color="pink" @click="bookmark()">mdi-cards-heart-outline</v-icon>
+            <v-icon v-if="heart" right bottom class="mb-2 d-none d-sm-flex" color="pink" @click="unBookmark()">mdi-heart</v-icon>
+            <v-icon v-else right bottom class="mb-2 d-none d-sm-flex" color="pink" @click="bookmark()">mdi-heart-outline</v-icon>
           </template>
         </v-col>
         <v-col cols="12" sm="6" md="6" lg="6" class="pa-0">
