@@ -1,7 +1,7 @@
 <template>
   <v-container class="my-16">
     <h1 class="mb-3 d-flex align-center justify-center">
-      <v-icon left bottom>mdi-account-circle</v-icon>
+      <v-icon left bottom color="teal darken-1">mdi-account-circle</v-icon>
       マイページ
     </h1>
 
@@ -145,9 +145,6 @@ import axios from '../plugins/axios'
 import { mapGetters } from "vuex"
 
 export default {
-  props: {
-    id: String
-  },
   data() {
     return {
       // すべての地点その国、動画オブジェクトを格納する配列

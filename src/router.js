@@ -25,7 +25,7 @@ const router = new Router({
       path: "/countries/:id", component: SpotResult, name: "SpotResult", props: true,
     },
     {
-      path: "/profile/:id", component: UserProfile, name: "UserProfile", props: true, meta: { requiredAuth: true }
+      path: "/profile", component: UserProfile, name: "UserProfile", meta: { requiredAuth: true }
     },
     {
       path: "/login", component: Login, name: "Login", meta: { loggedIn: true }
