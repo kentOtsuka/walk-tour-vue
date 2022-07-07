@@ -4,9 +4,36 @@
       <v-icon left bottom color="red">mdi-fire</v-icon>
       ホットスポット
     </h2>
+
     <v-divider class="mb-2" style="max-width: 700px; margin: auto;"></v-divider>
+
     <div class="d-flex justify-center">
-      <v-row style="max-width: 1000px; margin: auto;">
+      <!-- 画面幅がxs,smの時に表示 -->
+      <v-row class="mx-auto hidden-md-and-up">
+        <v-col v-for="spotDetail in spotDetails" :key="spotDetail.id" cols="12" sm="6">
+          <v-hover v-slot="{ hover }">
+            <v-card  :elevation="hover ? 12 : 2" max-width="400px" style="margin: auto;">
+              <v-img :src="spotDetail.video.thumbnail" alt="サムネイル"  @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video);" style="cursor: pointer"></v-img>
+              <div class="d-flex justify-space-between">
+                <v-list-item>
+                  <v-list-item-content>
+                    <!-- <v-list-item-subtitle small>過去{{ spotDetail.spot.click_count }}回の渡航歴</v-list-item-subtitle> -->
+                    <v-list-item-subtitle small>ランキング第{{ spotDetail.id + 1 }}位</v-list-item-subtitle>
+                    <v-list-item-title class="my-1">{{ spotDetail.spot.name }}</v-list-item-title>
+                    <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-card-actions>
+                  <v-btn color="blue darken-1 align-center" text  @click="setSpot(spotDetail.area, spotDetail.spot)">行ってみる！</v-btn>
+                </v-card-actions>
+              </div>
+            </v-card>
+          </v-hover>
+        </v-col>
+      </v-row>
+
+      <!-- 画面幅がmd, lg, xlで表示 -->
+      <v-row class="hidden-sm-and-down" style="max-width: 1000px; margin: auto;">
         <v-col v-for="spotDetail in spotDetails" :key="spotDetail.id" cols="12" lg="6" md="12" sm="12">
           <v-hover v-slot="{ hover }">
             <v-card :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
@@ -14,23 +41,22 @@
                 <div class="d-flex flex-column">
                   <v-list-item style="width: 160px;">
                     <v-list-item-content>
-                      <v-list-item-subtitle class="mb-2">過去{{ spotDetail.spot.click_count }}回の渡航歴</v-list-item-subtitle>
+                      <!-- <v-list-item-subtitle class="mb-2">過去{{ spotDetail.spot.click_count }}回の渡航歴</v-list-item-subtitle> -->
+                      <v-list-item-subtitle class="mb-2">ランキング第{{ spotDetail.id + 1 }}位</v-list-item-subtitle>
                       <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
                       <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
                     </v-list-item-content>
                   </v-list-item>
                   <v-divider></v-divider>
-                  <v-btn color="blue darken-1 align-center" class="hidden-sm-and-down" text @click="setSpot(spotDetail.area, spotDetail.spot)">行ってみる！</v-btn>
+                  <v-btn color="blue darken-1" text @click="setSpot(spotDetail.area, spotDetail.spot)">行ってみる！</v-btn>
                 </div>
-                <v-img :src="spotDetail.video.thumbnail" alt="サムネイル"  @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video);" class="hidden-sm-and-down" style="cursor: pointer"></v-img>
-                <v-card-actions class="hidden-md-and-up">
-                  <v-btn color="blue darken-1 align-center" text @click="setSpot(spotDetail.area, spotDetail.spot)">行ってみる</v-btn>
-                </v-card-actions>
+                <v-img :src="spotDetail.video.thumbnail" alt="サムネイル"  @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video);" style="cursor: pointer"></v-img>
               </div>
             </v-card>
           </v-hover>
         </v-col>
       </v-row>
+
     </div>
 
     <!-- ダイアログボックス -->

@@ -1,22 +1,21 @@
 <template>
   <div>
-    <router-link to="/spotRanking" style="color: #455A64; text-decoration: none;">
-      <h2 class="d-flex align-center justify-center">
-        <v-icon left bottom color="red">mdi-fire</v-icon>
-        ホットスポット
-      </h2>
-    </router-link>
+    <h2 class="d-flex align-center justify-center">
+      <v-icon left bottom color="red">mdi-fire</v-icon>
+      ホットスポット
+    </h2>
     <v-divider class="mb-2 mx-auto" style="max-width: 1200px; width: 90%;"></v-divider>
 
     <!-- 画面幅がxs,smの時に表示 -->
-    <v-row class="mx-auto hidden-md-and-up">
+    <v-row class="mx-auto mb-2 hidden-md-and-up">
       <v-col cols="12" sm="12" md="4" lg="4">
         <v-hover v-slot="{ hover }">
-          <v-card  :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
+          <v-card  :elevation="hover ? 12 : 2" max-width="400px" style="margin: auto;">
             <v-img :src="firstVideo.thumbnail" alt="サムネイル"  @click="openDialog(firstArea, firstSpot, firstVideo);" style="cursor: pointer"></v-img>
             <div class="d-flex justify-space-between">
               <v-list-item>
                 <v-list-item-content>
+                  <v-list-item-subtitle class="mb-2">ランキング第1位</v-list-item-subtitle>
                   <v-list-item-title>{{ firstSpot.name }}</v-list-item-title>
                   <v-list-item-subtitle class="mt-1">{{ firstArea.name }}</v-list-item-subtitle>
                 </v-list-item-content>
@@ -30,11 +29,12 @@
       </v-col>
       <v-col cols="12" sm="12" md="4" lg="4">
         <v-hover v-slot="{ hover }">
-          <v-card  :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
+          <v-card  :elevation="hover ? 12 : 2" max-width="400px" style="margin: auto;">
             <v-img :src="secondVideo.thumbnail" alt="サムネイル"  @click="openDialog(secondArea, secondSpot, secondVideo);" style="cursor: pointer"></v-img>
             <div class="d-flex justify-space-between">
               <v-list-item>
                 <v-list-item-content>
+                  <v-list-item-subtitle class="mb-2">ランキング第2位</v-list-item-subtitle>
                   <v-list-item-title>{{ secondSpot.name }}</v-list-item-title>
                   <v-list-item-subtitle class="mt-1">{{ secondArea.name }}</v-list-item-subtitle>
                 </v-list-item-content>
@@ -46,13 +46,14 @@
           </v-card>
         </v-hover>
       </v-col>
-      <v-col cols="12" sm="12" md="4" lg="4" class="">
+      <v-col cols="12" sm="12" md="4" lg="4">
         <v-hover v-slot="{ hover }">
-          <v-card  :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
+          <v-card  :elevation="hover ? 12 : 2" max-width="400px" style="margin: auto;">
             <v-img :src="thirdVideo.thumbnail" alt="サムネイル"  @click="openDialog(thirdArea, thirdSpot, thirdVideo);" style="cursor: pointer"></v-img>
             <div class="d-flex justify-space-between">
               <v-list-item>
                 <v-list-item-content>
+                  <v-list-item-subtitle class="mb-2">ランキング第3位</v-list-item-subtitle>
                   <v-list-item-title>{{ thirdSpot.name }}</v-list-item-title>
                   <v-list-item-subtitle class="mt-1">{{ thirdArea.name }}</v-list-item-subtitle>
                 </v-list-item-content>
@@ -68,7 +69,7 @@
 
     <!-- 画面幅がmd, lg, xlで表示 -->
     <v-sheet class="mx-auto hidden-sm-and-down" max-width="1400">
-      <v-slide-group class="pa-4" active-class="success" show-arrows  height="400">
+      <v-slide-group class="px-4" active-class="success" show-arrows height="400">
         <v-slide-item
           v-for="spotDetail in spotDetails" :key="spotDetail.id">
           <v-hover v-slot="{ hover }">
@@ -77,6 +78,7 @@
               <div class="d-flex justify-space-between">
                 <v-list-item>
                   <v-list-item-content>
+                    <v-list-item-subtitle class="mb-2">ランキング第{{ spotDetail.id + 1 }}位</v-list-item-subtitle>
                     <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
                     <v-list-item-subtitle class="mt-1">{{ spotDetail.area.name }}</v-list-item-subtitle>
                   </v-list-item-content>
@@ -90,6 +92,17 @@
         </v-slide-item>
       </v-slide-group>
     </v-sheet>
+
+    <v-col class="d-flex justify-center">
+      <v-btn
+        color="red"
+        outlined
+        to="/spotRanking"
+      >
+        <v-icon left>mdi-crown</v-icon>
+        ランキング一覧を見てみる
+      </v-btn>
+    </v-col>
 
     <!-- ダイアログボックス -->
     <v-dialog v-model="dialog" max-width="1200px">
