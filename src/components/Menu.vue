@@ -89,25 +89,13 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-
-    <!-- プライバシーポリシーダイアログボックス -->
-    <v-dialog v-model="privacyDialog" max-width="1500px">
-      <Privacy @reset-dialog="handleClosePrivacy()"></Privacy>
-    </v-dialog>
-    <!-- 利用規約ダイアログボックス -->
-    <v-dialog v-model="termsDialog" max-width="1200px">
-    <UseTerms @reset-dialog="handleCloseTerms()"></UseTerms>
-    </v-dialog>
   </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex"
-import Privacy from './PrivacyPolicy.vue'
-import UseTerms from './UseTerms.vue'
 
 export default {
-  components: { Privacy, UseTerms },
   // 親のHeader.vueから引き継ぎ
   props: {
     value: {
@@ -125,20 +113,12 @@ export default {
       ],
       smallItems: [
         { title: 'ログイン', icon: 'mdi-login', url: '/login' },
-        { title: 'プライバシーポリシー', icon: 'mdi-lock-outline', action: "privacy" },
-        { title: '利用規約', icon: 'mdi-file-document-outline', action: "terms" },
-        { title: 'お問い合わせ', icon: 'mdi-email-outline', action: "contact" },
       ],
       // ログイン中のメニューリスト
       smallItemsLogin: [
         { title: 'スポットをリクエスト', icon: 'mdi-send-circle', url: '/spotRequest' },
         { title: 'ログアウト', icon: 'mdi-logout', action: "logout" },
-        { title: 'プライバシーポリシー', icon: 'mdi-lock-outline', action: "privacy" },
-        { title: '利用規約', icon: 'mdi-file-document-outline', action: "terms" },
-        { title: 'お問い合わせ', icon: 'mdi-email-outline', action: "contact" },
       ],
-      privacyDialog: false,
-      termsDialog: false,
     }
   },
   computed: {
@@ -154,12 +134,6 @@ export default {
         this.logout();
       } else if (action === 'profile') {
         this.handleProfile();
-      } else if (action === 'privacy') {
-        this.handlePrivacy();
-      } else if (action === 'terms') {
-        this.handleTerms();
-      } else if (action === 'contact') {
-        this.handleContact();
       }
     },
     // ログアウトを実行するメソッド
@@ -177,26 +151,6 @@ export default {
     handleProfile() {
       this.$router.push({ name: "UserProfile" });
     },
-    // プライバシーポリシーを表示する
-    handlePrivacy() {
-      this.privacyDialog = true;
-    },
-    // プライバシーポリシーを非表示にする
-    handleClosePrivacy() {
-      this.privacyDialog = false;
-    },
-    // 利用規約を表示する
-    handleTerms() {
-      this.termsDialog = true;
-    },
-    // 利用規約を非表示にする
-    handleCloseTerms() {
-      this.termsDialog = false;
-    },
-    // お問合せフォームを別タブで開く
-    handleContact() {
-      window.open('https://forms.gle/ywb5Q35iHSBmYM4s5', '_blank');
-    }
   }
 }
 </script>
