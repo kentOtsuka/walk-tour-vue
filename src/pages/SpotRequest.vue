@@ -1,5 +1,5 @@
 <template>
-  <v-container class="my-16">
+  <v-container>
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom color="green darken-1">mdi-send-circle</v-icon>
       スポットをリクエスト

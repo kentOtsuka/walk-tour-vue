@@ -1,5 +1,5 @@
 <template>
-  <v-container class="my-16">
+  <v-container>
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom>mdi-account-plus</v-icon>
       新規登録

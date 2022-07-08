@@ -1,5 +1,5 @@
 <template>
-  <v-container class="my-16">
+  <v-container class="mb-16">
     <h1 class="mb-3 d-flex align-center justify-center">
       <v-icon left bottom color="teal darken-1">mdi-account-circle</v-icon>
       マイページ

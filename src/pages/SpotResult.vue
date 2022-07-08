@@ -1,5 +1,5 @@
 <template>
-  <v-container class="my-16">
+  <v-container class="mb-16">
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom color="cyan darken-1">mdi-earth</v-icon>
       {{ area.name }}
