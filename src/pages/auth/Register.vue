@@ -63,7 +63,7 @@
                 outlined
                 class="mr-2"
                 width="100px"
-                type="submit"
+                type="button"
                 :disabled="!valid" @click="register"
               >
                 新規登録
@@ -108,8 +108,8 @@ export default {
       ],
       passwordRules: [
         v => !!v || 'パスワードを入力してください',
-        v => v.length <= 12 || '6〜12文字が有効です',
-        v => v.length >= 8 || '8〜12文字が有効です',
+        v => v.length >= 8 || '8文字以上半角英数記号のみが有効です',
+        v => /^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/.test(v) || '8文字以上半角英数記号のみが有効です',
       ],
       showPassword: false,
       showPasswordConfirmation: false,
@@ -117,15 +117,28 @@ export default {
   },
   methods: {
     ...mapActions("users", ["registerUser"]),
+    ...mapActions("util", ["openSnackbar", "closeSnackbar"]),
     // 新規登録を実行するメソッド
-    register() {
+    async register() {
       try {
         // 新規登録処理
-        this.registerUser(this.user);
-        this.$router.push({ name: 'Login' })
+        const status = await this.registerUser(this.user);
+        if (status == 'success') {
+          this.$router.push({ name: 'Login' })
+          this.openSnackbar('新規登録が完了しました')
+        } else if (status == 'fail') {
+          this.openSnackbar('登録できませんでした')
+          this.resetUser();
+        }
       } catch (error) {
         console.log(error)
       }
+    },
+    resetUser() {
+      this.user.name = "";
+      this.user.email = "";
+      this.user.password = "";
+      this.user.password_confirmation = "";
     }
   }
 }

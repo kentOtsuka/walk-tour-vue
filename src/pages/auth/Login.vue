@@ -40,7 +40,7 @@
                 outlined
                 class="mr-2"
                 width="100px"
-                type="submit"
+                type="button"
                 :disabled="!valid || loading"
                 :loading="loading"
                 @click="login"
@@ -83,23 +83,33 @@ export default {
       // パスワードのバリデーション
       passwordRules: [
         v => !!v || 'パスワードを入力してください',
-        v => v.length <= 12 || '8〜12文字が有効です',
-        v => v.length >= 8 || '8〜12文字が有効です',
+        v => v.length >= 8 || '8文字以上半角英数記号のみが有効です',
+        v => /^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/.test(v) || '8文字以上半角英数記号のみが有効です',
       ],
       // パスワードの表示状態を表す(trueで表示)
       showPassword: false,
     }
   },
   methods: {
-    // mapActionでログイン処理を呼び出し
     ...mapActions("users", ["loginUser"]),
-    login() {
+    ...mapActions("util", ["openSnackbar", "closeSnackbar"]),
+    async login() {
       try {
-        this.loginUser(this.user);
-        this.$router.push({ name: 'Home' })
+        const status = await this.loginUser(this.user);
+        if (status == 'success') {
+          this.$router.push({ name: 'UserProfile' })
+          this.openSnackbar('ログインしました');
+        } else if (status == 'fail') {
+          this.openSnackbar('メールアドレスとパスワードが違います')
+          this.resetUser();
+        }
       } catch (error) {
         console.log(error);
       }
+    },
+    resetUser() {
+      this.user.email = "";
+      this.user.password = "";
     }
   }
 }
