@@ -126,8 +126,8 @@ export default {
     ...mapGetters("users", ["authUser"])
   },
   methods: {
-    // mapActionでログアウト処理を呼び出し
     ...mapActions("users", ["logoutUser"]),
+    ...mapActions("util", ["openSnackbar", "closeSnackbar"]),
     // メニューの中でログアウトメニューをクリックした時のみ発火
     triggerClick(action) {
       if (action === 'logout') {
@@ -141,8 +141,10 @@ export default {
       try {
         // ログアウト処理
         await this.logoutUser()
-        // // ログアウト後、ログインページに遷移させる
+        // ログアウト後、ログインページに遷移させる
         this.$router.push({name: 'Login'})
+        // フラッシュメッセージの表示処理の呼び出し
+        this.openSnackbar('ログアウトしました');
       } catch (error) {
         console.log(error)
       }
