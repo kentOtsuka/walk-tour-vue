@@ -33,8 +33,8 @@
           </v-responsive>
         </v-col>
         <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-        <v-card-subtitle class="my-0 pb-1">{{ view_count.toLocaleString() }}回視聴・{{ published_at }}</v-card-subtitle>
-        <v-divider></v-divider>
+        <v-card-subtitle class="my-0 pb-1 hidden-sm-and-down">{{ view_count.toLocaleString() }}回視聴・{{ published_at }}</v-card-subtitle>
+        <v-divider class="mt-2"></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn

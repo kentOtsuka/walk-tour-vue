@@ -23,7 +23,7 @@
       </v-col>
     </v-row>
 
-    <h2 class="mb-3 d-flex align-center justify-center">
+    <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom color="pink">mdi-heart</v-icon>
       Favorite Spot
     </h2>
@@ -34,7 +34,7 @@
     <template v-if="spotDetails.length != 0">
       <div class="d-flex justify-center">
         <!-- 画面幅がxs,smの時に表示 -->
-        <v-row class="mx-auto hidden-md-and-up">
+        <v-row class="mt-0 mx-auto hidden-md-and-up">
           <v-col v-for="spotDetail in spotDetails" :key="spotDetail.id" cols="12" sm="6">
             <v-hover v-slot="{ hover }">
               <v-card  :elevation="hover ? 12 : 2" max-width="400px" style="margin: auto;">
@@ -112,9 +112,8 @@
           </v-responsive>
         </v-col>
         <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-        <v-card-subtitle class="my-0 pb-1">{{ view_count.toLocaleString() }}回視聴・{{ published_at }}</v-card-subtitle>
-        <v-spacer></v-spacer>
-        <v-col class="d-flex justify-center pt-0">
+        <v-card-subtitle class="my-0 hidden-sm-and-down">{{ view_count.toLocaleString() }}回視聴・{{ published_at }}</v-card-subtitle>
+        <v-col class="d-flex justify-center pt-2">
           <v-btn
             color="blue darken-1"
             outlined

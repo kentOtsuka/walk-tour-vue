@@ -99,9 +99,8 @@
           </v-responsive>
         </v-col>
         <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-        <v-card-subtitle class="my-0 pb-1">{{ view_count.toLocaleString() }}回視聴・{{ published_at }}</v-card-subtitle>
-        <v-spacer></v-spacer>
-        <v-col class="d-flex justify-center pt-0">
+        <v-card-subtitle class="my-0 hidden-sm-and-down">{{ view_count.toLocaleString() }}回視聴・{{ published_at }}</v-card-subtitle>
+        <v-col class="d-flex justify-center pt-2">
           <v-btn
             color="blue darken-1"
             outlined

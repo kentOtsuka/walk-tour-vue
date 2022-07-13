@@ -68,7 +68,7 @@ video {
   font-size: 50px;
   max-width: 600px;
   width: 90%;
-  height: 250px;
+  height: 350px;
   position: absolute;
   top: 0;
   bottom: 0;
