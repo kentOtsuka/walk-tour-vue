@@ -112,7 +112,7 @@
           </v-responsive>
         </v-col>
         <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-        <v-card-subtitle class="my-0 hidden-sm-and-down">{{ view_count.toLocaleString() }}回視聴・{{ published_at }}</v-card-subtitle>
+        <v-card-subtitle class="my-0 hidden-sm-and-down">{{ viewCount.toLocaleString() }}回視聴・{{ publishedAt }}</v-card-subtitle>
         <v-col class="d-flex justify-center pt-2">
           <v-btn
             color="blue darken-1"
@@ -152,9 +152,9 @@ export default {
       // ダイアログに渡すdata
       dialog: false,
       title: '',
-      video_id: '',
-      view_count: '',
-      published_at: '',
+      videoId: '',
+      viewCount: '',
+      publishedAt: '',
       urlForEmbedVideo: '',
       area: {},
       spot: {},
@@ -223,10 +223,10 @@ export default {
     openDialog(area, spot, video) {
       this.dialog = true;
       this.title = video.title;
-      this.video_id = video.video_id;
-      this.view_count = video.view_count;
-      this.published_at = video.published_at;
-      this.urlForEmbedVideo = `https://www.youtube.com/embed/${this.video_id}`;
+      this.videoId = video.video_id;
+      this.viewCount = video.view_count;
+      this.publishedAt = video.published_at;
+      this.urlForEmbedVideo = `https://www.youtube.com/embed/${this.videoId}`;
       this.area =  area;
       this.spot =  spot;
     },
@@ -234,9 +234,9 @@ export default {
     resetDialog() {
       this.dialog = false;
       this.title = '';
-      this.video_id = '';
+      this.videoId = '';
       this.description = '';
-      this.view_count = '';
+      this.viewCount = '';
       this.urlForEmbedVideo = '';
       this.area =  [];
       this.spot = [];

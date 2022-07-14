@@ -14,7 +14,7 @@
           @click.native="triggerClick('profile')"
           link
         >
-          <v-list-item-avatar color="indigo">
+          <v-list-item-avatar color="indigo" size="50">
             <span class="white--text text-h5">{{ authUser.name.charAt(0) }}</span>
           </v-list-item-avatar>
           <v-list-item-content style="color: #455A64;">

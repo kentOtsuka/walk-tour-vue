@@ -45,7 +45,7 @@
         マーカーをクリックしてください
       </v-chip>
     </template>
-    <Video :videos="videos"></Video>
+    <Video :videos="videos" :area="area.name" :spot="spotName"></Video>
   </v-container>
 </template>
 
@@ -117,7 +117,9 @@ export default {
         this.videos = res.data;
         this.spotName = spot.name
         // お気に入り登録されているかを確認
-        this.bookmarked(spot);
+        if(this.authUser) {
+          this.bookmarked(this.spot);
+        }
       })
       .catch(error => {
         console.log(error)
@@ -141,7 +143,9 @@ export default {
         // propsで引き継いだ地点の動画を取得
         this.getVideo(this.spot, this.area);
         // お気に入り登録されているかを確認
-        this.bookmarked(this.spot);
+        if(this.authUser) {
+          this.bookmarked(this.spot);
+        }
       })
       .catch(error => {
         console.log(error)

@@ -12,12 +12,6 @@ export default {
   data() {
     return {
       latlng: [],
-      // ダイアログの表示、非表示
-      dialog: false,
-      title: '',
-      video_id: '',
-      view_count: '',
-      published_at: '',
       // Youtube動画の埋め込み用URL
       videos: [],
       randomVideo: {},
