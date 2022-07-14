@@ -33,8 +33,9 @@ const actions = {
       // current_userの取得
       const userResponse = await axios.get("/users/me");
       commit("setUser", userResponse.data);
+      return 'success'
     } else {
-      alert("メールアドレスとパスワードが違います")
+      return 'fail'
     }
   },
   // ログアウト処理
@@ -47,14 +48,14 @@ const actions = {
     commit("setUser", null);
   },
   // 新規登録メソッド
-  registerUser({ commit }, user) {
-    axios.post("/register", user)
-    .then(res => {
-      commit("addUser", res.data)
-    })
-    .catch(err => {
-      console.log(err)
-    })
+  async registerUser({ commit }, user) {
+    const response = await axios.post("/register", user);
+    if (response.data.user != null) {
+      commit("addUser", response.data.user)
+      return 'success'
+    } else {
+      return 'fail';
+    }
   },
 
   // current_userが存在するかを確認

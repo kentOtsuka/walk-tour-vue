@@ -1,5 +1,5 @@
 <template>
-  <v-container class="my-16">
+  <v-container class="mb-16">
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom color="cyan darken-1">mdi-earth</v-icon>
       {{ area.name }}
@@ -14,7 +14,7 @@
     <template v-if="videos.length != 0">
       <v-row style="max-width: 1200px; margin: auto;">
         <v-col cols="12" sm="6" md="6" lg="6" class="d-lg-flex align-lg-end d-md-flex align-md-end d-sm-flex align-sm-end pb-0">
-          <h4 class="mb-2 d-flex align-center justify-center">
+          <h3 class="mb-2 d-flex align-center justify-center">
             <v-icon left bottom>mdi-map-marker</v-icon>
             {{ spotName }}
             <!--  ログイン中のユーザーにのみお気に入りマークを表示 -->
@@ -22,7 +22,7 @@
               <v-icon v-if="heart" right bottom class="d-flex d-sm-none" color="pink" @click="unBookmark()">mdi-heart</v-icon>
               <v-icon v-else right bottom class="d-flex d-sm-none" color="pink" @click="bookmark()">mdi-heart-outline</v-icon>
             </template>
-          </h4>
+          </h3>
           <!--  ログイン中のユーザーにのみお気に入りマークを表示 -->
           <template v-if="authUser">
             <v-icon v-if="heart" right bottom class="mb-2 d-none d-sm-flex" color="pink" @click="unBookmark()">mdi-heart</v-icon>
@@ -45,15 +45,15 @@
         マーカーをクリックしてください
       </v-chip>
     </template>
-    <Video :videos="videos"></Video>
+    <Video :videos="videos" :area="area.name" :spot="spotName"></Video>
   </v-container>
 </template>
 
 <script>
 import axios from '../plugins/axios'
 import { mapGetters } from "vuex"
-import GoogleMap from '../components/GoogleMap.vue'
-import Video from '../components/Video.vue'
+import GoogleMap from '../components/TheGoogleMap.vue'
+import Video from '../components/BaseVideo.vue'
 
 export default {
   components: { GoogleMap, Video },
@@ -117,7 +117,9 @@ export default {
         this.videos = res.data;
         this.spotName = spot.name
         // お気に入り登録されているかを確認
-        this.bookmarked(spot);
+        if(this.authUser) {
+          this.bookmarked(this.spot);
+        }
       })
       .catch(error => {
         console.log(error)
@@ -137,11 +139,13 @@ export default {
             break;
           }
           i++;
-        };
+        }
         // propsで引き継いだ地点の動画を取得
         this.getVideo(this.spot, this.area);
         // お気に入り登録されているかを確認
-        this.bookmarked(this.spot);
+        if(this.authUser) {
+          this.bookmarked(this.spot);
+        }
       })
       .catch(error => {
         console.log(error)

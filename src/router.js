@@ -1,14 +1,14 @@
 import Vue from "vue";
 import Router from "vue-router";
 import store from "./store"
-import Home from "./pages/Home.vue"
+import Home from "./pages/TheHome.vue"
 import SpotResult from "./pages/SpotResult.vue"
 import SpotRanking from "./pages/SpotRanking.vue"
 import SpotRequest from "./pages/SpotRequest.vue"
 import NewsList from "./pages/NewsList.vue"
 import UserProfile from "./pages/UserProfile.vue"
-import Login from "./pages/auth/Login.vue"
-import Register from "./pages/auth/Register.vue"
+import Login from "./pages/auth/TheLogin.vue"
+import Register from "./pages/auth/TheRegister.vue"
 
 // VueRouterの宣言
 Vue.use(Router)
