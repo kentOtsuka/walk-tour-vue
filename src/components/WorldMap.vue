@@ -53,7 +53,7 @@ export default {
         for (let i = 0; i <= areas.length; i++) {
         // iso二桁コードをもとに国の色付け
           $('#vmap').vectorMap('set', 'colors', areas[i], '#5D99FF');
-        };
+        }
       })
     },
     // クリックされた国の詳細ページに遷移させる処理

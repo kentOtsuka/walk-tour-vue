@@ -1,5 +1,5 @@
 <template>
-  <v-container class="my-16">
+  <v-container>
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom color="green darken-1">mdi-send-circle</v-icon>
       スポットをリクエスト
@@ -43,7 +43,7 @@
                 color="info"
                 outlined
                 class="mr-2"
-                type="submit"
+                type="button"
                 :disabled="!valid || loading"
                 :loading="loading"
                 @click="send"
@@ -61,6 +61,7 @@
 
 <script>
 import axios from '../plugins/axios'
+import { mapActions } from "vuex";
 
 export default {
   data() {
@@ -80,11 +81,12 @@ export default {
       ],
     }
   },
-  created() {
+  mounted() {
     // DB内のすべての国名を取得
     this.setArea();
   },
   methods: {
+    ...mapActions("util", ["openSnackbar", "closeSnackbar"]),
     // DB内のすべての国名を取得
     setArea() {
       axios.get('/all_country')
@@ -95,13 +97,18 @@ export default {
     // リクエストを送信(作成)
     send() {
       axios.post("/requests", { request: this.spotInfo})
-      .then( res => {
-        console.log(res)
+      .then( () => {
+        this.openSnackbar('送信しました！');
+        this.resetSpotInfo();
       })
       .catch( err => {
         console.log(err)
       });
     },
+    resetSpotInfo() {
+      this.spotInfo.area = null;
+      this.spotInfo.spot = '';
+    }
   },
 }
 </script>

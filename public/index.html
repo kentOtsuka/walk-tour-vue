@@ -8,8 +8,42 @@
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdi/font@latest/css/materialdesignicons.min.css">
+    <!-- OGP -->
+    <meta property="og:site_name" content="VtourHub">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="VtourHub - 気になる街へ行こう">
+    <meta property="og:url" content="https://vtourhub.web.app/">
+    <meta property="og:description" content="VtourHubは、いつでもどこでも旅行気分を味わうことができるアプリです。世界のあらゆる街の雰囲気を、まるでその場にいるかのように体感できます。">
+    <meta name="keywords" content="VtourHub、Virtual Tour、WalkingTour ">
+    <meta property="og:image" content="https://vtourhub.web.app/img/ogp.png">
+    <meta property="og:site_name" content="VtourHub">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://vtourhub.web.app/img/ogp.png">
+    <meta name="twitter:site" content="VtourHub">
     <!-- GoogleMap -->
     <script src="https://maps.googleapis.com/maps/api/js?key=<%= process.env.VUE_APP_GOOGLE_API_KEY  %>"></script>
+    <!-- firebase -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-analytics.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyBJ5TDo8-YiHIVK3EnoxmM5HqsZie_M9Io",
+        authDomain: "vtourhub.firebaseapp.com",
+        projectId: "vtourhub",
+        storageBucket: "vtourhub.appspot.com",
+        messagingSenderId: "861507759655",
+        appId: "1:861507759655:web:28deb0c26462bc2996a802",
+        measurementId: "G-QGCL8BL6FM"
+      };
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const analytics = getAnalytics(app);
+    </script>
   </head>
   <body>
     <noscript>

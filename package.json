@@ -1,5 +1,5 @@
 {
-  "name": "walk-tour-vue",
+  "name": "VtourHub",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -44,16 +44,8 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "vue/multi-word-component-names": "off",
       "no-console": 1,
-      "no-debugger": 1,
-      "quotes": "off",
-      "no-extra-semi": "off",
-      "no-unexpected-multiline": "off",
-      "no-unreachable": "off",
-      "no-unused-vars": "off",
-      "no-undef": "off",
-      "no-redeclare": "off"
+      "no-debugger": 1
     }
   },
   "browserslist": [
