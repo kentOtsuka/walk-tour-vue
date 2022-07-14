@@ -45,13 +45,7 @@
     },
     "rules": {
       "no-console": 1,
-      "no-debugger": 1,
-      "quotes": "off",
-      "no-unexpected-multiline": "off",
-      "no-unreachable": "off",
-      "no-unused-vars": "off",
-      "no-undef": "off",
-      "no-redeclare": "off"
+      "no-debugger": 1
     }
   },
   "browserslist": [

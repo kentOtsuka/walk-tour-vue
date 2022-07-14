@@ -97,7 +97,7 @@ export default {
     // リクエストを送信(作成)
     send() {
       axios.post("/requests", { request: this.spotInfo})
-      .then( res => {
+      .then( () => {
         this.openSnackbar('送信しました！');
         this.resetSpotInfo();
       })
