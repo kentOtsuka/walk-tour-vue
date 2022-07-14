@@ -55,7 +55,7 @@ const actions = {
       return 'success'
     } else {
       return 'fail';
-    };
+    }
   },
 
   // current_userが存在するかを確認

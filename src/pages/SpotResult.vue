@@ -139,7 +139,7 @@ export default {
             break;
           }
           i++;
-        };
+        }
         // propsで引き継いだ地点の動画を取得
         this.getVideo(this.spot, this.area);
         // お気に入り登録されているかを確認

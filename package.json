@@ -47,7 +47,6 @@
       "no-console": 1,
       "no-debugger": 1,
       "quotes": "off",
-      "no-extra-semi": "off",
       "no-unexpected-multiline": "off",
       "no-unreachable": "off",
       "no-unused-vars": "off",

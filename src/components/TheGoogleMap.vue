@@ -116,7 +116,7 @@ export default {
               // 開かれている情報ウィンドウがあれば閉じる処理
               if (this.currentInfoWindow) {
                 this.currentInfoWindow.close();
-              };
+              }
               // アクティブ状態のマーカーがあれば行う処理
               if (this.focusMarker) {
                 // アクティブ中のマーカーを通常iconに戻す
@@ -160,7 +160,7 @@ export default {
               // 開かれている情報ウィンドウがあれば閉じる処理
               if (this.currentInfoWindow) {
                 this.currentInfoWindow.close();
-              };
+              }
               // アクティブ状態のマーカーがあれば行う処理
               if (this.focusMarker) {
                 // アクティブ中のマーカーを通常iconに戻す
@@ -204,8 +204,8 @@ export default {
             infoWindowSpot_2[i] = new google.maps.InfoWindow({
               content: `<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`
             });
-          };
-        };
+          }
+        }
       }
     }, 500);
   },

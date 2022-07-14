@@ -192,7 +192,7 @@ export default {
           } else {
             this.spotDetails.push( {id: i, spot: res.data.spots[i], area: res.data.areas[i], video: res.data.videos[i], heart: false } );
           }
-        };
+        }
       })
     },
     // クリックしたカードの地点の国の詳細ページに遷移させる処理
@@ -220,7 +220,7 @@ export default {
       .then( res => {
         for(let i = 0; i < res.data.spots.length; i++) {
           this.spotBookmarks.push(res.data.spots[i].id);
-        };
+        }
       })
       .catch(error => {
         console.log(error);

@@ -76,7 +76,7 @@ export default {
         this.share();
       } else if (action === 'twitter') {
         this.twitter();
-      };
+      }
     },
     // プライバシーポリシーを表示する
     openPrivacy() {

@@ -201,7 +201,7 @@ export default {
       .then(res => {
         for(let i = 0; i < res.data.spots.length; i++) {
           this.spotDetails.push( {id: i, spot: res.data.spots[i], area: res.data.areas[i], video: res.data.videos[i]} )
-        };
+        }
       })
       .catch(error => {
         console.log(error);
