@@ -52,8 +52,8 @@
 <script>
 import axios from '../plugins/axios'
 import { mapGetters } from "vuex"
-import GoogleMap from '../components/GoogleMap.vue'
-import Video from '../components/Video.vue'
+import GoogleMap from '../components/TheGoogleMap.vue'
+import Video from '../components/BaseVideo.vue'
 
 export default {
   components: { GoogleMap, Video },
