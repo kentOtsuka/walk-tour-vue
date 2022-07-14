@@ -104,14 +104,14 @@ export default {
     },
     // Twitterシェアを実行
     share() {
-            var shareURL =
+      var shareURL =
       'https://twitter.com/intent/tweet?text='
       +
-      'VtourHub'
+      '%23VtourHub'
       +
       '%0a'
       +
-      '%20%23walkingtour'
+      '%23walkingtour'
       +
       '%20%23citywalk'
       +
@@ -119,8 +119,8 @@ export default {
       +
       '%0a'
       +
-      '&url='+'';
-      window.open(shareURL, '_blank')
+      '&url='+'https://vtourhub.web.app/';
+      window.open(shareURL, '_blank');
     },
   }
 }

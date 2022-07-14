@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-row style="max-width: 1200px; margin: auto;">
-      <v-col v-for="video in videos" :key="video.videoId" cols="12" sm="6" md="6" lg="4" class="my-1">
+      <v-col v-for="video in videos" :key="video.video_id" cols="12" sm="6" md="6" lg="4" class="my-1">
         <v-hover v-slot="{ hover }">
           <v-card :elevation="hover ? 12 : 2" max-width="400px" style="margin: auto;">
             <v-img :src="video.thumbnail" alt="サムネイル"  @click="openDialog(video);" style="cursor: pointer"></v-img>
@@ -33,7 +33,18 @@
           </v-responsive>
         </v-col>
         <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-        <v-card-subtitle class="my-0 pb-1 hidden-sm-and-down">{{ view_count.toLocaleString() }}回視聴・{{ published_at }}</v-card-subtitle>
+        <v-card-subtitle class="my-0 pb-1 hidden-sm-and-down">{{ viewCount.toLocaleString() }}回視聴・{{ publishedAt }}</v-card-subtitle>
+        <v-col class="d-flex justify-center pt-2">
+          <v-btn
+            color="blue darken-1"
+            outlined
+            style="text-transform: none"
+            @click="shareTwitter(title, videoId)"
+          >
+            <v-icon left>mdi-twitter</v-icon>
+            Twitterに共有
+          </v-btn>
+        </v-col>
         <v-divider class="mt-2"></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
@@ -53,16 +64,18 @@
 <script>
 export default {
   props: {
-    videos: Array
+    videos: Array,
+    area: String,
+    spot: String,
   },
   data() {
     return {
       // ダイアログの表示、非表示
       dialog: false,
       title: '',
-      video_id: '',
-      view_count: '',
-      published_at: '',
+      videoId: '',
+      viewCount: '',
+      publishedAt: '',
       // Youtube動画の埋め込み用URL
       urlForEmbedVideo: ''
     }
@@ -81,20 +94,41 @@ export default {
     openDialog(video) {
       this.dialog = true;
       this.title = video.title;
-      this.video_id = video.video_id;
-      this.view_count = video.view_count;
-      this.published_at = video.published_at;
-      this.urlForEmbedVideo = `https://www.youtube.com/embed/${this.video_id}`;
-      // this.urlForPlayYoutubeApp = `https://www.youtube.com/watch?v=${this.video_id}`;
+      this.videoId = video.video_id;
+      this.viewCount = video.view_count;
+      this.publishedAt = video.published_at;
+      this.urlForEmbedVideo = `https://www.youtube.com/embed/${this.videoId}`;
     },
     // ダイアログを非表示にしdataを空にする
     resetDialog() {
       this.dialog = false;
       this.title = '';
-      this.video_id = '';
+      this.videoId = '';
       this.description = '';
-      this.view_count = '';
+      this.viewCount = '';
       this.urlForEmbedVideo = '';
+    },
+    // VideoリンクをTwitterにシェア
+    shareTwitter(title, videoId) {
+      var shareURL =
+      'https://twitter.com/intent/tweet?text='
+      +
+      `【${this.spot}（${this.area}）】`
+      +
+      '%0a'
+      +
+      '%0a'
+      +
+      encodeURI(title)
+      +
+      '%0a'
+      +
+      '&url='+ `https://youtu.be/${videoId}`+ '%20%40Youtube%20より'
+      +
+      '%0a'
+      +
+      '%23VtourHub';
+      window.open(shareURL, '_blank');
     },
   }
 }
