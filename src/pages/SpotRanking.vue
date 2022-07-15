@@ -175,7 +175,11 @@ export default {
   methods: {
     // すべての地点とその国、動画を取得
     getSpot() {
-      axios.get('/all_spot')
+      axios.get('/spots',{
+        params: {
+          flag: 'all_spot'
+        }
+      })
       .then( res => {
         for(let i = 0; i < res.data.spots.length; i++) {
           // 取得した地点の中にユーザがお気に入り登録している地点があるかを判別する
@@ -191,7 +195,11 @@ export default {
     setSpot(area, spot) {
       // 地点のカウント数を+1する
       this.clickCount(spot, area);
-      axios.get(`/countries/${spot.country_id}/spots`)
+      axios.get(`/spots`, {
+        params: {
+          country_id: spot.country_id
+        }
+      })
       .then( res => {
         this.$router.push({ name: "SpotResult", params: { id: res.data.area.id, spotId: spot.id} });
       })

@@ -89,7 +89,11 @@ export default {
     ...mapActions("util", ["openSnackbar", "closeSnackbar"]),
     // DB内のすべての国名を取得
     setArea() {
-      axios.get('/all_country')
+      axios.get('/countries', {
+        params: {
+          flag: 'areas_name'
+        }
+      })
       .then( res => {
         this.areas = res.data.areas;
       })

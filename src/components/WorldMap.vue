@@ -47,7 +47,7 @@ export default {
     },
     // 地点登録のある国のみ色付けして表示する処理
     checkedArea(){
-      axios.get('/set_country')
+      axios.get('/countries')
       .then( res => {
         var areas = res.data.iso;
         for (let i = 0; i <= areas.length; i++) {
@@ -59,7 +59,7 @@ export default {
     // クリックされた国の詳細ページに遷移させる処理
     setArea(iso) {
       // iso二桁コードをもとにクリックされた国を取得
-      axios.get('/countries', {
+      axios.get('/set_country', {
         params: {
           iso: iso
         }
