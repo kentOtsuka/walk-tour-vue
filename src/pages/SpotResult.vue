@@ -122,7 +122,7 @@ export default {
         this.spotName = spot.name
         // お気に入り登録されているかを確認
         if(this.authUser) {
-          this.bookmarked(this.spot);
+          this.bookmarked(spot);
         }
       })
       .catch(error => {
