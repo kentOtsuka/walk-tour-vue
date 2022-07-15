@@ -93,6 +93,16 @@
         <v-icon left>mdi-heart-plus-outline</v-icon>
         スポットをお気に入り登録してみよう！
       </v-chip>
+      <v-col class="d-flex justify-center mt-3">
+        <v-btn
+          color="black"
+          outlined
+          to="/"
+        >
+        <v-icon left>mdi-keyboard-backspace</v-icon>
+          トップページから探す
+        </v-btn>
+        </v-col>
     </template>
 
     <!-- ダイアログボックス -->
