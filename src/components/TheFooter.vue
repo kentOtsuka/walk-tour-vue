@@ -12,19 +12,29 @@
         class="white--text text-center"
       >
         <v-card-text>
-          <v-btn
+          <v-tooltip
             v-for="item in items"
             :key="item.icon"
-            class="mx-4 white--text"
-            icon
+            color="teal"
+            top
           >
-            <v-icon
-              size="24px"
-              @click.native="triggerClick(item.action)"
-            >
-              {{ item.icon }}
-            </v-icon>
-          </v-btn>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn
+                class="mx-4 white--text"
+                v-bind="attrs"
+                v-on="on"
+                icon
+              >
+                <v-icon
+                  size="24px"
+                  @click.native="triggerClick(item.action)"
+                >
+                  {{ item.icon }}
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ item.text}}</span>
+          </v-tooltip>
         </v-card-text>
 
         <v-divider></v-divider>
@@ -36,11 +46,11 @@
 
       <!-- プライバシーポリシーダイアログボックス -->
     <v-dialog v-model="privacyDialog" max-width="1500px">
-      <Privacy @reset-dialog="closePrivacy()"></Privacy>
+      <Privacy @reset-dialog="closePrivacy()" :dialog="privacyDialog"></Privacy>
     </v-dialog>
     <!-- 利用規約ダイアログボックス -->
     <v-dialog v-model="termsDialog" max-width="1200px">
-      <UseTerms @reset-dialog="closeTerms()"></UseTerms>
+      <UseTerms @reset-dialog="closeTerms()" :dialog="termsDialog"></UseTerms>
     </v-dialog>
   </div>
 </template>
@@ -54,15 +64,28 @@ export default {
   data() {
     return {
       items: [
-        { icon: 'mdi-lock-outline', action: "privacy" },
-        { icon: 'mdi-file-document-outline', action: "terms" },
-        { icon: 'mdi-email-outline', action: "contact" },
-        { icon: 'mdi-share-variant-outline', action: "share" },
-        { icon: 'mdi-twitter', action: "twitter" },
+        { icon: 'mdi-lock-outline', action: "privacy", text: "プライバシーポリシー" },
+        { icon: 'mdi-file-document-outline', action: "terms", text: "利用規約" },
+        { icon: 'mdi-email-outline', action: "contact", text: "お問い合わせ" },
+        { icon: 'mdi-share-variant-outline', action: "share", text: "Twitterシェア" },
+        { icon: 'mdi-twitter', action: "twitter", text: "開発者Twitter" },
       ],
       privacyDialog: false,
       termsDialog: false,
+      obj: '',
     }
+  },
+  watch: {
+    privacyDialog() {
+      if (!this.privacyDialog) {
+        this.closePrivacy()
+      }
+    },
+    termsDialog() {
+      if (!this.termsDialog) {
+        this.closeTerms()
+      }
+    },
   },
   methods: {
     triggerClick(action) {
@@ -81,18 +104,22 @@ export default {
     // プライバシーポリシーを表示する
     openPrivacy() {
       this.privacyDialog = true;
+      this.obj = document.activeElement
     },
     // プライバシーポリシーを非表示にする
     closePrivacy() {
       this.privacyDialog = false;
+      this.obj.blur();
     },
     // 利用規約を表示する
     openTerms() {
       this.termsDialog = true;
+      this.obj = document.activeElement
     },
     // 利用規約を非表示にする
     closeTerms() {
       this.termsDialog = false;
+      this.obj.blur();
     },
     // お問合せフォームを開く
     contact() {

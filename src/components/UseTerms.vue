@@ -114,6 +114,16 @@
 
 <script>
 export default {
+  props: {
+    dialog: Boolean,
+  },
+  watch: {
+    dialog() {
+      if (!this.dialog) {
+        this.resetDialog();
+      }
+    },
+  },
   methods: {
     resetDialog() {
       this.$emit("reset-dialog");
