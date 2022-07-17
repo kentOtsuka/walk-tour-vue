@@ -7,19 +7,21 @@
 
     <v-row class="mx-auto mb-10">
       <v-col cols="12">
-        <v-card max-width="500px" class="mx-auto pa-5">
-          <v-list-item>
-            <v-list-item-avatar
-              color="indigo"
-              size="50"
-            >
-              <span class="white--text text-h5">{{ authUser.name.charAt(0) }}</span>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title class="text-center">{{ authUser.name }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-card>
+        <v-hover v-slot="{ profileHover }">
+          <v-card :elevation="profileHover ? 12 : 2" max-width="500px" class="mx-auto pa-5" @click="openEditUserDialog();">
+            <v-list-item>
+              <v-list-item-avatar
+                color="indigo"
+                size="50"
+              >
+                <span class="white--text text-h5">{{ authUser.name.charAt(0) }}</span>
+              </v-list-item-avatar>
+              <v-list-item-content>
+                <v-list-item-title class="text-center">{{ authUser.name }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-card>
+        </v-hover>
       </v-col>
     </v-row>
 
@@ -105,6 +107,63 @@
         </v-col>
     </template>
 
+    <!-- ユーザ編集ダイアログボックス -->
+    <v-row justify="center">
+      <v-dialog
+        v-model="userDialog"
+        max-width="600px"
+      >
+        <v-card>
+          <h2 class="d-flex align-center justify-center py-2">
+            プロフィール編集
+          </h2>
+          <v-divider style="max-width: 700px; margin: auto;"></v-divider>
+          <v-form v-model="valid">
+            <v-card-text class="py-0">
+              <v-container>
+                <v-text-field
+                  v-model="authUser.name"
+                  :rules="nameRules"
+                  prepend-icon="mdi-account-circle"
+                  label="お名前"
+                  placeholder="2〜10文字"
+                  validate-on-blur
+                  required
+                ></v-text-field>
+                <v-text-field
+                  v-model="authUser.email"
+                  :rules="emailRules"
+                  prepend-icon="mdi-email"
+                  label="メールアドレス"
+                  validate-on-blur
+                  required
+                ></v-text-field>
+              </v-container>
+            </v-card-text>
+            <v-card-actions class="justify-end">
+              <v-btn
+                color="#78909c"
+                text
+                @click="resetEditUserDialog();"
+              >
+                Close
+              </v-btn>
+              <v-btn
+                color="blue darken-1"
+                text
+                type="button"
+                :disabled="!valid"
+                @click="editUser"
+              >
+                Save
+              </v-btn>
+            </v-card-actions>
+          </v-form>
+
+        </v-card>
+      </v-dialog>
+    </v-row>
+
     <!-- ダイアログボックス -->
     <v-dialog v-model="dialog" max-width="1200px">
       <v-card>
@@ -152,6 +211,7 @@
 <script>
 import axios from '../plugins/axios'
 import { mapGetters } from "vuex"
+import { mapActions } from "vuex"
 
 export default {
   data() {
@@ -161,6 +221,8 @@ export default {
       heart: [],
       // ダイアログに渡すdata
       dialog: false,
+      valid: false,
+      userDialog: false,
       title: '',
       videoId: '',
       viewCount: '',
@@ -168,6 +230,15 @@ export default {
       urlForEmbedVideo: '',
       area: {},
       spot: {},
+      nameRules: [
+        v => !!v || 'お名前を入力してください',
+        v => v.length <= 10 || '2〜10文字が有効です',
+        v => v.length >= 2 || '2〜10文字が有効です',
+      ],
+      emailRules: [
+        v => !!v || 'メールアドレスを入力してください',
+        v => /.+@.+\..+/.test(v) || '無効なメールアドレスです'
+      ],
     }
   },
   created() {
@@ -177,7 +248,12 @@ export default {
     // ダイアログの状態を監視（表示、非表示の切り替えと同時にdataをリセット）
     dialog() {
       if (!this.dialog) {
-        this.resetDialog()
+        this.resetDialog();
+      }
+    },
+    userDialog() {
+      if (!this.userDialog) {
+        this.resetEditUserDialog();
       }
     },
   },
@@ -186,6 +262,7 @@ export default {
     ...mapGetters("users", ["authUser"]),
   },
   methods: {
+    ...mapActions("util", ["openSnackbar", "closeSnackbar"]),
     // クリックしたカードの地点の国の詳細ページに遷移させる処理
     setSpot(area, spot) {
       // 地点のカウント数を+1する
@@ -226,12 +303,24 @@ export default {
       // お気に入りスポットの配列から削除（非同期処理）
       this.spotDetails = this.spotDetails.filter((item) => item.id !== id);
       axios.delete(`/bookmarks/${spot}`)
-      // .then(res => {
-      //   console.log(res.data.status);
-      // })
       .catch(error => {
         console.log(error);
       });
+    },
+    // ユーザ編集
+    async editUser() {
+      await axios.put(`/users/${this.authUser.id}`, {
+        name: this.authUser.name,
+        email: this.authUser.email,
+      })
+      .then(res => {
+        this.resetEditUserDialog();
+        if (res.data.status == 'ok') {
+          this.openSnackbar('プロフィールを編集しました');
+        } else {
+          this.openSnackbar('予期せぬエラーが発生しました');
+        }
+      })
     },
     // ダイアログの表示
     openDialog(area, spot, video) {
@@ -255,6 +344,14 @@ export default {
       this.area =  [];
       this.spot = [];
     },
+    // ユーザ編集のダイアログを開く
+    openEditUserDialog(){
+      this.userDialog = true;
+    },
+    // ユーザ編集のダイアログを閉じる
+    resetEditUserDialog() {
+      this.userDialog = false;
+    }
   },
 }
 </script>
