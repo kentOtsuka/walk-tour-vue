@@ -134,19 +134,19 @@ export default {
       var shareURL =
       'https://twitter.com/intent/tweet?text='
       +
-      '%23VtourHub'
+      '%23VtourHub' + '%20で気になる街へ行こう'
       +
       '%0a'
       +
-      '%23walkingtour'
+      '%234kwalk'
       +
       '%20%23citywalk'
       +
-      '%20%23eveningWalk'
+      '%20%23walkingtour'
       +
       '%0a'
       +
-      '&url='+'https://vtourhub.web.app/';
+      'https://vtourhub.jp/';
       window.open(shareURL, '_blank');
     },
   }

@@ -113,7 +113,7 @@ export default {
       var shareURL =
       'https://twitter.com/intent/tweet?text='
       +
-      `【${this.spot}（${this.area}）】`
+      `${this.spot}（${this.area}）に行ってみたよ！`
       +
       '%0a'
       +
@@ -127,7 +127,17 @@ export default {
       +
       '%0a'
       +
-      '%23VtourHub';
+      '%23VtourHub'
+      +
+      '%20%234kwalk'
+      +
+      '%20%23citywalk'
+      +
+      '%20%23walkingtour'
+      +
+      '%0a'
+      +
+      'https://vtourhub.jp/';
       window.open(shareURL, '_blank');
     },
   }
