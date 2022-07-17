@@ -8,7 +8,7 @@
     <div class="d-flex justify-center mt-5" style="margin: auto;" >
       <div
         id="vmap"
-        style="width: 900px; height: 600px; margin: auto;"
+        style="width: 900px; height: 600px;"
       ></div>
     </div>
   </div>
