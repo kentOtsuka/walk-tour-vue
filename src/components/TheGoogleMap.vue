@@ -3,6 +3,8 @@
 </template>
 
 <script>
+import { MarkerClusterer } from "@googlemaps/markerclusterer";
+
 export default {
   props: {
     area: Object,
@@ -41,6 +43,7 @@ export default {
         // マーカー
         let marker = [];
         let marker_2 = [];
+        let markers = [];
         // クリック時に表示される情報ウィンドウ
         let infoWindowSpot = [];
         let infoWindowSpot_2 = [];
@@ -91,6 +94,8 @@ export default {
               icon: focusIcon,
               animation: google.maps.Animation.BOUNCE,
             });
+            markers.push(marker);
+
             infoWindowSpot = new google.maps.InfoWindow({
               content: `<div class="mb-0"><h2>${this.spot.name}</h2></div>`
             });
@@ -143,7 +148,6 @@ export default {
               // マーカー(地点)がクリックされた時にクリック数が+1カウントされる
               this.clickCount(this.spot, this.area);
             });
-
           } else {
             // 地点の緯度経度
             let spotLatLng = { lat: Number(this.spots[i].lat), lng: Number(this.spots[i].lng) };
@@ -154,7 +158,7 @@ export default {
               icon: standardIcon,
               animation: google.maps.Animation.DROP,
             });
-
+            markers.push(marker_2[i]);
             // マーカークリック時に動画の情報ウィンドウを表示
             marker_2[i].addListener("click", () => {
               // 開かれている情報ウィンドウがあれば閉じる処理
@@ -206,6 +210,9 @@ export default {
             });
           }
         }
+
+        // マーカーを管理する Marker Clusterer を追加する
+        new MarkerClusterer({markers, map});
       }
     }, 500);
   },
