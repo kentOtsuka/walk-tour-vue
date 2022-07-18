@@ -28,11 +28,9 @@ import axios from '../plugins/axios'
 export default {
   data() {
     return {
-      spots: [],
       areas: [],
       area_name: [],
       value: [],
-      spot: ''
     }
   },
   created() {
