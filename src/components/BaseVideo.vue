@@ -97,7 +97,7 @@ export default {
       this.videoId = video.video_id;
       this.viewCount = video.view_count;
       this.publishedAt = video.published_at;
-      this.urlForEmbedVideo = `https://www.youtube.com/embed/${this.videoId}`;
+      this.urlForEmbedVideo = `https://www.youtube.com/embed/${this.videoId}?autoplay=1&mute=1&loop=1&playlist=${this.videoId}`;
     },
     // ダイアログを非表示にしdataを空にする
     resetDialog() {
