@@ -315,11 +315,7 @@ export default {
       })
       .then(res => {
         this.resetEditUserDialog();
-        if (res.data.status == 'ok') {
-          this.openSnackbar('プロフィールを編集しました');
-        } else {
-          this.openSnackbar('予期せぬエラーが発生しました');
-        }
+        this.openSnackbar(res.data.message);
       })
     },
     // ダイアログの表示
