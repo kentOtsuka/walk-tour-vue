@@ -5,6 +5,8 @@
       <!-- 地点から動画を表示させるための検索窓 -->
       <!-- jqvmapで世界地図を表示 -->
       <WorldMap class="hidden-sm-and-down"></WorldMap>
+      <!-- 最近新たに追加されたスポットを表示 -->
+      <NewSpot class="mb-10"></NewSpot>
       <!-- ホットスポットの上位三つを表示 -->
       <HomeRanking></HomeRanking>
     </div>
@@ -14,11 +16,12 @@
 <script>
 import WorldMap from '../components/WorldMap.vue'
 import HomeRanking from '../components/HomeSpotRanking.vue'
+import NewSpot from '../components/NewAddSpot.vue'
 import BackGroundVideo from '../components/BackGroundVideo.vue'
 import axios from '../plugins/axios'
 
 export default {
-  components: { WorldMap, HomeRanking, BackGroundVideo },
+  components: { WorldMap, HomeRanking, NewSpot, BackGroundVideo },
   data() {
     return {
       areas: [],
