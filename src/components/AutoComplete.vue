@@ -28,11 +28,9 @@ import axios from '../plugins/axios'
 export default {
   data() {
     return {
-      spots: [],
       areas: [],
       area_name: [],
       value: [],
-      spot: ''
     }
   },
   created() {
@@ -41,7 +39,7 @@ export default {
   methods: {
     // 地点を保有するエリア（国）を全て取得
     getArea() {
-      axios.get('/set_country')
+      axios.get('/countries')
       .then( res => {
         this.areas = res.data.areas;
         for (let i = 0; i < this.areas.length; i++) {

@@ -97,7 +97,7 @@ export default {
       this.videoId = video.video_id;
       this.viewCount = video.view_count;
       this.publishedAt = video.published_at;
-      this.urlForEmbedVideo = `https://www.youtube.com/embed/${this.videoId}`;
+      this.urlForEmbedVideo = `https://www.youtube.com/embed/${this.videoId}?autoplay=1&mute=1&loop=1&playlist=${this.videoId}`;
     },
     // ダイアログを非表示にしdataを空にする
     resetDialog() {
@@ -113,7 +113,7 @@ export default {
       var shareURL =
       'https://twitter.com/intent/tweet?text='
       +
-      `【${this.spot}（${this.area}）】`
+      `${this.spot}（${this.area}）に行ってみたよ！`
       +
       '%0a'
       +
@@ -127,7 +127,17 @@ export default {
       +
       '%0a'
       +
-      '%23VtourHub';
+      '%23VtourHub'
+      +
+      '%20%234kwalk'
+      +
+      '%20%23citywalk'
+      +
+      '%20%23walkingtour'
+      +
+      '%0a'
+      +
+      'https://vtourhub.jp/';
       window.open(shareURL, '_blank');
     },
   }

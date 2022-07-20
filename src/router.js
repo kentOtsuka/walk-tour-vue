@@ -42,7 +42,11 @@ const router = new Router({
     {
       path: "/spotRequest", component: SpotRequest, name: "SpotRequest", meta: { requiredAuth: true }
     },
-  ]
+  ],
+  // 画面遷移後は先頭位置で表示
+  scrollBehavior () {
+    return { x: 0, y: 0 }
+  }
 })
 
 // ページ遷移時に必ず実行される
@@ -61,5 +65,7 @@ router.beforeEach((to, from, next) => {
     }
   })
 });
+
+
 
 export default router;

@@ -1,18 +1,47 @@
 <template>
-  <v-container class="mb-16">
-    <h2 class="mb-1 d-flex align-center justify-center">
-      <v-icon left bottom color="red">mdi-fire</v-icon>
-      ホットスポット
+  <div v-if="spotDetails.length != 0">
+    <h2 class="d-flex align-center justify-center" v-bind="attrs" v-on="on">
+      <v-icon left bottom color="yellow darken-1">mdi-new-box</v-icon>
+      Newスポット
     </h2>
+    <v-divider class="mb-2 mx-auto" style="max-width: 1200px; width: 90%;"></v-divider>
+    <!-- 画面幅がxs,smの時に表示 -->
+    <v-row class="mx-auto mb-2 hidden-md-and-up">
+      <v-col v-for="spotDetail in spotDetails" :key="spotDetail.id" cols="12" sm="12" md="4" lg="4">
+        <v-hover v-slot="{ hover }">
+          <v-card :elevation="hover ? 12 : 2" max-width="400px" style="margin: auto;">
+            <v-img :src="spotDetail.video.thumbnail" alt="サムネイル"  @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video);" style="cursor: pointer"></v-img>
+            <template v-if="authUser">
+              <v-btn v-if="spotDetail.heart == true" class="btn ma-2" fab small color="white" @click="unBookmark(spotDetail.id, spotDetail.spot.id)">
+                <v-icon color="pink">mdi-heart</v-icon>
+              </v-btn>
+              <v-btn v-else class="btn ma-2" fab small color="white" @click="bookmark(spotDetail.id, spotDetail.spot.id)">
+                <v-icon color="pink">mdi-heart-outline</v-icon>
+              </v-btn>
+            </template>
+            <div class="d-flex justify-space-between">
+              <v-list-item>
+                <v-list-item-content>
+                  <v-list-item-title class="my-1">{{ spotDetail.spot.name }}</v-list-item-title>
+                  <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+              <v-card-actions>
+                <v-btn color="blue darken-1 align-center" text  @click="setSpot(spotDetail.area, spotDetail.spot)">行ってみる！</v-btn>
+              </v-card-actions>
+            </div>
+          </v-card>
+        </v-hover>
+      </v-col>
+    </v-row>
 
-    <v-divider class="mb-2" style="max-width: 700px; margin: auto;"></v-divider>
-
-    <div class="d-flex justify-center">
-      <!-- 画面幅がxs,smの時に表示 -->
-      <v-row class="mx-auto hidden-md-and-up">
-        <v-col v-for="spotDetail in spotDetails" :key="spotDetail.id" cols="12" sm="6">
+    <!-- 画面幅がxlで表示 -->
+    <v-sheet class="mx-auto d-none d-xl-flex justify-center" max-width="1400">
+      <v-slide-group class="px-4" active-class="success" show-arrows height="400">
+        <v-slide-item
+          v-for="spotDetail in spotDetails" :key="spotDetail.id">
           <v-hover v-slot="{ hover }">
-            <v-card :elevation="hover ? 12 : 2" max-width="400px" style="margin: auto;">
+            <v-card  :elevation="hover ? 12 : 2" width="300" class="ma-2" style="margin: auto;">
               <v-img :src="spotDetail.video.thumbnail" alt="サムネイル"  @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video);" style="cursor: pointer"></v-img>
               <template v-if="authUser">
                 <v-btn v-if="spotDetail.heart == true" class="btn ma-2" fab small color="white" @click="unBookmark(spotDetail.id, spotDetail.spot.id)">
@@ -25,9 +54,8 @@
               <div class="d-flex justify-space-between">
                 <v-list-item>
                   <v-list-item-content>
-                    <v-list-item-subtitle small>ランキング第{{ spotDetail.id + 1 }}位</v-list-item-subtitle>
-                    <v-list-item-title class="my-1">{{ spotDetail.spot.name }}</v-list-item-title>
-                    <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
+                    <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                    <v-list-item-subtitle class="mt-1">{{ spotDetail.area.name }}</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
                 <v-card-actions>
@@ -36,51 +64,42 @@
               </div>
             </v-card>
           </v-hover>
-        </v-col>
-      </v-row>
+        </v-slide-item>
+      </v-slide-group>
+    </v-sheet>
 
-      <!-- 画面幅がmd, lg, xlで表示 -->
-      <v-row class="hidden-sm-and-down" style="max-width: 1000px; margin: auto;">
-        <v-col v-for="spotDetail in spotDetails" :key="spotDetail.id" cols="12" lg="6" md="12" sm="12">
+    <!-- 画面幅がmd, lgで表示 -->
+    <v-sheet class="mx-auto d-none d-md-flex d-lg-flex d-xl-none justify-center" max-width="1080">
+      <v-slide-group class="px-4" active-class="success" show-arrows height="400">
+        <v-slide-item
+          v-for="spotDetail in spotDetails" :key="spotDetail.id">
           <v-hover v-slot="{ hover }">
-            <v-card :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto;">
+            <v-card  :elevation="hover ? 12 : 2" width="300" class="ma-2" style="margin: auto;">
+              <v-img :src="spotDetail.video.thumbnail" alt="サムネイル"  @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video);" style="cursor: pointer"></v-img>
+              <template v-if="authUser">
+                <v-btn v-if="spotDetail.heart == true" class="btn ma-2" fab small color="white" @click="unBookmark(spotDetail.id, spotDetail.spot.id)">
+                  <v-icon color="pink">mdi-heart</v-icon>
+                </v-btn>
+                <v-btn v-else class="btn ma-2" fab small color="white" @click="bookmark(spotDetail.id, spotDetail.spot.id)">
+                  <v-icon color="pink">mdi-heart-outline</v-icon>
+                </v-btn>
+              </template>
               <div class="d-flex justify-space-between">
-                <div class="d-flex flex-column">
-                  <template v-if="authUser">
-                    <v-btn v-if="spotDetail.heart == true" class="btn ma-2" fab small color="white" @click="unBookmark(spotDetail.id, spotDetail.spot.id)">
-                      <v-icon color="pink">mdi-heart</v-icon>
-                    </v-btn>
-                    <v-btn v-else class="btn ma-2" fab small color="white" @click="bookmark(spotDetail.id, spotDetail.spot.id)">
-                      <v-icon color="pink">mdi-heart-outline</v-icon>
-                  </v-btn>
-                  </template>
-                  <v-list-item style="width: 160px;">
-                    <template v-if="authUser">
-                      <v-list-item-content class="pt-12">
-                        <v-list-item-subtitle class="mb-2">ランキング第{{ spotDetail.id + 1 }}位</v-list-item-subtitle>
-                        <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
-                        <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
-                      </v-list-item-content>
-                    </template>
-                    <template v-else>
-                      <v-list-item-content>
-                        <v-list-item-subtitle class="mb-2">ランキング第{{ spotDetail.id + 1 }}位</v-list-item-subtitle>
-                        <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
-                        <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
-                      </v-list-item-content>
-                    </template>
-                  </v-list-item>
-                  <v-divider></v-divider>
-                  <v-btn color="blue darken-1" text @click="setSpot(spotDetail.area, spotDetail.spot)">行ってみる！</v-btn>
-                </div>
-                <v-img :src="spotDetail.video.thumbnail" alt="サムネイル"  @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video);" style="cursor: pointer"></v-img>
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                    <v-list-item-subtitle class="mt-1">{{ spotDetail.area.name }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-card-actions>
+                  <v-btn color="blue darken-1 align-center" text  @click="setSpot(spotDetail.area, spotDetail.spot)">行ってみる！</v-btn>
+                </v-card-actions>
               </div>
             </v-card>
           </v-hover>
-        </v-col>
-      </v-row>
-
-    </div>
+        </v-slide-item>
+      </v-slide-group>
+    </v-sheet>
 
     <!-- ダイアログボックス -->
     <v-dialog v-model="dialog" max-width="1200px">
@@ -123,7 +142,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -135,7 +154,7 @@ export default {
     return {
       // すべての地点その国、動画オブジェクトを格納する配列
       spotDetails: [],
-      // ユーザがお気に入り登録している地点のidを格納する配列
+      // 地点ランキング上位三つの各オブジェクトを格納する配列
       spotBookmarks: [],
       // ダイアログに渡すdata
       dialog: false,
@@ -173,11 +192,11 @@ export default {
     ...mapGetters("users", ["authUser"]),
   },
   methods: {
-    // すべての地点とその国、動画を取得
+    // 3日前までに作成されたすべての地点とその国、動画を取得
     getSpot() {
       axios.get('/spots',{
         params: {
-          flag: 'all_spot'
+          flag: 'new_spot'
         }
       })
       .then( res => {
@@ -189,12 +208,13 @@ export default {
             this.spotDetails.push( {id: i, spot: res.data.spots[i], area: res.data.areas[i], video: res.data.videos[i], heart: false } );
           }
         }
+        console.log(this.spotDetails)
       })
     },
     // クリックしたカードの地点の国の詳細ページに遷移させる処理
     setSpot(area, spot) {
       // 地点のカウント数を+1する
-      this.clickCount(spot, area);
+      this.clickCount(spot, area)
       axios.get(`/spots`, {
         params: {
           country_id: spot.country_id
@@ -207,7 +227,7 @@ export default {
     // カードがクリックされた時に+1カウントされる
     clickCount(spot, area) {
       axios.get(`/countries/${area.id}/spots/${spot.id}/edit`)
-      .then( res => {
+      .then(res => {
         console.log(res.data.status);
       })
       .catch(error => {

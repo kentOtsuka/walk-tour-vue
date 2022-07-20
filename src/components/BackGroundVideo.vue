@@ -9,10 +9,9 @@
       <!--   動画の上に載せるテキスト   -->
       <div class="mv-txt">
         <p class="mb-0">VtourHub</p>
-        <p style="font-size: xx-large;">
-          気になる街へ行こう
-        </p>
-        <AutoComplete></AutoComplete>
+        <p style="font-size: xx-large;">気になる街へ行こう</p>
+        <AutoComplete :areas="areas"></AutoComplete>
+        <p class="font-weight-black text-decoration-underline" style="font-size: x-large;">{{ areas.length }}カ国 {{ spots.length }}地点を登録中</p>
       </div>
     </div>
   </div>
@@ -22,7 +21,11 @@
 import AutoComplete from './AutoComplete.vue'
 
 export default {
-  components: { AutoComplete }
+  components: { AutoComplete },
+  props: {
+    areas: Array,
+    spots: Array,
+  },
 }
 </script>
 
@@ -58,7 +61,7 @@ video {
   position: absolute;
   top: 0;
   left: 0;
-  background-color: rgba(0, 30, 0, 0.2);
+  background-color: rgba(0, 30, 0, 0.4);
   z-index: 2;
 }
 
@@ -68,7 +71,7 @@ video {
   font-size: 50px;
   max-width: 600px;
   width: 90%;
-  height: 350px;
+  height: 400px;
   position: absolute;
   top: 0;
   bottom: 0;

@@ -37,8 +37,42 @@
       </v-col>
     </v-row>
 
-    <!-- 画面幅がmd, lg, xlで表示 -->
-    <v-sheet class="mx-auto hidden-sm-and-down" max-width="1400">
+    <!-- 画面幅がxlで表示 -->
+    <v-sheet class="mx-auto d-none d-xl-flex" max-width="1400">
+      <v-slide-group class="px-4" active-class="success" show-arrows height="400">
+        <v-slide-item
+          v-for="spotDetail in bigLimitCount" :key="spotDetail.id">
+          <v-hover v-slot="{ hover }">
+            <v-card  :elevation="hover ? 12 : 2" width="300" class="ma-2" style="margin: auto;">
+              <v-img :src="spotDetail.video.thumbnail" alt="サムネイル"  @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video);" style="cursor: pointer"></v-img>
+              <template v-if="authUser">
+                <v-btn v-if="spotDetail.heart == true" class="btn ma-2" fab small color="white" @click="unBookmark(spotDetail.id, spotDetail.spot.id)">
+                  <v-icon color="pink">mdi-heart</v-icon>
+                </v-btn>
+                <v-btn v-else class="btn ma-2" fab small color="white" @click="bookmark(spotDetail.id, spotDetail.spot.id)">
+                  <v-icon color="pink">mdi-heart-outline</v-icon>
+                </v-btn>
+              </template>
+              <div class="d-flex justify-space-between">
+                <v-list-item>
+                  <v-list-item-content>
+                    <v-list-item-subtitle class="mb-2">ランキング第{{ spotDetail.id + 1 }}位</v-list-item-subtitle>
+                    <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                    <v-list-item-subtitle class="mt-1">{{ spotDetail.area.name }}</v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+                <v-card-actions>
+                  <v-btn color="blue darken-1 align-center" text  @click="setSpot(spotDetail.area, spotDetail.spot)">行ってみる！</v-btn>
+                </v-card-actions>
+              </div>
+            </v-card>
+          </v-hover>
+        </v-slide-item>
+      </v-slide-group>
+    </v-sheet>
+
+    <!-- 画面幅がmd, lgで表示 -->
+    <v-sheet class="mx-auto d-none d-md-flex d-lg-flex d-xl-none" max-width="1080">
       <v-slide-group class="px-4" active-class="success" show-arrows height="400">
         <v-slide-item
           v-for="spotDetail in bigLimitCount" :key="spotDetail.id">
@@ -183,7 +217,11 @@ export default {
   methods: {
     // すべての地点とその国、動画を取得
     getSpot() {
-      axios.get('/all_spot')
+      axios.get('/spots',{
+        params: {
+          flag: 'all_spot'
+        }
+      })
       .then( res => {
         for(let i = 0; i < res.data.spots.length; i++) {
           // 取得した地点の中にユーザがお気に入り登録している地点があるかを判別する
@@ -199,7 +237,11 @@ export default {
     setSpot(area, spot) {
       // 地点のカウント数を+1する
       this.clickCount(spot, area)
-      axios.get(`/countries/${spot.country_id}/spots`)
+      axios.get(`/spots`, {
+        params: {
+          country_id: spot.country_id
+        }
+      })
       .then( res => {
         this.$router.push({ name: "SpotResult", params: { id: res.data.area.id, spotId: spot.id} });
       })
@@ -256,7 +298,7 @@ export default {
       this.videoId = video.video_id;
       this.viewCount = video.view_count;
       this.publishedAt = video.published_at;
-      this.urlForEmbedVideo = `https://www.youtube.com/embed/${this.videoId}`;
+      this.urlForEmbedVideo = `https://www.youtube.com/embed/${this.videoId}?autoplay=1&mute=1&loop=1&playlist=${this.videoId}`;
       this.area =  area;
       this.spot =  spot;
     },
