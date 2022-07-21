@@ -215,11 +215,7 @@ export default {
     setSpot(area, spot) {
       // 地点のカウント数を+1する
       this.clickCount(spot, area)
-      axios.get(`/spots`, {
-        params: {
-          country_id: spot.country_id
-        }
-      })
+      axios.get(`/countries/${area.id}`)
       .then( res => {
         this.$router.push({ name: "SpotResult", params: { id: res.data.area.id, spotId: spot.id} });
       })

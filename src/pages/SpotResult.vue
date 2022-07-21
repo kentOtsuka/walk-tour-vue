@@ -90,11 +90,7 @@ export default {
   methods: {
     // 国に関する地点を取得
     setSpot() {
-      axios.get(`/spots`, {
-        params: {
-          country_id: this.id
-        }
-      })
+      axios.get(`/countries/${this.id}`)
       .then(res => {
         this.area = res.data.area
         this.spots = res.data.spots
@@ -131,11 +127,7 @@ export default {
     },
     // 地点の表示と動画の一覧表示を同時に行う処理
     setSpotAndVideo() {
-      axios.get(`/spots`, {
-        params: {
-          country_id: this.id
-        }
-      })
+      axios.get(`/countries/${this.id}`)
       .then(res => {
         this.area = res.data.area
         this.spots = res.data.spots
