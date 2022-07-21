@@ -164,46 +164,19 @@
       </v-dialog>
     </v-row>
 
-    <!-- ダイアログボックス -->
+    <!-- 動画のダイアログを表示 -->
     <v-dialog v-model="dialog" max-width="1200px">
-      <v-card>
-        <v-col>
-          <v-responsive :aspect-ratio="16/9">
-            <iframe
-              width="100%"
-              height="100%"
-              :src="urlForEmbedVideo"
-              frameborder="0"
-              autoplay
-              allowfullscreen
-              modestbranding="1"
-            ></iframe>
-          </v-responsive>
-        </v-col>
-        <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-        <v-card-subtitle class="my-0 hidden-sm-and-down">{{ viewCount.toLocaleString() }}回視聴・{{ publishedAt }}</v-card-subtitle>
-        <v-col class="d-flex justify-center pt-2">
-          <v-btn
-            color="blue darken-1"
-            outlined
-            @click="setSpot(area, spot)"
-          >
-            <v-icon left>mdi-video</v-icon>
-            {{ spot.name }}のVtour動画一覧
-          </v-btn>
-        </v-col>
-        <v-divider></v-divider>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="resetDialog()"
-          >
-            CLOSE
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+      <Dialog
+        :title="title"
+        :videoId="videoId"
+        :viewCount="viewCount"
+        :publishedAt="publishedAt"
+        :urlForEmbedVideo="urlForEmbedVideo"
+        :area="area"
+        :spot="spot"
+        @set-spot="setSpot"
+        @reset-dialog="resetDialog"
+      ></Dialog>
     </v-dialog>
   </v-container>
 </template>
@@ -212,8 +185,10 @@
 import axios from '../plugins/axios'
 import { mapGetters } from "vuex"
 import { mapActions } from "vuex"
+import Dialog from "../components/dialogs/HomeVideoDialog.vue"
 
 export default {
+  components: { Dialog },
   data() {
     return {
       // すべての地点その国、動画オブジェクトを格納する配列
@@ -267,11 +242,7 @@ export default {
     setSpot(area, spot) {
       // 地点のカウント数を+1する
       this.clickCount(spot, area)
-      axios.get(`/spots`, {
-        params: {
-          country_id: spot.country_id
-        }
-      })
+      axios.get(`/countries/${spot.country_id}`)
       .then( res => {
         this.$router.push({ name: "SpotResult", params: { id: res.data.area.id, spotId: spot.id} });
       })

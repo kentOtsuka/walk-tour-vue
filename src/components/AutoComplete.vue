@@ -58,7 +58,7 @@ export default {
           i++;
         }
       } else {
-        alert("見つかりません");
+        alert("検索ワードを選択してください");
       }
     },
   }

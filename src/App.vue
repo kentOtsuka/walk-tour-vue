@@ -39,3 +39,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.v-snack--absolute{
+  z-index: 2;
+}
+</style>
