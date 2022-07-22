@@ -18,51 +18,26 @@
 
     <!-- ダイアログボックス -->
     <v-dialog v-model="dialog" max-width="1300px">
-      <v-card>
-        <v-col>
-          <v-responsive :aspect-ratio="16/9">
-            <iframe
-              width="100%"
-              height="100%"
-              :src="urlForEmbedVideo"
-              frameborder="0"
-              autoplay
-              allowfullscreen
-              modestbranding="1"
-            ></iframe>
-          </v-responsive>
-        </v-col>
-        <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-        <v-card-subtitle class="my-0 pb-1 hidden-sm-and-down">{{ viewCount.toLocaleString() }}回視聴・{{ publishedAt }}</v-card-subtitle>
-        <v-col class="d-flex justify-center pt-2">
-          <v-btn
-            color="blue darken-1"
-            outlined
-            style="text-transform: none"
-            @click="shareTwitter(title, videoId)"
-          >
-            <v-icon left>mdi-twitter</v-icon>
-            Twitterに共有
-          </v-btn>
-        </v-col>
-        <v-divider class="mt-2"></v-divider>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="resetDialog()"
-          >
-            CLOSE
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+      <Dialog
+        :title="title"
+        :videoId="videoId"
+        :viewCount="viewCount"
+        :publishedAt="publishedAt"
+        :urlForEmbedVideo="urlForEmbedVideo"
+        :area="area"
+        :spot="spot"
+        @share-twitter="shareTwitter"
+        @reset-dialog="resetDialog"
+      ></Dialog>
     </v-dialog>
   </div>
 </template>
 
 <script>
+import Dialog from "../components/dialogs/VideoDialog.vue"
+
 export default {
+  components: { Dialog },
   props: {
     videos: Array,
     area: String,
