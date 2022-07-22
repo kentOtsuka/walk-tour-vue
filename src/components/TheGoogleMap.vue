@@ -3,6 +3,7 @@
 </template>
 
 <script>
+// GoogleMapのマーカーをクラスタリング
 import { MarkerClusterer } from "@googlemaps/markerclusterer";
 
 export default {
@@ -212,7 +213,24 @@ export default {
         }
 
         // マーカーを管理する Marker Clusterer を追加する
-        new MarkerClusterer({markers, map});
+        const markerCluster = new MarkerClusterer({markers, map});
+
+        markerCluster.addListener("click", () => {
+          if (this.currentInfoWindow) {
+            this.currentInfoWindow.close();
+          }
+          // アクティブ状態のマーカーがあれば行う処理
+          if (this.focusMarker) {
+            // アクティブ中のマーカーを通常iconに戻す
+            this.focusMarker.setIcon({
+              url: standardIcon,
+            });
+            // アクティブ中のマーカーのバウンドを止める
+            this.focusMarker.setAnimation(
+              null
+            );
+          }
+        });
       }
     }, 500);
   },
