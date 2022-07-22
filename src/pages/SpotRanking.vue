@@ -150,18 +150,16 @@ export default {
   methods: {
     // すべての地点とその国、動画を取得
     getSpot() {
-      axios.get('/spots',{
-        params: {
-          flag: 'all_spot'
-        }
-      })
+      axios.get('/spots')
       .then( res => {
-        for(let i = 0; i < res.data.spots.length; i++) {
+        // クリック数順に並び替え
+        res.data.ranking.sort((a, b) => { return a.click_count - b.click_count; }).reverse();
+        for(let i = 0; i < res.data.ranking.length; i++) {
           // 取得した地点の中にユーザがお気に入り登録している地点があるかを判別する
-          if (this.spotBookmarks.includes(res.data.spots[i].id)) {
-            this.spotDetails.push( {id: i, spot: res.data.spots[i], area: res.data.areas[i], video: res.data.videos[i], heart: true } );
+          if (this.spotBookmarks.includes(res.data.ranking[i].spot.id)) {
+            this.spotDetails.push( {id: i, spot: res.data.ranking[i].spot, area: res.data.ranking[i].area, video: res.data.ranking[i].video, heart: true } );
           } else {
-            this.spotDetails.push( {id: i, spot: res.data.spots[i], area: res.data.areas[i], video: res.data.videos[i], heart: false } );
+            this.spotDetails.push( {id: i, spot: res.data.ranking[i].spot, area: res.data.ranking[i].area, video: res.data.ranking[i].video, heart: false } );
           }
         }
       })

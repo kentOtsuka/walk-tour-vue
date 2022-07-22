@@ -170,21 +170,16 @@ export default {
   methods: {
     // 3日前までに作成されたすべての地点とその国、動画を取得
     getSpot() {
-      axios.get('/spots',{
-        params: {
-          flag: 'new_spot'
-        }
-      })
+      axios.get('/spots')
       .then( res => {
-        for(let i = 0; i < res.data.spots.length; i++) {
+        for(let i = 0; i < res.data.create.length; i++) {
           // 取得した地点の中にユーザがお気に入り登録している地点があるかを判別する
-          if (this.spotBookmarks.includes(res.data.spots[i].id)) {
-            this.spotDetails.push( {id: i, spot: res.data.spots[i], area: res.data.areas[i], video: res.data.videos[i], heart: true } );
+          if (this.spotBookmarks.includes(res.data.create[i].spot.id)) {
+            this.spotDetails.push( {id: i, spot: res.data.create[i].spot, area: res.data.create[i].area, video: res.data.create[i].video, heart: true } );
           } else {
-            this.spotDetails.push( {id: i, spot: res.data.spots[i], area: res.data.areas[i], video: res.data.videos[i], heart: false } );
+            this.spotDetails.push( {id: i, spot: res.data.create[i].spot, area: res.data.create[i].area, video: res.data.create[i].video, heart: false } );
           }
         }
-        console.log(this.spotDetails)
       })
     },
     // クリックしたカードの地点の国の詳細ページに遷移させる処理
