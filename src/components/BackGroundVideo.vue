@@ -3,30 +3,46 @@
     <!--  メイン全体を囲うdiv  -->
     <div class="mv-wrap">
       <!--   薄いレイヤー   -->
-      <div class="mv-bg"></div>
+      <div class="mv-bg" />
       <!--   videoタグ   -->
-      <video id="video" webkit-playsinline="" playsinline="" muted="" autoplay="" loop="" src="../../public/bgvideo_2.mp4"></video>
+      <video
+        id="video"
+        webkit-playsinline=""
+        playsinline=""
+        muted=""
+        autoplay=""
+        loop=""
+        src="../../public/bgvideo_2.mp4"
+      />
       <!--   動画の上に載せるテキスト   -->
       <div class="mv-txt">
         <p class="mb-0">VtourHub</p>
-        <p style="font-size: xx-large;">気になる街へ行こう</p>
-        <AutoComplete :areas="areas"></AutoComplete>
-        <p class="font-weight-black text-decoration-underline" style="font-size: x-large;">{{ areas.length }}カ国 {{ spots.length }}地点を登録中</p>
+        <p style="font-size: xx-large">気になる街へ行こう</p>
+        <AutoComplete :areas="areas" />
+        <p class="font-weight-black text-decoration-underline" style="font-size: x-large">
+          {{ areas.length }}カ国 {{ spots.length }}地点を登録中
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AutoComplete from './AutoComplete.vue'
+import AutoComplete from './AutoComplete.vue';
 
 export default {
   components: { AutoComplete },
   props: {
-    areas: Array,
-    spots: Array,
+    areas: {
+      type: Array,
+      required: true,
+    },
+    spots: {
+      type: Array,
+      required: true,
+    },
   },
-}
+};
 </script>
 
 <style scoped>
@@ -35,7 +51,6 @@ export default {
   /* height: 100%; */
   position: relative;
   overflow: hidden;
-
 }
 
 .mv-wrap {

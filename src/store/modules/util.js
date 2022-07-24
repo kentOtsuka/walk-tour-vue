@@ -2,8 +2,8 @@ const getters = {};
 
 const state = {
   //初期状態を定義
-  text: "",
-  snackbar: false ,
+  text: '',
+  snackbar: false,
 };
 
 const mutations = {
@@ -14,7 +14,7 @@ const mutations = {
   },
   unsetSnackbar: () => {
     state.snackbar = false;
-    state.text = "";
+    state.text = '';
   },
 };
 
@@ -23,11 +23,11 @@ const actions = {
   openSnackbar: ({ commit }, text) => {
     //mutationsを発動させる。テキストの内容を引数で持たせる
     //commit('mutatiuonsの関数名')でmutationsを発動させられる
-    commit("setSnackbar", text);
+    commit('setSnackbar', text);
   },
   //スナックバーを非表示にする関数
   closeSnackbar: ({ commit }) => {
-    commit("unsetSnackbar");
+    commit('unsetSnackbar');
   },
 };
 
