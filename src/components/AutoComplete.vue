@@ -42,7 +42,7 @@ export default {
       if (this.value.length !== 0) {
         let i = 0;
         while (i < this.areas.length) {
-          if (this.value == this.areas[i].name) {
+          if (this.value === this.areas[i].name) {
             this.$router.push({ name: 'SpotResult', params: { id: this.areas[i].id } });
             break;
           }

@@ -30,8 +30,6 @@ export default {
       urlForEmbedVideo: '',
       // アクティブ中のマーカー
       focusMarker: null,
-      // 現在開いているinfoWindow
-      currentInfoWindow: null,
     };
   },
   // データの変更
@@ -54,11 +52,15 @@ export default {
         let marker_2 = [];
         let markers = [];
         // クリック時に表示される情報ウィンドウ
-        let infoWindowSpot = [];
-        let infoWindowSpot_2 = [];
+        const infoWindow = new google.maps.InfoWindow({
+          content: "",
+          disableAutoPan: true,
+        });
         // カーソルホバー時に表示される情報ウィンドウ
-        let infoWindowHover = [];
-        let infoWindowHover_2 = [];
+        const infoWindowHover = new google.maps.InfoWindow({
+          content: "",
+          disableAutoPan: true,
+        });
 
         const standardIcon = 'http://maps.google.co.jp/mapfiles/ms/icons/blue-dot.png';
         const focusIcon = 'http://maps.google.co.jp/mapfiles/ms/icons/yellow-dot.png';
@@ -76,7 +78,7 @@ export default {
 
         // エリア（国、都道府県）から緯度経度を取得し地図に表示
         new google.maps.Geocoder().geocode({ address: this.area.name }, (results, status) => {
-          if (status == google.maps.GeocoderStatus.OK) {
+          if (status === google.maps.GeocoderStatus.OK) {
             if (results[0].geometry) {
               // 緯度経度を取得
               this.latlng = results[0].geometry.location;
@@ -85,7 +87,7 @@ export default {
               // 全エリアが表示されるように設定
               map.fitBounds(results[0].geometry.bounds);
             }
-          } else if (status == google.maps.GeocoderStatus.ZERO_RESULTS) {
+          } else if (status === google.maps.GeocoderStatus.ZERO_RESULTS) {
             alert('見つかりません');
           } else {
             console.log(status);
@@ -96,7 +98,7 @@ export default {
         // エリア内の各地点にマーカーを立てる
         for (let i = 0; i < this.spots.length; i++) {
           // spotIdを引き継いでおり（ホットスポットからの遷移であり）、 APIで取得した地点の中で同じものであれば
-          if (this.spots[i] == this.spot) {
+          if (this.spots[i] === this.spot) {
             marker = new google.maps.Marker({
               position: { lat: Number(this.spot.lat), lng: Number(this.spot.lng) },
               map,
@@ -105,20 +107,18 @@ export default {
             });
             markers.push(marker);
 
-            infoWindowSpot = new google.maps.InfoWindow({
-              content: `<div class="mb-0"><h2>${this.spot.name}</h2></div>`,
-            });
-            infoWindowHover = new google.maps.InfoWindow({
-              content: `<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`,
-            });
             // 情報ウィンドウを固定で表示する
-            infoWindowSpot.open(map, marker);
+            infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+            infoWindow.open(map, marker);
+
+            // infoWindowHover = new google.maps.InfoWindow({
+            //   content: `<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`,
+            // });
             // マーカーをアクティブ状態にする
             this.focusMarker = marker;
-            // マーカーの情報ウィンドウに印をつける
-            this.currentInfoWindow = infoWindowSpot;
             // マーカーにマウスオーバー時に地点名の情報ウィンドウを表示
             marker.addListener('mouseover', () => {
+              infoWindowHover.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
               infoWindowHover.open(map, marker);
             });
             // マーカーからマウスアウトした時に地点名の情報ウィンドウを非表示
@@ -127,10 +127,6 @@ export default {
             });
 
             marker.addListener('click', () => {
-              // 開かれている情報ウィンドウがあれば閉じる処理
-              if (this.currentInfoWindow) {
-                this.currentInfoWindow.close();
-              }
               // アクティブ状態のマーカーがあれば行う処理
               if (this.focusMarker) {
                 // アクティブ中のマーカーを通常iconに戻す
@@ -147,9 +143,10 @@ export default {
               // アクティブ中のマーカーのみバウンドさせる
               marker.setAnimation(google.maps.Animation.BOUNCE);
               // 情報ウィンドウを固定で表示する
-              infoWindowSpot.open(map, marker);
+              infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+              infoWindow.open(map, marker);
               // 地点に関する動画一覧ページに遷移する処理
-              this.getVideo(marker, infoWindowSpot, this.spot, this.area);
+              this.getVideo(marker, this.spot, this.area);
               // マーカー(地点)がクリックされた時にクリック数が+1カウントされる
               this.clickCount(this.spot, this.area);
             });
@@ -166,10 +163,6 @@ export default {
             markers.push(marker_2[i]);
             // マーカークリック時に動画の情報ウィンドウを表示
             marker_2[i].addListener('click', () => {
-              // 開かれている情報ウィンドウがあれば閉じる処理
-              if (this.currentInfoWindow) {
-                this.currentInfoWindow.close();
-              }
               // アクティブ状態のマーカーがあれば行う処理
               if (this.focusMarker) {
                 // アクティブ中のマーカーを通常iconに戻す
@@ -186,28 +179,22 @@ export default {
               // アクティブ中のマーカーのみバウンドさせる
               marker_2[i].setAnimation(google.maps.Animation.BOUNCE);
               // 情報ウィンドウを固定で表示する
-              infoWindowSpot_2[i].open(map, marker_2[i]);
+              infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+              infoWindow.open(map, marker_2[i]);
               // 地点に関する動画一覧ページに遷移する処理
-              this.getVideo(marker_2[i], infoWindowSpot_2[i], this.spots[i], this.area);
+              this.getVideo(marker_2[i], this.spots[i], this.area);
               // マーカー(地点)がクリックされた時にクリック数が+1カウントされる
               this.clickCount(this.spots[i], this.area);
             });
 
             // マーカーにマウスオーバー時に地点名の情報ウィンドウを表示
             marker_2[i].addListener('mouseover', () => {
-              infoWindowHover_2[i].open(map, marker_2[i]);
+              infoWindowHover.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+              infoWindowHover.open(map, marker_2[i]);
             });
             // マーカーからマウスアウトした時に地点名の情報ウィンドウを非表示
             marker_2[i].addListener('mouseout', () => {
-              infoWindowHover_2[i].close(map, marker_2[i]);
-            });
-            // 情報ウィンドウ内に国名を表示
-            infoWindowHover_2[i] = new google.maps.InfoWindow({
-              content: `<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`,
-            });
-            // 情報ウィンドウ内に国名を表示
-            infoWindowSpot_2[i] = new google.maps.InfoWindow({
-              content: `<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`,
+              infoWindowHover.close(map, marker_2[i]);
             });
           }
         }
@@ -216,9 +203,6 @@ export default {
         const markerCluster = new MarkerClusterer({ markers, map });
 
         markerCluster.addListener('click', () => {
-          if (this.currentInfoWindow) {
-            this.currentInfoWindow.close();
-          }
           // アクティブ状態のマーカーがあれば行う処理
           if (this.focusMarker) {
             // アクティブ中のマーカーを通常iconに戻す
@@ -234,11 +218,10 @@ export default {
   },
   methods: {
     // 地点に関する動画一覧ページに遷移する処理
-    getVideo(marker, infoWindow, spot, area) {
+    getVideo(marker, spot, area) {
       // マーカーをアクティブ状態にする
       this.focusMarker = marker;
       // マーカーの情報ウィンドウに印をつける
-      this.currentInfoWindow = infoWindow;
       // マーカー(地点)がクリックされた時にクリック数が+1カウントされる
       this.$emit('get-video', spot, area);
     },

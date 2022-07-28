@@ -128,7 +128,7 @@ export default {
   },
   created() {
     // spotIdを引き継いでいれば（ホットスポットからの遷移であれば）spotIdに関する動画も一覧表示する
-    if (this.spotId == undefined) {
+    if (this.spotId === undefined) {
       this.setSpot();
     } else {
       this.setSpotAndVideo();
@@ -188,7 +188,7 @@ export default {
           let i = 0;
           // APIで取得した地点の中でpropsで引き継いだ地点と同じものを探す
           while (i < this.spots.length) {
-            if (this.spots[i].id == this.spotId) {
+            if (this.spots[i].id === this.spotId) {
               this.spot = this.spots[i];
               break;
             }
@@ -227,7 +227,7 @@ export default {
           },
         })
         .then((res) => {
-          if (res.data.status == 'yes') {
+          if (res.data.status === 'yes') {
             this.heart = true;
           } else {
             this.heart = false;
@@ -240,7 +240,7 @@ export default {
     // お気に入りに登録する
     bookmark() {
       this.heart = true;
-      if (this.markSpot.id == undefined) {
+      if (this.markSpot.id === undefined) {
         axios
           .post('/bookmarks', { spot_id: this.spot.id })
           // .then(res => {
@@ -263,7 +263,7 @@ export default {
     // お気に入り登録を解除する
     unBookmark() {
       this.heart = false;
-      if (this.markSpot.id == undefined) {
+      if (this.markSpot.id === undefined) {
         axios
           .delete(`/bookmarks/${this.spot.id}`)
           // .then(res => {
