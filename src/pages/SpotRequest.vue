@@ -4,16 +4,16 @@
       <v-icon left bottom color="green darken-1">mdi-send-circle</v-icon>
       スポットをリクエスト
     </h2>
-    <v-divider class="mb-4" style="max-width: 700px; margin: auto;"></v-divider>
+    <v-divider class="mb-4" style="max-width: 700px; margin: auto" />
     <p class="mb-1 d-flex align-center justify-center">
-      本サービスの管理者に対して、地点の追加をリクエストすることができます。<br>
+      本サービスの管理者に対して、地点の追加をリクエストすることができます。<br />
     </p>
-    <p class="d-flex justify-center" style="font-size: small;">
-      ※ リクエストされた地点の内、追加を見送ることもあるのでご了承ください。<br>
+    <p class="d-flex justify-center" style="font-size: small">
+      ※ リクエストされた地点の内、追加を見送ることもあるのでご了承ください。<br />
       ※ お知らせ欄から追加された地点を確認することができます。
     </p>
 
-    <v-row justify="center" style="max-width: 1400px; margin: auto;">
+    <v-row justify="center" style="max-width: 1400px; margin: auto">
       <v-col cols="11" sm="10" md="8" lg="6">
         <v-card>
           <v-form v-model="valid">
@@ -35,7 +35,7 @@
                 label="地名を入力"
                 validate-on-blur
                 required
-              ></v-text-field>
+              />
             </v-card-text>
 
             <v-card-actions class="justify-end">
@@ -51,7 +51,6 @@
                 リクエストを送る
               </v-btn>
             </v-card-actions>
-
           </v-form>
         </v-card>
       </v-col>
@@ -60,8 +59,8 @@
 </template>
 
 <script>
-import axios from '../plugins/axios'
-import { mapActions } from "vuex";
+import axios from '../plugins/axios';
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -72,47 +71,43 @@ export default {
       // フォームで選択、入力された値
       spotInfo: {
         area: null,
-        spot: "",
+        spot: '',
       },
       spotRules: [
-        v => v.length <= 20 || '2〜20文字が有効です',
-        v => v.length >= 2 || '2〜20文字が有効です',
-        v => /^[^ -~｡-ﾟ]+$/.test(v) || '全角文字で入力してください'
+        (v) => v.length <= 20 || '2〜20文字が有効です',
+        (v) => v.length >= 2 || '2〜20文字が有効です',
+        (v) => /^[^ -~｡-ﾟ]+$/.test(v) || '全角文字で入力してください',
       ],
-    }
+    };
   },
   mounted() {
     // DB内のすべての国名を取得
     this.setArea();
   },
   methods: {
-    ...mapActions("util", ["openSnackbar", "closeSnackbar"]),
+    ...mapActions('util', ['openSnackbar', 'closeSnackbar']),
     // DB内のすべての国名を取得
     setArea() {
-      axios.get('/countries', {
-        params: {
-          flag: 'areas_name'
-        }
-      })
-      .then( res => {
-        this.areas = res.data.areas;
-      })
+      axios.get('/countries').then((res) => {
+        this.areas = res.data.areas_name;
+      });
     },
     // リクエストを送信(作成)
     send() {
-      axios.post("/requests", { request: this.spotInfo})
-      .then( () => {
-        this.openSnackbar('送信しました！');
-        this.resetSpotInfo();
-      })
-      .catch( err => {
-        console.log(err)
-      });
+      axios
+        .post('/requests', { request: this.spotInfo })
+        .then(() => {
+          this.openSnackbar('送信しました！');
+          this.resetSpotInfo();
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
     resetSpotInfo() {
       this.spotInfo.area = null;
       this.spotInfo.spot = '';
-    }
+    },
   },
-}
+};
 </script>

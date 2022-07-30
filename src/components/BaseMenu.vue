@@ -1,30 +1,20 @@
 <template>
   <div>
     <!-- メニュー表の中身 -->
-    <v-navigation-drawer
-      :value="value"
-      @input="$emit('input', $event)"
-      app
-      fixed
-      temporary
-    >
-
+    <v-navigation-drawer :value="value" @input="$emit('input', $event)" app fixed temporary>
       <v-list v-if="authUser">
-        <v-list-item
-          @click.native="triggerClick('profile')"
-          link
-        >
+        <v-list-item @click.native="triggerClick('profile')" link>
           <v-list-item-avatar color="indigo" size="50">
             <span class="white--text text-h5">{{ authUser.name.charAt(0) }}</span>
           </v-list-item-avatar>
-          <v-list-item-content style="color: #455A64;">
+          <v-list-item-content style="color: #455a64">
             <v-list-item-title>マイページ</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
 
       <!-- 線 -->
-      <v-divider></v-divider>
+      <v-divider />
 
       <!-- メニュー表のリスト -->
       <v-list>
@@ -35,18 +25,18 @@
           @click.native="triggerClick(item.action)"
           link
         >
-          <v-list-item-icon style="color: #455A64;">
+          <v-list-item-icon style="color: #455a64">
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
-          <v-list-item-content style="color: #455A64;">
+          <v-list-item-content style="color: #455a64">
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
 
       <!-- 線 -->
-      <v-divider></v-divider>
+      <v-divider />
 
       <v-list dense>
         <template v-if="!authUser">
@@ -57,11 +47,11 @@
             @click.native="triggerClick(item.action)"
             link
           >
-            <v-list-item-icon style="color: #455A64;">
+            <v-list-item-icon style="color: #455a64">
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
 
-            <v-list-item-content  style="color: #455A64;">
+            <v-list-item-content style="color: #455a64">
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -77,12 +67,12 @@
             link
           >
             <!-- リストのアイコン -->
-            <v-list-item-icon style="color: #455A64;">
+            <v-list-item-icon style="color: #455a64">
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
 
             <!-- リストのタイトル -->
-            <v-list-item-content style="color: #455A64;">
+            <v-list-item-content style="color: #455a64">
               <v-list-item-title>{{ item.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
@@ -93,15 +83,15 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex"
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   // 親のHeader.vueから引き継ぎ
   props: {
     value: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   data() {
     return {
@@ -111,23 +101,21 @@ export default {
         { title: 'ホットスポット', icon: 'mdi-fire', url: '/spotRanking' },
         { title: 'お知らせ', icon: 'mdi-information-outline', url: '/newsList' },
       ],
-      smallItems: [
-        { title: 'ログイン', icon: 'mdi-login', url: '/login' },
-      ],
+      smallItems: [{ title: 'ログイン', icon: 'mdi-login', url: '/login' }],
       // ログイン中のメニューリスト
       smallItemsLogin: [
         { title: 'スポットをリクエスト', icon: 'mdi-send-circle', url: '/spotRequest' },
-        { title: 'ログアウト', icon: 'mdi-logout', action: "logout" },
+        { title: 'ログアウト', icon: 'mdi-logout', action: 'logout' },
       ],
-    }
+    };
   },
   computed: {
     // mapGettersでログイン中のユーザを取得
-    ...mapGetters("users", ["authUser"])
+    ...mapGetters('users', ['authUser']),
   },
   methods: {
-    ...mapActions("users", ["logoutUser"]),
-    ...mapActions("util", ["openSnackbar", "closeSnackbar"]),
+    ...mapActions('users', ['logoutUser']),
+    ...mapActions('util', ['openSnackbar', 'closeSnackbar']),
     // メニューの中でログアウトメニューをクリックした時のみ発火
     triggerClick(action) {
       if (action === 'logout') {
@@ -140,19 +128,19 @@ export default {
     async logout() {
       try {
         // ログアウト処理
-        await this.logoutUser()
+        await this.logoutUser();
         // ログアウト後、ログインページに遷移させる
-        this.$router.push({name: 'Login'})
+        this.$router.push({ name: 'Login' });
         // フラッシュメッセージの表示処理の呼び出し
         this.openSnackbar('ログアウトしました');
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
     },
     // マイページを開く
     handleProfile() {
-      this.$router.push({ name: "UserProfile" });
+      this.$router.push({ name: 'UserProfile' });
     },
-  }
-}
+  },
+};
 </script>
