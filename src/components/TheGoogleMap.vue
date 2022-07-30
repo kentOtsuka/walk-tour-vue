@@ -43,6 +43,7 @@ export default {
   },
   mounted() {
     let timer = setInterval(() => {
+      debugger
       const google = window.google;
       if (google) {
         clearInterval(timer);
@@ -214,7 +215,7 @@ export default {
           }
         });
       }
-    }, 500);
+    }, 1000);
   },
   methods: {
     // 地点に関する動画一覧ページに遷移する処理
