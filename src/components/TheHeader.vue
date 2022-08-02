@@ -7,6 +7,22 @@
         <v-icon color="blue-grey lighten-1"> VtourHub </v-icon>
       </router-link>
       <v-spacer />
+      <div class="px-2 d-flex justify-end">
+        <v-btn
+          v-if="this.$i18n.locale === 'en'"
+          color="deep-orange darken-1"
+          outlined
+          @click="changeLocale"
+          >Japanese</v-btn
+        >
+        <v-btn
+          v-if="this.$i18n.locale === 'ja'"
+          color="deep-orange darken-1"
+          outlined
+          @click="changeLocale"
+          >English</v-btn
+        >
+      </div>
       <!-- メニューアイコン -->
       <v-btn color="blue-grey lighten-1" icon @click.stop="drawer = !drawer">
         <v-icon>mdi-menu</v-icon>
@@ -26,6 +42,11 @@ export default {
     return {
       drawer: false,
     };
+  },
+  methods: {
+    changeLocale() {
+      this.$i18n.locale = this.$i18n.locale === 'ja' ? 'en' : 'ja';
+    },
   },
 };
 </script>
