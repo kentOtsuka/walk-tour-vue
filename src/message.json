@@ -1,0 +1,28 @@
+{
+  "ja": {
+    "defaults": {
+      "no-data": "データがありません"
+    },
+    "top": {
+      "subtitle": "気になる街へ行こう",
+      "count": "%{areas}カ国 %{spots}地点を登録中"
+    },
+    "autocomplete": {
+      "label": "国名から検索しよう",
+      "error_message": "検索ワードを選択してください"
+    }
+  },
+  "en": {
+    "defaults": {
+      "no-data": "No data available."
+    },
+    "top": {
+      "subtitle": "Let's go to the city",
+      "count": "%{areas} locations in %{spots} countries are currently registered"
+    },
+    "autocomplete": {
+      "label": "Search by Country",
+      "error_message": "Please select a search word"
+    }
+  }
+}
