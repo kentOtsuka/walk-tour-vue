@@ -10,6 +10,15 @@
     "autocomplete": {
       "label": "国名から検索しよう",
       "error_message": "検索ワードを選択してください"
+    },
+    "menu": {
+      "my_page": "マイページ",
+      "home": "トップページ",
+      "hot_spot": "ホットスポット",
+      "news": "お知らせ",
+      "request_spot": "スポットをリクエスト",
+      "login": "ログイン",
+      "logout": "ログアウト"
     }
   },
   "en": {
@@ -23,6 +32,15 @@
     "autocomplete": {
       "label": "Search by Country",
       "error_message": "Please select a search word"
+    },
+    "menu": {
+      "my_page": "Profile",
+      "home": "Top",
+      "hot_spot": "Hot Spot",
+      "news": "News",
+      "request_spot": "Spot Request",
+      "login": "Login",
+      "logout": "Logout"
     }
   }
 }
