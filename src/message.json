@@ -5,6 +5,9 @@
       "hot_spot": "ホットスポット",
       "spot_order": "ランキング第%{number}位",
       "spot_detail": "行ってみる！",
+      "videos": "%{spot}のVtour動画一覧",
+      "video_detail": "%{count}回視聴・%{published_at}",
+      "share": "Twitterに共有",
       "no-data": "データがありません"
     },
     "top": {
@@ -24,6 +27,11 @@
       "request_spot": "スポットをリクエスト",
       "login": "ログイン",
       "logout": "ログアウト"
+    },
+    "result": {
+      "attention": "マーカーをクリックしてください",
+      "popular": "閲覧順",
+      "new": "新着順"
     }
   },
   "en": {
@@ -32,6 +40,9 @@
       "hot_spot": "Hot Spot",
       "spot_order": "No. %{number}",
       "spot_detail": "go！",
+      "videos": "List of Vtour Videos %{spot}",
+      "video_detail": "%{count}views・%{published_at}",
+      "share": "Twitter Share",
       "no-data": "No data available."
     },
     "top": {
@@ -51,6 +62,11 @@
       "request_spot": "Spot Request",
       "login": "Login",
       "logout": "Logout"
+    },
+    "result": {
+      "attention": "Click on the marker",
+      "popular": "popular",
+      "new": "recent"
     }
   }
 }

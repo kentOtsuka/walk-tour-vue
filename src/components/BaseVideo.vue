@@ -21,11 +21,14 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>{{ video.title }}</v-list-item-title>
-                <v-list-item-subtitle class="mt-1"
-                  >{{ video.view_count.toLocaleString() }}回視聴・{{
-                    video.published_at
-                  }}</v-list-item-subtitle
-                >
+                <v-list-item-subtitle class="mt-1">
+                  {{
+                    $t('defaults.video_detail', {
+                      count: video.view_count.toLocaleString(),
+                      published_at: video.published_at,
+                    })
+                  }}
+                </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-card>

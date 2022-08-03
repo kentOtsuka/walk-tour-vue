@@ -14,9 +14,14 @@
       </v-responsive>
     </v-col>
     <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-    <v-card-subtitle class="my-0 pb-1 hidden-sm-and-down"
-      >{{ viewCount.toLocaleString() }}回視聴・{{ publishedAt }}</v-card-subtitle
-    >
+    <v-card-subtitle class="my-0 pb-1 hidden-sm-and-down">
+      {{
+        $t('defaults.video_detail', {
+          count: viewCount.toLocaleString(),
+          published_at: publishedAt,
+        })
+      }}
+    </v-card-subtitle>
     <v-col class="d-flex justify-center pt-2">
       <v-btn
         color="blue darken-1"
@@ -25,10 +30,10 @@
         @click="shareTwitter(title, videoId)"
       >
         <v-icon left>mdi-twitter</v-icon>
-        Twitterに共有
+        {{ $t('defaults.share') }}
       </v-btn>
     </v-col>
-    <v-divider class="mt-2"/>
+    <v-divider class="mt-2" />
     <v-card-actions>
       <v-spacer />
       <v-btn color="blue darken-1" text @click="resetDialog()"> CLOSE </v-btn>
