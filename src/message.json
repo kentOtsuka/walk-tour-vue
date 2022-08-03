@@ -5,7 +5,13 @@
     },
     "top": {
       "subtitle": "気になる街へ行こう",
-      "count": "%{areas}カ国 %{spots}地点を登録中"
+      "count": "%{areas}カ国 %{spots}地点を登録中",
+      "world_map": "地図から探す",
+      "new_spot": "Newスポット",
+      "hot_spot": "ホットスポット",
+      "spot_order": "ランキング第%{number}位",
+      "spot_detail": "行ってみる！",
+      "ranking_button": "ランキング一覧を見てみる"
     },
     "autocomplete": {
       "label": "国名から検索しよう",
@@ -27,7 +33,13 @@
     },
     "top": {
       "subtitle": "Let's go to the city",
-      "count": "%{areas} locations in %{spots} countries are currently registered"
+      "count": "%{areas} locations in %{spots} countries are currently registered",
+      "world_map": "Search by Map",
+      "new_spot": "New Spot",
+      "hot_spot": "Hot Spot",
+      "spot_order": "No. %{number}",
+      "spot_detail": "go！",
+      "ranking_button": "View Ranking List"
     },
     "autocomplete": {
       "label": "Search by Country",
