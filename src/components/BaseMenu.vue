@@ -8,7 +8,7 @@
             <span class="white--text text-h5">{{ authUser.name.charAt(0) }}</span>
           </v-list-item-avatar>
           <v-list-item-content style="color: #455a64">
-            <v-list-item-title>{{ $t('menu.my_page') }}</v-list-item-title>
+            <v-list-item-title>{{ $t('defaults.my_page') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -33,7 +33,7 @@
           </v-list-item-icon>
 
           <v-list-item-content style="color: #455a64">
-            <v-list-item-title>{{ $t('menu.hot_spot') }}</v-list-item-title>
+            <v-list-item-title>{{ $t('defaults.hot_spot') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-item to="/newsList" link>

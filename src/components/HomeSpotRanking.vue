@@ -2,7 +2,7 @@
   <div>
     <h2 class="d-flex align-center justify-center">
       <v-icon left bottom color="red">mdi-fire</v-icon>
-      {{ $t('top.hot_spot') }}
+      {{ $t('defaults.hot_spot') }}
     </h2>
     <v-divider class="mb-2 mx-auto" style="max-width: 1200px; width: 90%" />
 
@@ -43,7 +43,7 @@
               <v-list-item>
                 <v-list-item-content>
                   <v-list-item-subtitle class="mb-2">
-                    {{ $t('top.spot_order', { number: spotDetail.id + 1 }) }}
+                    {{ $t('defaults.spot_order', { number: spotDetail.id + 1 }) }}
                   </v-list-item-subtitle>
                   <template v-if="$i18n.locale === 'ja'">
                     <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
@@ -64,7 +64,7 @@
                   color="blue darken-1 align-center"
                   text
                   @click="setSpot(spotDetail.area, spotDetail.spot)"
-                  >{{ $t('top.spot_detail') }}</v-btn
+                  >{{ $t('defaults.spot_detail') }}</v-btn
                 >
               </v-card-actions>
             </div>
@@ -104,7 +104,7 @@
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-subtitle class="mb-2">
-                      {{ $t('top.spot_order', { number: spotDetail.id + 1 }) }}
+                      {{ $t('defaults.spot_order', { number: spotDetail.id + 1 }) }}
                     </v-list-item-subtitle>
                     <template v-if="$i18n.locale === 'ja'">
                       <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
@@ -125,7 +125,7 @@
                     color="blue darken-1 align-center"
                     text
                     @click="setSpot(spotDetail.area, spotDetail.spot)"
-                    >{{ $t('top.spot_detail') }}</v-btn
+                    >{{ $t('defaults.spot_detail') }}</v-btn
                   >
                 </v-card-actions>
               </div>
@@ -166,7 +166,7 @@
                 <v-list-item>
                   <v-list-item-content>
                     <v-list-item-subtitle class="mb-2">
-                      {{ $t('top.spot_order', { number: spotDetail.id + 1 }) }}
+                      {{ $t('defaults.spot_order', { number: spotDetail.id + 1 }) }}
                     </v-list-item-subtitle>
                     <template v-if="$i18n.locale === 'ja'">
                       <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
@@ -187,7 +187,7 @@
                     color="blue darken-1 align-center"
                     text
                     @click="setSpot(spotDetail.area, spotDetail.spot)"
-                    >{{ $t('top.spot_detail') }}</v-btn
+                    >{{ $t('defaults.spot_detail') }}</v-btn
                   >
                 </v-card-actions>
               </div>

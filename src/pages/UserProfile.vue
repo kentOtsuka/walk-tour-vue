@@ -2,7 +2,7 @@
   <v-container class="mb-16">
     <h1 class="mb-3 d-flex align-center justify-center">
       <v-icon left bottom color="teal darken-1">mdi-account-circle</v-icon>
-      マイページ
+      {{ $t('defaults.my_page') }}
     </h1>
 
     <v-row class="mx-auto mb-10">
@@ -53,8 +53,18 @@
                 <div class="d-flex justify-space-between">
                   <v-list-item>
                     <v-list-item-content>
-                      <v-list-item-title class="my-1">{{ spotDetail.spot.name }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
+                      <template v-if="$i18n.locale === 'ja'">
+                        <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                        <v-list-item-subtitle class="mt-1">{{
+                          spotDetail.area.name
+                        }}</v-list-item-subtitle>
+                      </template>
+                      <template v-if="$i18n.locale === 'en'">
+                        <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
+                        <v-list-item-subtitle class="mt-1">{{
+                          spotDetail.area.name_ens
+                        }}</v-list-item-subtitle>
+                      </template>
                     </v-list-item-content>
                   </v-list-item>
                   <v-card-actions>
@@ -62,7 +72,7 @@
                       color="blue darken-1 align-center"
                       text
                       @click="setSpot(spotDetail.area, spotDetail.spot)"
-                      >行ってみる！</v-btn
+                      >{{ $t('defaults.spot_detail') }}</v-btn
                     >
                   </v-card-actions>
                 </div>
@@ -92,8 +102,18 @@
                     />
                     <v-list-item style="width: 160px">
                       <v-list-item-content class="mt-3">
-                        <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
-                        <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
+                        <template v-if="$i18n.locale === 'ja'">
+                          <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                          <v-list-item-subtitle class="mt-1">{{
+                            spotDetail.area.name
+                          }}</v-list-item-subtitle>
+                        </template>
+                        <template v-if="$i18n.locale === 'en'">
+                          <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
+                          <v-list-item-subtitle class="mt-1">{{
+                            spotDetail.area.name_ens
+                          }}</v-list-item-subtitle>
+                        </template>
                       </v-list-item-content>
                     </v-list-item>
                     <v-divider />
@@ -101,7 +121,7 @@
                       color="blue darken-1 align-center"
                       text
                       @click="setSpot(spotDetail.area, spotDetail.spot)"
-                      >行ってみる！</v-btn
+                      >{{ $t('defaults.spot_detail') }}</v-btn
                     >
                   </div>
                   <v-img
@@ -268,8 +288,7 @@ export default {
     clickCount(spot, area) {
       axios
         .get(`/countries/${area.id}/spots/${spot.id}/edit`)
-        .then(() => {
-        })
+        .then(() => {})
         .catch((error) => {
           console.log(error);
         });

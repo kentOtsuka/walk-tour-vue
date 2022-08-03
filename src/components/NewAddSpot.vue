@@ -53,7 +53,7 @@
                   color="blue darken-1 align-center"
                   text
                   @click="setSpot(spotDetail.area, spotDetail.spot)"
-                  >{{ $t('top.spot_detail') }}</v-btn
+                  >{{ $t('defaults.spot_detail') }}</v-btn
                 >
               </v-card-actions>
             </div>
@@ -111,7 +111,7 @@
                     color="blue darken-1 align-center"
                     text
                     @click="setSpot(spotDetail.area, spotDetail.spot)"
-                    >{{ $t('top.spot_detail') }}</v-btn
+                    >{{ $t('defaults.spot_detail') }}</v-btn
                   >
                 </v-card-actions>
               </div>
@@ -170,7 +170,7 @@
                     color="blue darken-1 align-center"
                     text
                     @click="setSpot(spotDetail.area, spotDetail.spot)"
-                    >{{ $t('top.spot_detail') }}</v-btn
+                    >{{ $t('defaults.spot_detail') }}</v-btn
                   >
                 </v-card-actions>
               </div>

@@ -1,6 +1,10 @@
 {
   "ja": {
     "defaults": {
+      "my_page": "マイページ",
+      "hot_spot": "ホットスポット",
+      "spot_order": "ランキング第%{number}位",
+      "spot_detail": "行ってみる！",
       "no-data": "データがありません"
     },
     "top": {
@@ -8,9 +12,6 @@
       "count": "%{areas}カ国 %{spots}地点を登録中",
       "world_map": "地図から探す",
       "new_spot": "Newスポット",
-      "hot_spot": "ホットスポット",
-      "spot_order": "ランキング第%{number}位",
-      "spot_detail": "行ってみる！",
       "ranking_button": "ランキング一覧を見てみる"
     },
     "autocomplete": {
@@ -18,9 +19,7 @@
       "error_message": "検索ワードを選択してください"
     },
     "menu": {
-      "my_page": "マイページ",
       "home": "トップページ",
-      "hot_spot": "ホットスポット",
       "news": "お知らせ",
       "request_spot": "スポットをリクエスト",
       "login": "ログイン",
@@ -29,6 +28,10 @@
   },
   "en": {
     "defaults": {
+      "my_page": "Profile",
+      "hot_spot": "Hot Spot",
+      "spot_order": "No. %{number}",
+      "spot_detail": "go！",
       "no-data": "No data available."
     },
     "top": {
@@ -36,9 +39,6 @@
       "count": "%{areas} locations in %{spots} countries are currently registered",
       "world_map": "Search by Map",
       "new_spot": "New Spot",
-      "hot_spot": "Hot Spot",
-      "spot_order": "No. %{number}",
-      "spot_detail": "go！",
       "ranking_button": "View Ranking List"
     },
     "autocomplete": {
@@ -46,9 +46,7 @@
       "error_message": "Please select a search word"
     },
     "menu": {
-      "my_page": "Profile",
       "home": "Top",
-      "hot_spot": "Hot Spot",
       "news": "News",
       "request_spot": "Spot Request",
       "login": "Login",
