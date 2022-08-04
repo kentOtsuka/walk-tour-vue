@@ -1,6 +1,8 @@
 {
   "ja": {
     "defaults": {
+      "login": "ログイン",
+      "register": "新規登録",
       "my_page": "マイページ",
       "hot_spot": "ホットスポット",
       "news": "お知らせ",
@@ -12,13 +14,22 @@
       "share": "Twitterに共有"
     },
     "form": {
+      "mail": "メールアドレス",
+      "password": "パスワード",
       "area": "国を選択",
       "spot": "地名を入力",
       "request_button": "リクエストを送る",
-      "no_data": "データがありません"
+      "no_data": "データがありません",
+      "login_success": "ログインしました",
+      "logout_success": "ログアウトしました",
+      "login_error": "メールアドレスとパスワードが違います"
     },
     "validate": {
-      "request_spot": "2〜20文字が有効です"
+      "request_spot": "2〜20文字が有効です",
+      "email_presence": "メールアドレスを入力してください",
+      "email_invalid": "メールアドレスが無効です",
+      "password_presence": "パスワードを入力してください",
+      "password_invalid": "8文字以上半角英数記号のみが有効です"
     },
     "top": {
       "subtitle": "気になる街へ行こう",
@@ -59,6 +70,8 @@
   },
   "en": {
     "defaults": {
+      "login": "Login",
+      "register": "Register",
       "my_page": "Profile",
       "hot_spot": "Hot Spot",
       "news": "News",
@@ -71,13 +84,22 @@
       "no_data": "No data available"
     },
     "form": {
+      "mail": "Email",
+      "password": "password",
       "area": "Select Country",
       "spot": "Enter spot name",
       "request_button": "Send",
-      "no_data": "No data available"
+      "no_data": "No data available",
+      "login_success": "Logged in",
+      "logout_success": "Logged out",
+      "login_error": "Email and password are different"
     },
     "validate": {
-      "request_spot": "2-20 characters are valid"
+      "request_spot": "2-20 characters are valid",
+      "email_presence": "Enter your email",
+      "email_invalid": "Invalid email",
+      "password_presence": "Enter your password",
+      "password_invalid": "Only alphanumeric symbols of at least 8 characters are valid"
     },
     "top": {
       "subtitle": "Let's go to the city",

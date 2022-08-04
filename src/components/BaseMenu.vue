@@ -127,7 +127,7 @@ export default {
         // ログアウト後、ログインページに遷移させる
         this.$router.push({ name: 'Login' });
         // フラッシュメッセージの表示処理の呼び出し
-        this.openSnackbar('ログアウトしました');
+        this.openSnackbar(this.$t('form.logout_success'));
       } catch (error) {
         console.log(error);
       }
