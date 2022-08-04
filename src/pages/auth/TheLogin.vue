@@ -15,7 +15,7 @@
                 v-model="user.email"
                 :rules="emailRules"
                 prepend-icon="mdi-email"
-                :label="$t('form.mail')"
+                :label="$t('form.email')"
                 validate-on-blur
                 required
               />

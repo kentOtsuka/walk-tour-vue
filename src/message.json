@@ -14,18 +14,24 @@
       "share": "Twitterに共有"
     },
     "form": {
-      "mail": "メールアドレス",
+      "name": "お名前",
+      "email": "メールアドレス",
       "password": "パスワード",
+      "password_confirmation": "パスワード確認",
       "area": "国を選択",
       "spot": "地名を入力",
       "request_button": "リクエストを送る",
       "no_data": "データがありません",
       "login_success": "ログインしました",
       "logout_success": "ログアウトしました",
-      "login_error": "メールアドレスとパスワードが違います"
+      "register_success": "新規登録が完了しました",
+      "login_error": "メールアドレスとパスワードが違います",
+      "register_error": "登録できませんでした"
     },
     "validate": {
       "request_spot": "2〜20文字が有効です",
+      "name_presence": "お名前を入力してください",
+      "name_invalid": "2〜10文字が有効です",
       "email_presence": "メールアドレスを入力してください",
       "email_invalid": "メールアドレスが無効です",
       "password_presence": "パスワードを入力してください",
@@ -84,18 +90,24 @@
       "no_data": "No data available"
     },
     "form": {
-      "mail": "Email",
-      "password": "password",
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "password_confirmation": "Confirm Password",
       "area": "Select Country",
       "spot": "Enter spot name",
       "request_button": "Send",
       "no_data": "No data available",
       "login_success": "Logged in",
       "logout_success": "Logged out",
-      "login_error": "Email and password are different"
+      "register_success": "New registration completed!",
+      "login_error": "Email and password are different",
+      "register_error": "Could not register"
     },
     "validate": {
       "request_spot": "2-20 characters are valid",
+      "name_presence": "Enter your name",
+      "name_invalid": "2-10 characters are valid",
       "email_presence": "Enter your email",
       "email_invalid": "Invalid email",
       "password_presence": "Enter your password",
