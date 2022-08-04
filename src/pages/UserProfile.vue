@@ -149,12 +149,12 @@
         style="max-width: 700px; margin: auto"
       >
         <v-icon left>mdi-heart-plus-outline</v-icon>
-        スポットをお気に入り登録してみよう！
+        {{ $t('profile.attention') }}
       </v-chip>
       <v-col class="d-flex justify-center mt-3">
-        <v-btn color="black" outlined to="/">
+        <v-btn color="black" outlined to="/" style="text-transform: none">
           <v-icon left>mdi-keyboard-backspace</v-icon>
-          トップページから探す
+          {{ $t('profile.home_button') }}
         </v-btn>
       </v-col>
     </template>
@@ -163,7 +163,7 @@
     <v-row justify="center">
       <v-dialog v-model="userDialog" max-width="600px">
         <v-card>
-          <h2 class="d-flex align-center justify-center py-2">プロフィール編集</h2>
+          <h2 class="d-flex align-center justify-center py-2">{{ $t('profile.edit') }}</h2>
           <v-divider style="max-width: 700px; margin: auto" />
           <v-form v-model="valid">
             <v-card-text class="py-0">

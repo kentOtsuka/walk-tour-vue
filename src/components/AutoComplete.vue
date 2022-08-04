@@ -5,7 +5,7 @@
         v-model="value"
         :items="areaName"
         :label="$t('autocomplete.label')"
-        :no-data-text="$t('defaults.no-data')"
+        :no-data-text="$t('form.no_data')"
         solo
       >
       </v-autocomplete>
@@ -18,7 +18,7 @@
         v-model="valueEns"
         :items="areaNameEns"
         :label="$t('autocomplete.label')"
-        :no-data-text="$t('defaults.no-data')"
+        :no-data-text="$t('form.no_data')"
         solo
       >
       </v-autocomplete>
@@ -34,7 +34,6 @@ import axios from '../plugins/axios';
 import { mapActions } from 'vuex';
 
 export default {
-
   data() {
     return {
       areas: [],
@@ -55,8 +54,6 @@ export default {
         this.areas = res.data.areas;
         for (let i = 0; i < this.areas.length; i++) {
           this.areaName.push(this.areas[i].name);
-        }
-        for (let i = 0; i < this.areas.length; i++) {
           this.areaNameEns.push(this.areas[i].name_ens);
         }
       });

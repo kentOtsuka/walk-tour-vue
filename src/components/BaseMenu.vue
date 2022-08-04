@@ -42,7 +42,7 @@
           </v-list-item-icon>
 
           <v-list-item-content style="color: #455a64">
-            <v-list-item-title>{{ $t('menu.news') }}</v-list-item-title>
+            <v-list-item-title>{{ $t('defaults.news') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -73,7 +73,7 @@
 
             <!-- リストのタイトル -->
             <v-list-item-content style="color: #455a64">
-              <v-list-item-title>{{ $t('menu.request_spot') }}</v-list-item-title>
+              <v-list-item-title>{{ $t('defaults.request_spot') }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item @click.native="triggerClick('logout')" link>
