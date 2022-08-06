@@ -11,7 +11,12 @@
       "spot_detail": "行ってみる！",
       "videos": "%{spot}のVtour動画一覧",
       "video_detail": "%{count}回視聴・%{published_at}",
-      "share": "Twitterに共有"
+      "share": "Twitterに共有",
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約",
+      "contact": "お問い合わせ",
+      "app_share": "Twitterシェア",
+      "twitter": "開発者Twitter"
     },
     "form": {
       "name": "お名前",
@@ -87,7 +92,12 @@
       "videos": "List of Vtour Videos %{spot}",
       "video_detail": "%{count}views・%{published_at}",
       "share": "Twitter Share",
-      "no_data": "No data available"
+      "no_data": "No data available",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "contact": "Contact",
+      "app_share": "Twitter Share",
+      "twitter": "Developer"
     },
     "form": {
       "name": "Name",

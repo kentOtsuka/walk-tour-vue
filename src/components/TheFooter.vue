@@ -3,15 +3,55 @@
     <v-footer dark padless>
       <v-card flat tile width="100%" color="#5D99FF" class="white--text text-center">
         <v-card-text>
-          <v-tooltip v-for="item in items" :key="item.icon" color="teal" top>
+          <v-tooltip color="teal" top>
             <template v-slot:activator="{ on, attrs }">
               <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
-                <v-icon size="24px" @click.native="triggerClick(item.action)">
-                  {{ item.icon }}
+                <v-icon size="24px" @click.native="triggerClick('privacy')">
+                  mdi-lock-outline
                 </v-icon>
               </v-btn>
             </template>
-            <span>{{ item.text }}</span>
+            <span>{{ $t('defaults.privacy') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('terms')">
+                  mdi-file-document-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.terms') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('contact')">
+                  mdi-email-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.contact') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('share')">
+                  mdi-share-variant-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.app_share') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('twitter')">
+                  mdi-twitter
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.twitter') }}</span>
           </v-tooltip>
         </v-card-text>
 
@@ -42,11 +82,7 @@ export default {
   data() {
     return {
       items: [
-        { icon: 'mdi-lock-outline', action: 'privacy', text: 'プライバシーポリシー' },
-        { icon: 'mdi-file-document-outline', action: 'terms', text: '利用規約' },
-        { icon: 'mdi-email-outline', action: 'contact', text: 'お問い合わせ' },
-        { icon: 'mdi-share-variant-outline', action: 'share', text: 'Twitterシェア' },
-        { icon: 'mdi-twitter', action: 'twitter', text: '開発者Twitter' },
+        { icon: 'mdi-twitter', action: 'twitter', text: this.$t('defaults.twitter') },
       ],
       privacyDialog: false,
       termsDialog: false,
