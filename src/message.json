@@ -77,6 +77,9 @@
       "first_annotation": "※ リクエストされた地点の内、追加を見送ることもあるのでご了承ください。",
       "second_annotation": "※ お知らせ欄から追加された地点を確認することができます。",
       "send": "送信しました！"
+    },
+    "share": {
+      "content": "%{spot}にGO！"
     }
   },
   "en": {
@@ -158,6 +161,9 @@
       "first_annotation": "※ Please note that some of the requested locations may not be added.",
       "second_annotation": "※ You can see the added locations from the Notices column.",
       "send": "Your request has been sent!"
+    },
+    "share": {
+      "content": "Let's walk in %{spot_ens}!"
     }
   }
 }

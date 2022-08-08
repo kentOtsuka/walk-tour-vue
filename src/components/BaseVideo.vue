@@ -71,6 +71,10 @@ export default {
       type: String,
       required: true,
     },
+    spotEns: {
+      type: String,
+      required: true,
+    },
   },
   data() {
     return {
@@ -116,7 +120,7 @@ export default {
     shareTwitter(title, videoId) {
       var shareURL =
         'https://twitter.com/intent/tweet?text=' +
-        `${this.spot}（${this.area}）に行ってみたよ！` +
+        this.$t('share.content', { area: this.area, spot: this.spot, spot_ens: this.spotEns }) +
         '%0a' +
         '%0a' +
         encodeURI(title) +

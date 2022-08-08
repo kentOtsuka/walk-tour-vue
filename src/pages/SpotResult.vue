@@ -100,7 +100,7 @@
         {{ $t('result.attention') }}
       </v-chip>
     </template>
-    <Video :videos="videos" :area="area.name" :spot="spotName" />
+    <Video :videos="videos" :area="area.name" :spot="spotName" :spotEns="spotNameEns" />
   </v-container>
 </template>
 
