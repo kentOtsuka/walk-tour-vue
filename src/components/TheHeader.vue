@@ -7,21 +7,25 @@
         <v-icon color="blue-grey lighten-1"> VtourHub </v-icon>
       </router-link>
       <v-spacer />
-      <div class="px-2 d-flex justify-end">
+      <div class="d-flex justify-end">
         <v-btn
           v-if="this.$i18n.locale === 'en'"
-          color="deep-orange darken-1"
-          outlined
+          color="blue-grey lighten-1"
+          icon
+          raised
           @click="changeLocale"
-          >Japanese</v-btn
         >
+          <Icon icon="uil:english-to-chinese" width="30" height="30" />
+        </v-btn>
         <v-btn
           v-if="this.$i18n.locale === 'ja'"
-          color="deep-orange darken-1"
-          outlined
+          color="blue-grey lighten-1"
+          icon
+          raised
           @click="changeLocale"
-          >English</v-btn
         >
+          <Icon icon="uil:english-to-chinese" width="30" height="30" />
+        </v-btn>
       </div>
       <!-- メニューアイコン -->
       <v-btn color="blue-grey lighten-1" icon @click.stop="drawer = !drawer">
@@ -35,9 +39,10 @@
 
 <script>
 import Menu from './BaseMenu.vue';
+import { Icon } from '@iconify/vue2';
 
 export default {
-  components: { Menu },
+  components: { Menu, Icon },
   data() {
     return {
       drawer: false,
