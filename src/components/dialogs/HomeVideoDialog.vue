@@ -14,7 +14,7 @@
       </v-responsive>
     </v-col>
     <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-    <v-card-subtitle class="my-0 hidden-sm-and-down">
+    <v-card-subtitle class="my-0 pb-0 hidden-sm-and-down">
       {{
         $t('defaults.video_detail', {
           count: viewCount.toLocaleString(),
@@ -96,3 +96,14 @@ export default {
   },
 };
 </script>
+
+<!-- <style scoped>
+.shortcut {
+  width: 300px; /* 要素の横幅を指定 */
+  white-space: nowrap; /* 横幅のMAXに達しても改行しない */
+  overflow: hidden; /* ハミ出した部分を隠す */
+  text-overflow: ellipsis; /* 「…」と省略 */
+  -webkit-text-overflow: ellipsis; /* Safari */
+  -o-text-overflow: ellipsis; /* Opera */
+}
+</style> -->

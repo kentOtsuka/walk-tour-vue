@@ -10,7 +10,7 @@
       <div class="d-flex justify-end">
         <v-btn
           v-if="this.$i18n.locale === 'en'"
-          color="blue-grey lighten-1"
+          color="teal darken-1"
           icon
           raised
           @click="changeLocale"
@@ -19,7 +19,7 @@
         </v-btn>
         <v-btn
           v-if="this.$i18n.locale === 'ja'"
-          color="blue-grey lighten-1"
+          color="cyan darken-1"
           icon
           raised
           @click="changeLocale"

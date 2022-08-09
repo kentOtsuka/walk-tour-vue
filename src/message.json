@@ -92,7 +92,7 @@
       "request_spot": "Spot Request",
       "spot_order": "No. %{number}",
       "spot_detail": "go！",
-      "videos": "List of Vtour Videos %{spot}",
+      "videos": "List of Vtour in %{spot}",
       "video_detail": "%{count}views・%{published_at}",
       "share": "Twitter Share",
       "no_data": "No data available",
@@ -128,7 +128,7 @@
     },
     "top": {
       "subtitle": "Let's go to the city",
-      "count": "%{areas} locations in %{spots} countries are currently registered",
+      "count": "%{areas} spots in %{spots} countries are currently registered",
       "world_map": "Search by Map",
       "new_spot": "New Spot",
       "ranking_button": "View Ranking List"
@@ -157,9 +157,9 @@
       "content": "content"
     },
     "request": {
-      "main_description": "You may request the administrator of this service to add a location.",
-      "first_annotation": "※ Please note that some of the requested locations may not be added.",
-      "second_annotation": "※ You can see the added locations from the Notices column.",
+      "main_description": "You may request the administrator of this service to add a spot.",
+      "first_annotation": "※ Please note that some of the requested spots may not be added.",
+      "second_annotation": "※ You can see the added spots from the Notices column.",
       "send": "Your request has been sent!"
     },
     "share": {

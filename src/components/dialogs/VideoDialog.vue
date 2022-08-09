@@ -14,7 +14,7 @@
       </v-responsive>
     </v-col>
     <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-    <v-card-subtitle class="my-0 pb-1 hidden-sm-and-down">
+    <v-card-subtitle class="my-0 pb-0 hidden-sm-and-down">
       {{
         $t('defaults.video_detail', {
           count: viewCount.toLocaleString(),

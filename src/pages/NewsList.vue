@@ -10,14 +10,19 @@
       <template v-slot:default>
         <thead>
           <tr>
-            <th class="text-left">{{ $t("news.updated_at")}}</th>
-            <th class="text-left">{{ $t("news.content")}}</th>
+            <th class="text-left">{{ $t('news.updated_at') }}</th>
+            <th class="text-left">{{ $t('news.content') }}</th>
           </tr>
         </thead>
         <tbody>
           <tr v-for="item in newsLists" :key="item.id">
             <td>{{ item.created_at }}</td>
-            <td>{{ item.content }}</td>
+            <template v-if="$i18n.locale === 'ja'">
+              <td>{{ item.content }}</td>
+            </template>
+            <template v-if="$i18n.locale === 'en'">
+              <td>{{ item.content_ens }}</td>
+            </template>
           </tr>
         </tbody>
       </template>
