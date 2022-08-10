@@ -17,10 +17,10 @@
       <!--   動画の上に載せるテキスト   -->
       <div class="mv-txt">
         <p class="mb-0">VtourHub</p>
-        <p style="font-size: xx-large">気になる街へ行こう</p>
+        <p style="font-size: xx-large">{{ $t('top.subtitle') }}</p>
         <AutoComplete :areas="areas" />
         <p class="font-weight-black text-decoration-underline" style="font-size: x-large">
-          {{ areas.length }}カ国 {{ spots.length }}地点を登録中
+          {{ $t('top.count', { areas: areas.length, spots: spots.length }) }}
         </p>
       </div>
     </div>

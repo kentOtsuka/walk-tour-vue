@@ -2,7 +2,7 @@
   <v-container>
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom>mdi-login</v-icon>
-      ログイン
+      {{ $t('defaults.login') }}
     </h2>
     <v-divider class="mb-4" style="max-width: 700px; margin: auto" />
 
@@ -15,7 +15,7 @@
                 v-model="user.email"
                 :rules="emailRules"
                 prepend-icon="mdi-email"
-                label="メールアドレス"
+                :label="$t('form.email')"
                 validate-on-blur
                 required
               />
@@ -26,8 +26,7 @@
                 prepend-icon="mdi-lock"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 :type="showPassword ? 'text' : 'password'"
-                label="パスワード"
-                placeholder="8〜12文字"
+                :label="$t('form.password')"
                 validate-on-blur
                 required
                 @click:append="showPassword = !showPassword"
@@ -45,14 +44,17 @@
                 :loading="loading"
                 @click="login"
               >
-                ログイン
+                {{ $t('defaults.login') }}
               </v-btn>
             </v-card-actions>
           </v-form>
 
           <v-divider />
-          <v-card-text class="text-center">
+          <v-card-text class="text-center" v-if="this.$i18n.locale === 'ja'">
             新規登録は<router-link to="/register">こちら</router-link>
+          </v-card-text>
+          <v-card-text class="text-center" v-if="this.$i18n.locale === 'en'">
+            Click <router-link to="/register">here</router-link> for new registration
           </v-card-text>
         </v-card>
       </v-col>
@@ -75,14 +77,14 @@ export default {
       },
       // メールアドレスのバリデーション
       emailRules: [
-        (v) => !!v || 'メールアドレスを入力してください',
-        (v) => /.+@.+\..+/.test(v) || '無効なメールアドレスです',
+        (v) => !!v || this.$t('validate.email_presence'),
+        (v) => /.+@.+\..+/.test(v) || this.$t('validate.email_invalid'),
       ],
       // パスワードのバリデーション
       passwordRules: [
-        (v) => !!v || 'パスワードを入力してください',
-        (v) => v.length >= 8 || '8文字以上半角英数記号のみが有効です',
-        (v) => /^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/.test(v) || '8文字以上半角英数記号のみが有効です',
+        (v) => !!v || this.$t('validate.password_presence'),
+        (v) => v.length >= 8 || this.$t('validate.password_invalid'),
+        (v) => /^[a-zA-Z0-9!-/:-@¥[-`{-~]*$/.test(v) || this.$t('validate.password_invalid'),
       ],
       // パスワードの表示状態を表す(trueで表示)
       showPassword: false,
@@ -97,21 +99,16 @@ export default {
 
         // 異常系
         if (status === 'fail') {
-          this.openSnackbar('メールアドレスとパスワードが違います');
-          this.resetUser();
+          this.openSnackbar(this.$t('form.login_error'));
           return;
         }
 
         // 正常系
         this.$router.push({ name: 'UserProfile' });
-        this.openSnackbar('ログインしました');
+        this.openSnackbar(this.$t('form.login_success'));
       } catch (error) {
         console.log(error);
       }
-    },
-    resetUser() {
-      this.user.email = '';
-      this.user.password = '';
     },
   },
 };

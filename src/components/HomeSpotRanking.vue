@@ -2,7 +2,7 @@
   <div>
     <h2 class="d-flex align-center justify-center">
       <v-icon left bottom color="red">mdi-fire</v-icon>
-      ホットスポット
+      {{ $t('defaults.hot_spot') }}
     </h2>
     <v-divider class="mb-2 mx-auto" style="max-width: 1200px; width: 90%" />
 
@@ -42,11 +42,21 @@
             <div class="d-flex justify-space-between">
               <v-list-item>
                 <v-list-item-content>
-                  <v-list-item-subtitle small
-                    >ランキング第{{ spotDetail.id + 1 }}位</v-list-item-subtitle
-                  >
-                  <v-list-item-title class="my-1">{{ spotDetail.spot.name }}</v-list-item-title>
-                  <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
+                  <v-list-item-subtitle class="mb-2">
+                    {{ $t('defaults.spot_order', { number: spotDetail.id + 1 }) }}
+                  </v-list-item-subtitle>
+                  <template v-if="$i18n.locale === 'ja'">
+                    <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                    <v-list-item-subtitle class="mt-1">{{
+                      spotDetail.area.name
+                    }}</v-list-item-subtitle>
+                  </template>
+                  <template v-if="$i18n.locale === 'en'">
+                    <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
+                    <v-list-item-subtitle class="mt-1">{{
+                      spotDetail.area.name_ens
+                    }}</v-list-item-subtitle>
+                  </template>
                 </v-list-item-content>
               </v-list-item>
               <v-card-actions>
@@ -54,7 +64,7 @@
                   color="blue darken-1 align-center"
                   text
                   @click="setSpot(spotDetail.area, spotDetail.spot)"
-                  >行ってみる！</v-btn
+                  >{{ $t('defaults.spot_detail') }}</v-btn
                 >
               </v-card-actions>
             </div>
@@ -93,13 +103,21 @@
               <div class="d-flex justify-space-between">
                 <v-list-item>
                   <v-list-item-content>
-                    <v-list-item-subtitle class="mb-2"
-                      >ランキング第{{ spotDetail.id + 1 }}位</v-list-item-subtitle
-                    >
-                    <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
-                    <v-list-item-subtitle class="mt-1">{{
-                      spotDetail.area.name
-                    }}</v-list-item-subtitle>
+                    <v-list-item-subtitle class="mb-2">
+                      {{ $t('defaults.spot_order', { number: spotDetail.id + 1 }) }}
+                    </v-list-item-subtitle>
+                    <template v-if="$i18n.locale === 'ja'">
+                      <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                      <v-list-item-subtitle class="mt-1">{{
+                        spotDetail.area.name
+                      }}</v-list-item-subtitle>
+                    </template>
+                    <template v-if="$i18n.locale === 'en'">
+                      <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
+                      <v-list-item-subtitle class="mt-1">{{
+                        spotDetail.area.name_ens
+                      }}</v-list-item-subtitle>
+                    </template>
                   </v-list-item-content>
                 </v-list-item>
                 <v-card-actions>
@@ -107,7 +125,7 @@
                     color="blue darken-1 align-center"
                     text
                     @click="setSpot(spotDetail.area, spotDetail.spot)"
-                    >行ってみる！</v-btn
+                    >{{ $t('defaults.spot_detail') }}</v-btn
                   >
                 </v-card-actions>
               </div>
@@ -147,13 +165,21 @@
               <div class="d-flex justify-space-between">
                 <v-list-item>
                   <v-list-item-content>
-                    <v-list-item-subtitle class="mb-2"
-                      >ランキング第{{ spotDetail.id + 1 }}位</v-list-item-subtitle
-                    >
-                    <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
-                    <v-list-item-subtitle class="mt-1">{{
-                      spotDetail.area.name
-                    }}</v-list-item-subtitle>
+                    <v-list-item-subtitle class="mb-2">
+                      {{ $t('defaults.spot_order', { number: spotDetail.id + 1 }) }}
+                    </v-list-item-subtitle>
+                    <template v-if="$i18n.locale === 'ja'">
+                      <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                      <v-list-item-subtitle class="mt-1">{{
+                        spotDetail.area.name
+                      }}</v-list-item-subtitle>
+                    </template>
+                    <template v-if="$i18n.locale === 'en'">
+                      <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
+                      <v-list-item-subtitle class="mt-1">{{
+                        spotDetail.area.name_ens
+                      }}</v-list-item-subtitle>
+                    </template>
                   </v-list-item-content>
                 </v-list-item>
                 <v-card-actions>
@@ -161,7 +187,7 @@
                     color="blue darken-1 align-center"
                     text
                     @click="setSpot(spotDetail.area, spotDetail.spot)"
-                    >行ってみる！</v-btn
+                    >{{ $t('defaults.spot_detail') }}</v-btn
                   >
                 </v-card-actions>
               </div>
@@ -173,8 +199,8 @@
 
     <v-col class="d-flex justify-center">
       <v-btn color="red" outlined to="/spotRanking">
-        <v-icon left>mdi-crown</v-icon>
-        ランキング一覧を見てみる
+        <v-icon left class="b-1">mdi-crown</v-icon>
+        {{ $t('top.ranking_button') }}
       </v-btn>
     </v-col>
 

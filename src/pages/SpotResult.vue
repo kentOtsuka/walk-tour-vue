@@ -2,7 +2,12 @@
   <v-container class="mb-16">
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom color="cyan darken-1">mdi-earth</v-icon>
-      {{ area.name }}
+      <template v-if="this.$i18n.locale === 'ja'">
+        {{ area.name }}
+      </template>
+      <template v-if="this.$i18n.locale === 'en'">
+        {{ area.name_ens }}
+      </template>
     </h2>
     <v-divider class="mb-2" style="max-width: 700px; margin: auto" />
     <v-row no-gutters class="my-5">
@@ -28,7 +33,12 @@
         >
           <h3 class="mb-2 d-flex align-center justify-center">
             <v-icon left bottom>mdi-map-marker</v-icon>
-            {{ spotName }}
+            <template v-if="this.$i18n.locale === 'ja'">
+              {{ spotName }}
+            </template>
+            <template v-if="this.$i18n.locale === 'en'">
+              {{ spotNameEns }}
+            </template>
             <!--  ログイン中のユーザーにのみお気に入りマークを表示 -->
             <template v-if="authUser">
               <v-icon
@@ -69,8 +79,8 @@
         </v-col>
         <v-col cols="12" sm="6" md="6" lg="6" class="pa-0">
           <v-tabs right v-model="currentTab">
-            <v-tab @click="viewOrder(videos)" :value="'viewTab'">閲覧順</v-tab>
-            <v-tab @click="newOrder(videos)">新着順</v-tab>
+            <v-tab @click="viewOrder(videos)" :value="'viewTab'">{{ $t('result.popular') }}</v-tab>
+            <v-tab @click="newOrder(videos)">{{ $t('result.new') }}</v-tab>
           </v-tabs>
         </v-col>
       </v-row>
@@ -87,10 +97,10 @@
         style="max-width: 700px; margin: auto"
       >
         <v-icon left>mdi-cursor-default-click-outline</v-icon>
-        マーカーをクリックしてください
+        {{ $t('result.attention') }}
       </v-chip>
     </template>
-    <Video :videos="videos" :area="area.name" :spot="spotName" />
+    <Video :videos="videos" :area="area.name" :spot="spotName" :spotEns="spotNameEns" />
   </v-container>
 </template>
 
@@ -121,6 +131,7 @@ export default {
       markSpot: {},
       heart: false,
       spotName: '',
+      spotNameEns: '',
       videos: [],
       // タブのフォーカス
       currentTab: 'viewTab',
@@ -169,6 +180,7 @@ export default {
         .then((res) => {
           this.videos = res.data;
           this.spotName = spot.name;
+          this.spotNameEns = spot.name_ens;
           // お気に入り登録されているかを確認
           if (this.authUser) {
             this.bookmarked(spot);

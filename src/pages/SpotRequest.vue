@@ -2,15 +2,14 @@
   <v-container>
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom color="green darken-1">mdi-send-circle</v-icon>
-      スポットをリクエスト
+      {{ $t('defaults.request_spot') }}
     </h2>
     <v-divider class="mb-4" style="max-width: 700px; margin: auto" />
     <p class="mb-1 d-flex align-center justify-center">
-      本サービスの管理者に対して、地点の追加をリクエストすることができます。<br />
+      {{ $t('request.main_description') }}<br />
     </p>
     <p class="d-flex justify-center" style="font-size: small">
-      ※ リクエストされた地点の内、追加を見送ることもあるのでご了承ください。<br />
-      ※ お知らせ欄から追加された地点を確認することができます。
+      {{ $t('request.first_annotation') }}<br />{{ $t('request.second_annotation') }}
     </p>
 
     <v-row justify="center" style="max-width: 1400px; margin: auto">
@@ -18,21 +17,35 @@
         <v-card>
           <v-form v-model="valid">
             <v-card-text>
-              <v-autocomplete
-                v-model="spotInfo.area"
-                :items="areas"
-                prepend-icon="mdi-earth"
-                label="国を選択"
-                no-data-text="データがありません"
-                validate-on-blur
-                required
-              >
-              </v-autocomplete>
+              <template v-if="this.$i18n.locale === 'ja'">
+                <v-autocomplete
+                  v-model="spotInfo.area"
+                  :items="areaName"
+                  prepend-icon="mdi-earth"
+                  :label="$t('form.area')"
+                  :no-data-text="$t('form.no_data')"
+                  validate-on-blur
+                  required
+                >
+                </v-autocomplete>
+              </template>
+              <template v-if="this.$i18n.locale === 'en'">
+                <v-autocomplete
+                  v-model="spotInfo.area"
+                  :items="areaNameEns"
+                  prepend-icon="mdi-earth"
+                  :label="$t('form.area')"
+                  :no-data-text="$t('form.no_data')"
+                  validate-on-blur
+                  required
+                >
+                </v-autocomplete>
+              </template>
               <v-text-field
                 v-model="spotInfo.spot"
                 :rules="spotRules"
                 prepend-icon="mdi-map-marker"
-                label="地名を入力"
+                :label="$t('form.spot')"
                 validate-on-blur
                 required
               />
@@ -44,11 +57,11 @@
                 outlined
                 class="mr-2"
                 type="button"
-                :disabled="!valid || loading"
+                :disabled="!valid"
                 :loading="loading"
                 @click="send"
               >
-                リクエストを送る
+                {{ $t('form.request_button') }}
               </v-btn>
             </v-card-actions>
           </v-form>
@@ -67,16 +80,16 @@ export default {
     return {
       valid: false,
       loading: false,
-      areas: [],
+      areaName: [],
+      areaNameEns: [],
       // フォームで選択、入力された値
       spotInfo: {
         area: null,
         spot: '',
       },
       spotRules: [
-        (v) => v.length <= 20 || '2〜20文字が有効です',
-        (v) => v.length >= 2 || '2〜20文字が有効です',
-        (v) => /^[^ -~｡-ﾟ]+$/.test(v) || '全角文字で入力してください',
+        (v) => v.length <= 20 || this.$t('validate.request_spot'),
+        (v) => v.length >= 2 || this.$t('validate.request_spot')
       ],
     };
   },
@@ -89,7 +102,10 @@ export default {
     // DB内のすべての国名を取得
     setArea() {
       axios.get('/countries').then((res) => {
-        this.areas = res.data.areas_name;
+        for (let i = 0; i < res.data.all_areas.length; i++) {
+          this.areaName.push(res.data.all_areas[i].name);
+          this.areaNameEns.push(res.data.all_areas[i].name_ens);
+        }
       });
     },
     // リクエストを送信(作成)
@@ -97,16 +113,11 @@ export default {
       axios
         .post('/requests', { request: this.spotInfo })
         .then(() => {
-          this.openSnackbar('送信しました！');
-          this.resetSpotInfo();
+          this.openSnackbar(this.$t('request.send'));
         })
         .catch((err) => {
           console.log(err);
         });
-    },
-    resetSpotInfo() {
-      this.spotInfo.area = null;
-      this.spotInfo.spot = '';
     },
   },
 };

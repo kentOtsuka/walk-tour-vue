@@ -14,13 +14,36 @@
       </v-responsive>
     </v-col>
     <v-card-subtitle class="py-0 font-weight-bold secondary--text">{{ title }}</v-card-subtitle>
-    <v-card-subtitle class="my-0 hidden-sm-and-down"
-      >{{ viewCount.toLocaleString() }}回視聴・{{ publishedAt }}</v-card-subtitle
-    >
+    <v-card-subtitle class="my-0 pb-0 hidden-sm-and-down">
+      {{
+        $t('defaults.video_detail', {
+          count: viewCount.toLocaleString(),
+          published_at: publishedAt,
+        })
+      }}
+    </v-card-subtitle>
     <v-col class="d-flex justify-center pt-2">
-      <v-btn color="blue darken-1" outlined @click="setSpot(area, spot)">
+      <v-btn
+        color="blue darken-1"
+        outlined
+        @click="setSpot(area, spot)"
+        style="text-transform: none"
+      >
         <v-icon left>mdi-video</v-icon>
-        {{ spot.name }}のVtour動画一覧
+        <template v-if="this.$i18n.locale === 'ja'">
+          {{
+            $t('defaults.videos', {
+              spot: spot.name,
+            })
+          }}
+        </template>
+        <template v-if="this.$i18n.locale === 'en'">
+          {{
+            $t('defaults.videos', {
+              spot: spot.name_ens,
+            })
+          }}
+        </template>
       </v-btn>
     </v-col>
     <v-divider />
@@ -73,3 +96,14 @@ export default {
   },
 };
 </script>
+
+<!-- <style scoped>
+.shortcut {
+  width: 300px; /* 要素の横幅を指定 */
+  white-space: nowrap; /* 横幅のMAXに達しても改行しない */
+  overflow: hidden; /* ハミ出した部分を隠す */
+  text-overflow: ellipsis; /* 「…」と省略 */
+  -webkit-text-overflow: ellipsis; /* Safari */
+  -o-text-overflow: ellipsis; /* Opera */
+}
+</style> -->

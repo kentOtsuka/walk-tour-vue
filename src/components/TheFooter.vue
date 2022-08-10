@@ -2,16 +2,105 @@
   <div>
     <v-footer dark padless>
       <v-card flat tile width="100%" color="#5D99FF" class="white--text text-center">
-        <v-card-text>
-          <v-tooltip v-for="item in items" :key="item.icon" color="teal" top>
+        <v-card-text v-if="this.$i18n.locale === 'ja'">
+          <v-tooltip color="teal" top>
             <template v-slot:activator="{ on, attrs }">
               <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
-                <v-icon size="24px" @click.native="triggerClick(item.action)">
-                  {{ item.icon }}
+                <v-icon size="24px" @click.native="triggerClick('privacy')">
+                  mdi-lock-outline
                 </v-icon>
               </v-btn>
             </template>
-            <span>{{ item.text }}</span>
+            <span>{{ $t('defaults.privacy') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('terms')">
+                  mdi-file-document-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.terms') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('contact')">
+                  mdi-email-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.contact') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('share')">
+                  mdi-share-variant-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.app_share') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('twitter')"> mdi-twitter </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.twitter') }}</span>
+          </v-tooltip>
+        </v-card-text>
+
+        <v-card-text v-if="this.$i18n.locale === 'en'">
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('privacy')">
+                  mdi-lock-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.privacy') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('terms')">
+                  mdi-file-document-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.terms') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('contact')">
+                  mdi-email-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.contact') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('share')">
+                  mdi-share-variant-outline
+                </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.app_share') }}</span>
+          </v-tooltip>
+          <v-tooltip color="teal" top>
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
+                <v-icon size="24px" @click.native="triggerClick('twitter')"> mdi-twitter </v-icon>
+              </v-btn>
+            </template>
+            <span>{{ $t('defaults.twitter') }}</span>
           </v-tooltip>
         </v-card-text>
 
@@ -24,30 +113,44 @@
 
     <!-- プライバシーポリシーダイアログボックス -->
     <v-dialog v-model="privacyDialog" max-width="1500px">
-      <Privacy @reset-dialog="closePrivacy()" :dialog="privacyDialog" />
+      <Privacy
+        v-if="this.$i18n.locale === 'ja'"
+        @reset-dialog="closePrivacy()"
+        :dialog="privacyDialog"
+      />
+      <PrivacyEnglish
+        v-if="this.$i18n.locale === 'en'"
+        @reset-dialog="closePrivacy()"
+        :dialog="privacyDialog"
+      />
     </v-dialog>
     <!-- 利用規約ダイアログボックス -->
     <v-dialog v-model="termsDialog" max-width="1200px">
-      <UseTerms @reset-dialog="closeTerms()" :dialog="termsDialog" />
+      <UseTerms
+        v-if="this.$i18n.locale === 'ja'"
+        @reset-dialog="closeTerms()"
+        :dialog="termsDialog"
+      />
+      <UseTermsEnglish
+        v-if="this.$i18n.locale === 'en'"
+        @reset-dialog="closeTerms()"
+        :dialog="termsDialog"
+      />
     </v-dialog>
   </div>
 </template>
 
 <script>
 import Privacy from './PrivacyPolicy.vue';
+import PrivacyEnglish from './PrivacyPolicyEnglish.vue';
 import UseTerms from './UseTerms.vue';
+import UseTermsEnglish from './UseTermsEnglish.vue';
 
 export default {
-  components: { Privacy, UseTerms },
+  components: { Privacy, PrivacyEnglish, UseTerms, UseTermsEnglish },
   data() {
     return {
-      items: [
-        { icon: 'mdi-lock-outline', action: 'privacy', text: 'プライバシーポリシー' },
-        { icon: 'mdi-file-document-outline', action: 'terms', text: '利用規約' },
-        { icon: 'mdi-email-outline', action: 'contact', text: 'お問い合わせ' },
-        { icon: 'mdi-share-variant-outline', action: 'share', text: 'Twitterシェア' },
-        { icon: 'mdi-twitter', action: 'twitter', text: '開発者Twitter' },
-      ],
+      items: [{ icon: 'mdi-twitter', action: 'twitter', text: this.$t('defaults.twitter') }],
       privacyDialog: false,
       termsDialog: false,
       obj: '',

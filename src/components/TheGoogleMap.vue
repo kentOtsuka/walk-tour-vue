@@ -43,7 +43,6 @@ export default {
   },
   mounted() {
     let timer = setInterval(() => {
-      debugger
       const google = window.google;
       if (google) {
         clearInterval(timer);
@@ -54,12 +53,12 @@ export default {
         let markers = [];
         // クリック時に表示される情報ウィンドウ
         const infoWindow = new google.maps.InfoWindow({
-          content: "",
+          content: '',
           disableAutoPan: true,
         });
         // カーソルホバー時に表示される情報ウィンドウ
         const infoWindowHover = new google.maps.InfoWindow({
-          content: "",
+          content: '',
           disableAutoPan: true,
         });
 
@@ -109,17 +108,26 @@ export default {
             markers.push(marker);
 
             // 情報ウィンドウを固定で表示する
-            infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+            if (this.$i18n.locale === 'ja') {
+              infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+            } else if (this.$i18n.locale === 'en') {
+              infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name_ens}</h2></div>`);
+            }
             infoWindow.open(map, marker);
 
-            // infoWindowHover = new google.maps.InfoWindow({
-            //   content: `<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`,
-            // });
             // マーカーをアクティブ状態にする
             this.focusMarker = marker;
             // マーカーにマウスオーバー時に地点名の情報ウィンドウを表示
             marker.addListener('mouseover', () => {
-              infoWindowHover.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+              if (this.$i18n.locale === 'ja') {
+                infoWindowHover.setContent(
+                  `<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`
+                );
+              } else if (this.$i18n.locale === 'en') {
+                infoWindowHover.setContent(
+                  `<div class="mb-0"><h2>${this.spots[i].name_ens}</h2></div>`
+                );
+              }
               infoWindowHover.open(map, marker);
             });
             // マーカーからマウスアウトした時に地点名の情報ウィンドウを非表示
@@ -144,7 +152,11 @@ export default {
               // アクティブ中のマーカーのみバウンドさせる
               marker.setAnimation(google.maps.Animation.BOUNCE);
               // 情報ウィンドウを固定で表示する
-              infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+              if (this.$i18n.locale === 'ja') {
+                infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+              } else if (this.$i18n.locale === 'en') {
+                infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name_ens}</h2></div>`);
+              }
               infoWindow.open(map, marker);
               // 地点に関する動画一覧ページに遷移する処理
               this.getVideo(marker, this.spot, this.area);
@@ -180,7 +192,11 @@ export default {
               // アクティブ中のマーカーのみバウンドさせる
               marker_2[i].setAnimation(google.maps.Animation.BOUNCE);
               // 情報ウィンドウを固定で表示する
-              infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+              if (this.$i18n.locale === 'ja') {
+                infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+              } else if (this.$i18n.locale === 'en') {
+                infoWindow.setContent(`<div class="mb-0"><h2>${this.spots[i].name_ens}</h2></div>`);
+              }
               infoWindow.open(map, marker_2[i]);
               // 地点に関する動画一覧ページに遷移する処理
               this.getVideo(marker_2[i], this.spots[i], this.area);
@@ -190,7 +206,15 @@ export default {
 
             // マーカーにマウスオーバー時に地点名の情報ウィンドウを表示
             marker_2[i].addListener('mouseover', () => {
-              infoWindowHover.setContent(`<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`);
+              if (this.$i18n.locale === 'ja') {
+                infoWindowHover.setContent(
+                  `<div class="mb-0"><h2>${this.spots[i].name}</h2></div>`
+                );
+              } else if (this.$i18n.locale === 'en') {
+                infoWindowHover.setContent(
+                  `<div class="mb-0"><h2>${this.spots[i].name_ens}</h2></div>`
+                );
+              }
               infoWindowHover.open(map, marker_2[i]);
             });
             // マーカーからマウスアウトした時に地点名の情報ウィンドウを非表示

@@ -21,11 +21,14 @@
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title>{{ video.title }}</v-list-item-title>
-                <v-list-item-subtitle class="mt-1"
-                  >{{ video.view_count.toLocaleString() }}回視聴・{{
-                    video.published_at
-                  }}</v-list-item-subtitle
-                >
+                <v-list-item-subtitle class="mt-1">
+                  {{
+                    $t('defaults.video_detail', {
+                      count: video.view_count.toLocaleString(),
+                      published_at: video.published_at,
+                    })
+                  }}
+                </v-list-item-subtitle>
               </v-list-item-content>
             </v-list-item>
           </v-card>
@@ -65,6 +68,10 @@ export default {
       required: true,
     },
     spot: {
+      type: String,
+      required: true,
+    },
+    spotEns: {
       type: String,
       required: true,
     },
@@ -113,7 +120,7 @@ export default {
     shareTwitter(title, videoId) {
       var shareURL =
         'https://twitter.com/intent/tweet?text=' +
-        `${this.spot}（${this.area}）に行ってみたよ！` +
+        this.$t('share.content', { area: this.area, spot: this.spot, spot_ens: this.spotEns }) +
         '%0a' +
         '%0a' +
         encodeURI(title) +
