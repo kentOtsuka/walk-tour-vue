@@ -9,6 +9,7 @@
       <NewSpot class="mb-10" />
       <!-- ホットスポットの上位三つを表示 -->
       <HomeRanking />
+      <UseGuide />
     </div>
   </div>
 </template>
@@ -18,10 +19,11 @@ import WorldMap from '../components/WorldMap.vue';
 import HomeRanking from '../components/HomeSpotRanking.vue';
 import NewSpot from '../components/NewAddSpot.vue';
 import BackGroundVideo from '../components/BackGroundVideo.vue';
+import UseGuide from '../components/UseGuide.vue';
 import axios from '../plugins/axios';
 
 export default {
-  components: { WorldMap, HomeRanking, NewSpot, BackGroundVideo },
+  components: { WorldMap, HomeRanking, NewSpot, BackGroundVideo, UseGuide },
   data() {
     return {
       areas: [],
