@@ -33,10 +33,9 @@
           disabled
           class="align-center pa-3"
           max-width="400px"
-          height="220.08"
           style="margin: auto"
         >
-          <div style="text-align: center">
+          <div style="text-align: center; color: gray">
             <h3>{{ $t('guide.third_title') }}</h3>
             <v-icon class="my-2" color="gray" style="font-size: 80px">
               mdi-close-octagon-outline

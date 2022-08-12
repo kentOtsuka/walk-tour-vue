@@ -2,7 +2,6 @@
   <div>
     <BackGroundVideo :areas="areas" :spots="spots" />
     <div class="mx-lg-16 my-8" style="color: #455a64">
-      <!-- 地点から動画を表示させるための検索窓 -->
       <!-- jqvmapで世界地図を表示 -->
       <WorldMap class="hidden-sm-and-down" />
       <!-- 最近新たに追加されたスポットを表示 -->
