@@ -1,10 +1,10 @@
 <template>
-  <div class="mt-5">
+  <div>
     <h2 class="d-flex align-center justify-center">
       <v-icon left bottom color="green">mdi-book-open</v-icon>
       {{ $t('defaults.guide') }}
     </h2>
-    <v-divider class="mb-5 mx-auto" style="max-width: 1200px; width: 90%" />
+    <v-divider class="mb-1 mx-auto" style="max-width: 1200px; width: 90%" />
     <v-row class="mx-auto mb-2" style="max-width: 1200px">
       <v-col cols="12" sm="12" md="4" lg="4">
         <v-sheet class="align-center pa-3" max-width="400px" style="margin: auto">

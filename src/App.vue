@@ -2,7 +2,7 @@
   <div id="app">
     <v-app
       id="inspire"
-      style="color: #455A64; font-family: 'Tsukushi A Round Gothic','筑紫A丸ゴシック', '	Hiragino Maru Gothic ProN W4', 'ヒラギノ丸ゴ ProN W4';">
+      style="color: #455A64; font-family: 'Tsukushi A Round Gothic','筑紫A丸ゴシック', 'Hiragino Maru Gothic ProN W4', 'ヒラギノ丸ゴ ProN W4';">
       <Header />
       <!-- ルートコンポーネントでページのメイン部分の表示 -->
       <v-main>

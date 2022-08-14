@@ -4,11 +4,12 @@
     <div class="mx-lg-16 my-8" style="color: #455a64">
       <!-- jqvmapで世界地図を表示 -->
       <WorldMap class="hidden-sm-and-down" />
+      <!-- サービスについての説明 -->
+      <UseGuide class="mb-10" />
       <!-- 最近新たに追加されたスポットを表示 -->
       <NewSpot class="mb-10" />
       <!-- ホットスポットの上位三つを表示 -->
       <HomeRanking />
-      <UseGuide />
     </div>
   </div>
 </template>
