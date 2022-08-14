@@ -2,58 +2,7 @@
   <div>
     <v-footer dark padless>
       <v-card flat tile width="100%" color="#5D99FF" class="white--text text-center">
-        <v-card-text v-if="this.$i18n.locale === 'ja'">
-          <v-tooltip color="teal" top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
-                <v-icon size="24px" @click.native="triggerClick('privacy')">
-                  mdi-lock-outline
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>{{ $t('defaults.privacy') }}</span>
-          </v-tooltip>
-          <v-tooltip color="teal" top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
-                <v-icon size="24px" @click.native="triggerClick('terms')">
-                  mdi-file-document-outline
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>{{ $t('defaults.terms') }}</span>
-          </v-tooltip>
-          <v-tooltip color="teal" top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
-                <v-icon size="24px" @click.native="triggerClick('contact')">
-                  mdi-email-outline
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>{{ $t('defaults.contact') }}</span>
-          </v-tooltip>
-          <v-tooltip color="teal" top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
-                <v-icon size="24px" @click.native="triggerClick('share')">
-                  mdi-share-variant-outline
-                </v-icon>
-              </v-btn>
-            </template>
-            <span>{{ $t('defaults.app_share') }}</span>
-          </v-tooltip>
-          <v-tooltip color="teal" top>
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
-                <v-icon size="24px" @click.native="triggerClick('twitter')"> mdi-twitter </v-icon>
-              </v-btn>
-            </template>
-            <span>{{ $t('defaults.twitter') }}</span>
-          </v-tooltip>
-        </v-card-text>
-
-        <v-card-text v-if="this.$i18n.locale === 'en'">
+        <v-card-text>
           <v-tooltip color="teal" top>
             <template v-slot:activator="{ on, attrs }">
               <v-btn class="mx-4 white--text" v-bind="attrs" v-on="on" icon>
@@ -206,22 +155,15 @@ export default {
     contact() {
       window.open('https://forms.gle/ywb5Q35iHSBmYM4s5', '_blank');
     },
-    // 開発者Twitterを開く
+    // 公式Twitterを開く
     twitter() {
-      window.open('https://twitter.com/O_H_K_N', '_blank');
+      window.open('https://twitter.com/VtourHub', '_blank');
     },
     // Twitterシェアを実行
     share() {
       var shareURL =
         'https://twitter.com/intent/tweet?text=' +
-        '%23VtourHub' +
-        '%20で気になる街へ行こう' +
-        '%0a' +
-        '%234kwalk' +
-        '%20%23citywalk' +
-        '%20%23walkingtour' +
-        '%0a' +
-        'https://vtourhub.jp/';
+        this.$t("share.footer.content")
       window.open(shareURL, '_blank');
     },
   },

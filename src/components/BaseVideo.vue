@@ -117,24 +117,16 @@ export default {
       this.urlForEmbedVideo = '';
     },
     // VideoリンクをTwitterにシェア
-    shareTwitter(title, videoId) {
+    shareTwitter(videoId) {
+      const spot_ens = this.spotEns.replace(/\s+/g, "");
       var shareURL =
         'https://twitter.com/intent/tweet?text=' +
-        this.$t('share.content', { area: this.area, spot: this.spot, spot_ens: this.spotEns }) +
-        '%0a' +
-        '%0a' +
-        encodeURI(title) +
-        '%0a' +
-        '&url=' +
-        `https://youtu.be/${videoId}` +
-        '%20%40Youtube%20より' +
-        '%0a' +
-        '%23VtourHub' +
-        '%20%234kwalk' +
-        '%20%23citywalk' +
-        '%20%23walkingtour' +
-        '%0a' +
-        'https://vtourhub.jp/';
+        this.$t('share.dialog.content', { spot: this.spot, spot_ens: this.spotEns }) +
+        `%0a%0a%23${this.$t('share.dialog.spot_name', { spot: this.spot, spot_ens: spot_ens })}` +
+        `%0a%23${this.$t('share.dialog.travel')}` +
+        '%0a%23walkingtour' +
+        '%0a%23VtourHub' +
+        `%0ayoutu.be/${videoId}`;
       window.open(shareURL, '_blank');
     },
   },

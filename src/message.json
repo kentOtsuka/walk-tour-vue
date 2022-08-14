@@ -17,7 +17,7 @@
       "terms": "利用規約",
       "contact": "お問い合わせ",
       "app_share": "Twitterシェア",
-      "twitter": "開発者Twitter"
+      "twitter": "公式Twitter"
     },
     "form": {
       "name": "お名前",
@@ -88,7 +88,14 @@
       "send": "送信しました！"
     },
     "share": {
-      "content": "%{spot}にGO！"
+      "footer": {
+        "content": "%40VtourHub で気になる街へ行こう%0a%0a%23旅行 %23旅行好きと繋がりたい%0a%23travel%0a%23walkingtour%0a%23VtourHub%0avtourhub.jp/"
+      },
+      "dialog": {
+        "content": "%{spot}をオンライン旅行中✈️ %40VtourHub より%0a☞vtourhub.jp/",
+        "spot_name": "%{spot}",
+        "travel": "旅行"
+      }
     }
   },
   "en": {
@@ -110,7 +117,7 @@
       "terms": "Terms of Use",
       "contact": "Contact",
       "app_share": "Twitter Share",
-      "twitter": "Developer"
+      "twitter": "Official"
     },
     "form": {
       "name": "Name",
@@ -181,7 +188,14 @@
       "send": "Your request has been sent!"
     },
     "share": {
-      "content": "Let's walk in %{spot_ens}!"
+      "footer": {
+        "content": "Have a nice trip by online✈%0avia @VtourHub%0a%0a%23travel%20%23vacation%0a%23walkingtour%0a%23VtourHub%0avtourhub.jp/"
+      },
+      "dialog": {
+        "content": "Traveling to %{spot_ens} online✈️ via @VtourHub%0a☞vtourhub.jp/",
+        "spot_name": "%{spot_ens}",
+        "travel": "travel"
+      }
     }
   }
 }
