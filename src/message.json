@@ -31,6 +31,8 @@
       "login_success": "ログインしました",
       "logout_success": "ログアウトしました",
       "register_success": "新規登録が完了しました",
+      "edit_success": "プロフィールを編集しました",
+      "error": "予期せぬエラーが発生しました",
       "login_error": "メールアドレスとパスワードが違います",
       "register_error": "登録できませんでした"
     },
@@ -131,6 +133,8 @@
       "login_success": "Logged in",
       "logout_success": "Logged out",
       "register_success": "New registration completed!",
+      "edit_success": "Profile has been edited.",
+      "error": "An unexpected error has occurred.",
       "login_error": "Email and password are different",
       "register_error": "Could not register"
     },
