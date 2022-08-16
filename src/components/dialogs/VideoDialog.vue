@@ -27,7 +27,7 @@
         color="blue darken-1"
         outlined
         style="text-transform: none"
-        @click="shareTwitter(title, videoId)"
+        @click="shareTwitter(videoId)"
       >
         <v-icon left>mdi-twitter</v-icon>
         {{ $t('defaults.share') }}
@@ -74,8 +74,8 @@ export default {
     },
   },
   methods: {
-    shareTwitter(title, videoId) {
-      this.$emit('share-twitter', title, videoId);
+    shareTwitter(videoId) {
+      this.$emit('share-twitter', videoId);
     },
     resetDialog() {
       this.$emit('reset-dialog');

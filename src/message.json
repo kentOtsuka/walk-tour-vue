@@ -5,6 +5,7 @@
       "register": "新規登録",
       "my_page": "マイページ",
       "hot_spot": "ホットスポット",
+      "guide": "VtourHubでできること",
       "news": "お知らせ",
       "request_spot": "スポットをリクエスト",
       "spot_order": "ランキング第%{number}位",
@@ -16,7 +17,7 @@
       "terms": "利用規約",
       "contact": "お問い合わせ",
       "app_share": "Twitterシェア",
-      "twitter": "開発者Twitter"
+      "twitter": "公式Twitter"
     },
     "form": {
       "name": "お名前",
@@ -30,6 +31,8 @@
       "login_success": "ログインしました",
       "logout_success": "ログアウトしました",
       "register_success": "新規登録が完了しました",
+      "edit_success": "プロフィールを編集しました",
+      "error": "予期せぬエラーが発生しました",
       "login_error": "メールアドレスとパスワードが違います",
       "register_error": "登録できませんでした"
     },
@@ -52,6 +55,14 @@
     "autocomplete": {
       "label": "国名から検索しよう",
       "error_message": "検索ワードを選択してください"
+    },
+    "guide": {
+      "first_title": "1. 旅行気分を味わえる",
+      "first_content": "Youtube上にある#4kwalk, #walkingtourなどのバーチャルツアーの動画を活用し、いつでもどこでも旅行気分を味わうことができます。",
+      "second_title": "2. スポットをお気に入り登録",
+      "second_content": "ユーザー登録しログインすると、お気に入りのスポットをブックマーク登録できます。ブックマークは、マイページから確認できます。",
+      "third_title": "3. 自分だけの旅行ツアーを組める",
+      "third_content": "こちらの機能は只今準備中です。"
     },
     "menu": {
       "home": "トップページ",
@@ -79,7 +90,14 @@
       "send": "送信しました！"
     },
     "share": {
-      "content": "%{spot}にGO！"
+      "footer": {
+        "content": "%40VtourHub で気になる街へ行こう%0a%0a%23旅行 %23旅行好きと繋がりたい%0a%23travel%0a%23walkingtour%0a%23VtourHub%0avtourhub.jp/"
+      },
+      "dialog": {
+        "content": "%{spot}をオンライン旅行中✈️ %40VtourHub より%0a☞vtourhub.jp/",
+        "spot_name": "%{spot}",
+        "travel": "旅行"
+      }
     }
   },
   "en": {
@@ -88,6 +106,7 @@
       "register": "Register",
       "my_page": "Profile",
       "hot_spot": "Hot Spot",
+      "guide": "What's VtourHub?",
       "news": "News",
       "request_spot": "Spot Request",
       "spot_order": "No. %{number}",
@@ -100,7 +119,7 @@
       "terms": "Terms of Use",
       "contact": "Contact",
       "app_share": "Twitter Share",
-      "twitter": "Developer"
+      "twitter": "Official"
     },
     "form": {
       "name": "Name",
@@ -114,6 +133,8 @@
       "login_success": "Logged in",
       "logout_success": "Logged out",
       "register_success": "New registration completed!",
+      "edit_success": "Profile has been edited.",
+      "error": "An unexpected error has occurred.",
       "login_error": "Email and password are different",
       "register_error": "Could not register"
     },
@@ -136,6 +157,14 @@
     "autocomplete": {
       "label": "Search by Country",
       "error_message": "Please select a search word"
+    },
+    "guide": {
+      "first_title": "1. Travel Feeling",
+      "first_content": "You can take advantage of '#4kwalk', '#walkingtour' and other virtual tour videos on Youtube to feel like you are traveling anytime, anywhere.",
+      "second_title": "2. Add a spot as a favorite",
+      "second_content": "Once you have registered and logged in, you can register your favorite spots as bookmarks. Bookmarks can be viewed from My Page.",
+      "third_title": "3. Build your own travel tour",
+      "third_content": "This function is currently under preparation."
     },
     "menu": {
       "home": "Top",
@@ -163,7 +192,14 @@
       "send": "Your request has been sent!"
     },
     "share": {
-      "content": "Let's walk in %{spot_ens}!"
+      "footer": {
+        "content": "Have a nice trip by online✈%0avia @VtourHub%0a%0a%23travel%20%23vacation%0a%23walkingtour%0a%23VtourHub%0avtourhub.jp/"
+      },
+      "dialog": {
+        "content": "Traveling to %{spot_ens} online✈️ via @VtourHub%0a☞vtourhub.jp/",
+        "spot_name": "%{spot_ens}",
+        "travel": "travel"
+      }
     }
   }
 }

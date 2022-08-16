@@ -172,7 +172,7 @@
                   v-model="authUser.name"
                   :rules="nameRules"
                   prepend-icon="mdi-account-circle"
-                  label="お名前"
+                  :label="$t('form.name')"
                   placeholder="2〜10文字"
                   validate-on-blur
                   required
@@ -181,7 +181,7 @@
                   v-model="authUser.email"
                   :rules="emailRules"
                   prepend-icon="mdi-email"
-                  label="メールアドレス"
+                  :label="$t('form.email')"
                   validate-on-blur
                   required
                 />
@@ -241,13 +241,13 @@ export default {
       area: {},
       spot: {},
       nameRules: [
-        (v) => !!v || 'お名前を入力してください',
-        (v) => v.length <= 10 || '2〜10文字が有効です',
-        (v) => v.length >= 2 || '2〜10文字が有効です',
+        (v) => !!v || this.$t('validate.name_presence'),
+        (v) => v.length <= 10 || this.$t('validate.name_invalid'),
+        (v) => v.length >= 2 ||this.$t('validate.name_invalid'),
       ],
       emailRules: [
-        (v) => !!v || 'メールアドレスを入力してください',
-        (v) => /.+@.+\..+/.test(v) || '無効なメールアドレスです',
+        (v) => !!v || this.$t('validate.email_presence'),
+        (v) => /.+@.+\..+/.test(v) || this.$t('validate.email_invalid'),
       ],
     };
   },
@@ -328,7 +328,13 @@ export default {
         })
         .then((res) => {
           this.resetEditUserDialog();
-          this.openSnackbar(res.data.message);
+          // 異常系
+          if (res.data.status === 'fail') {
+            this.openSnackbar(this.$t('form.error'));
+            return;
+          }
+          // 正常系
+          this.openSnackbar(this.$t('form.edit_success'));
         });
     },
     // ダイアログの表示
