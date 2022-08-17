@@ -161,7 +161,7 @@
 
     <!-- ユーザ編集ダイアログボックス -->
     <v-row justify="center">
-      <v-dialog v-model="userDialog" max-width="600px">
+      <v-dialog persistent v-model="userDialog" max-width="600px">
         <v-card>
           <h2 class="d-flex align-center justify-center py-2">{{ $t('profile.edit') }}</h2>
           <v-divider style="max-width: 700px; margin: auto" />
@@ -169,7 +169,7 @@
             <v-card-text class="py-0">
               <v-container>
                 <v-text-field
-                  v-model="authUser.name"
+                  v-model="name"
                   :rules="nameRules"
                   prepend-icon="mdi-account-circle"
                   :label="$t('form.name')"
@@ -178,7 +178,7 @@
                   required
                 />
                 <v-text-field
-                  v-model="authUser.email"
+                  v-model="email"
                   :rules="emailRules"
                   prepend-icon="mdi-email"
                   :label="$t('form.email')"
@@ -240,10 +240,13 @@ export default {
       urlForEmbedVideo: '',
       area: {},
       spot: {},
+      // プロフィール編集用プロパティ
+      name: '',
+      email: '',
       nameRules: [
         (v) => !!v || this.$t('validate.name_presence'),
         (v) => v.length <= 10 || this.$t('validate.name_invalid'),
-        (v) => v.length >= 2 ||this.$t('validate.name_invalid'),
+        (v) => v.length >= 2 || this.$t('validate.name_invalid'),
       ],
       emailRules: [
         (v) => !!v || this.$t('validate.email_presence'),
@@ -259,11 +262,6 @@ export default {
     dialog() {
       if (!this.dialog) {
         this.resetDialog();
-      }
-    },
-    userDialog() {
-      if (!this.userDialog) {
-        this.resetEditUserDialog();
       }
     },
   },
@@ -323,8 +321,8 @@ export default {
     async editUser() {
       await axios
         .put(`/users/${this.authUser.id}`, {
-          name: this.authUser.name,
-          email: this.authUser.email,
+          name: this.name,
+          email: this.email,
         })
         .then((res) => {
           this.resetEditUserDialog();
@@ -335,6 +333,8 @@ export default {
           }
           // 正常系
           this.openSnackbar(this.$t('form.edit_success'));
+          this.authUser.name = this.name;
+          this.authUser.email = this.email;
         });
     },
     // ダイアログの表示
@@ -361,6 +361,8 @@ export default {
     },
     // ユーザ編集のダイアログを開く
     openEditUserDialog() {
+      this.name = this.authUser.name;
+      this.email = this.authUser.email;
       this.userDialog = true;
     },
     // ユーザ編集のダイアログを閉じる
