@@ -86,7 +86,9 @@
 import { mapActions } from 'vuex';
 
 export default {
-  name: 'RegisterIndex',
+  metaInfo: {
+    title: '新規登録',
+  },
   data() {
     return {
       valid: false,

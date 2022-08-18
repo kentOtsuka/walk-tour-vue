@@ -112,6 +112,9 @@ import Video from '../components/BaseVideo.vue';
 
 export default {
   components: { GoogleMap, Video },
+  metaInfo: {
+    title: '検索結果',
+  },
   props: {
     id: {
       type: [String, Number],
@@ -138,6 +141,7 @@ export default {
     };
   },
   created() {
+    console.log(this.$t('defaults.top'))
     // spotIdを引き継いでいれば（ホットスポットからの遷移であれば）spotIdに関する動画も一覧表示する
     if (this.spotId === undefined) {
       this.setSpot();

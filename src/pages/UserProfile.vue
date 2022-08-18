@@ -224,6 +224,9 @@ import { FavoriteButton } from '@/components/elements/button';
 
 export default {
   components: { Dialog, FavoriteButton },
+  metaInfo: {
+    title: 'Profile',
+  },
   data() {
     return {
       // すべての地点その国、動画オブジェクトを格納する配列
