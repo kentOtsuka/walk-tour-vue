@@ -100,7 +100,7 @@
         {{ $t('result.attention') }}
       </v-chip>
     </template>
-    <Video :videos="videos" :area="area.name" :spot="spotName" :spotEns="spotNameEns" />
+    <Video :videos="videos" :area="area" :spot="spotName" :spotEns="spotNameEns" />
   </v-container>
 </template>
 
@@ -118,7 +118,7 @@ export default {
       required: true,
     },
     spotId: {
-      type: Number,
+      type: [String, Number],
       required: false,
     },
   },
