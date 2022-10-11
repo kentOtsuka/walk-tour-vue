@@ -287,9 +287,9 @@ export default {
     clickCount(spot, area) {
       axios
         .get(`/countries/${area.id}/spots/${spot.id}/edit`)
-        .then((res) => {
-          console.log(res.data.status);
-        })
+        // .then((res) => {
+        //   console.log(res.data.status);
+        // })
         .catch((error) => {
           console.log(error);
         });

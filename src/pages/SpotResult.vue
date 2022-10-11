@@ -141,7 +141,6 @@ export default {
     };
   },
   created() {
-    console.log(this.$t('defaults.top'))
     // spotIdを引き継いでいれば（ホットスポットからの遷移であれば）spotIdに関する動画も一覧表示する
     if (this.spotId === undefined) {
       this.setSpot();

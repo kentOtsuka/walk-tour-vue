@@ -99,7 +99,6 @@ export default {
   methods: {
     // ダイアログの表示
     openDialog(video) {
-      console.log(video.thumbnail)
       this.dialog = true;
       this.title = video.title;
       this.videoId = video.video_id;

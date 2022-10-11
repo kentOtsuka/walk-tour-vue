@@ -23,7 +23,7 @@
           {{ $t('top.count', { areas: areas.length, spots: spots.length }) }}
         </p>
         <!-- <p style="font-size: x-large; margin-top: 120px;">地図、新規スポット、ホットスポットから探す</p> -->
-        <p class="mb-0" style="font-size: x-large; margin-top: 95px;">Scroll Down</p>
+        <p class="mb-0" style="font-size: x-large; margin-top: 95px">Scroll Down</p>
         <div class="container">
           <div class="field">
             <div class="scroll"></div>
