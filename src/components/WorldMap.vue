@@ -66,8 +66,13 @@ export default {
         })
         .catch((res) => {
           // 地点登録がない場合は遷移せずアラートで表示
-          var message = res.response.data.name + 'の登録情報はありません';
-          alert(message);
+          // 日本語
+          if (this.$i18n.locale === 'ja') {
+            alert(res.response.data.name + 'の登録情報はありません');
+            return;
+          }
+          // 英語
+          alert('There is no registration information for ' + res.response.data.name_ens);
         });
     },
   },
