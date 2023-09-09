@@ -100,7 +100,7 @@
         {{ $t('result.attention') }}
       </v-chip>
     </template>
-    <Video :videos="videos" :area="area.name" :spot="spotName" :spotEns="spotNameEns" />
+    <Video :videos="videos" :area="area" :spot="spotName" :spotEns="spotNameEns" />
   </v-container>
 </template>
 
@@ -112,13 +112,16 @@ import Video from '../components/BaseVideo.vue';
 
 export default {
   components: { GoogleMap, Video },
+  metaInfo: {
+    title: '検索結果',
+  },
   props: {
     id: {
       type: [String, Number],
       required: true,
     },
     spotId: {
-      type: Number,
+      type: [String, Number],
       required: false,
     },
   },

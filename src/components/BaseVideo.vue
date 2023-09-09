@@ -44,7 +44,6 @@
         :viewCount="viewCount"
         :publishedAt="publishedAt"
         :urlForEmbedVideo="urlForEmbedVideo"
-        :area="area"
         :spot="spot"
         @share-twitter="shareTwitter"
         @reset-dialog="resetDialog"
@@ -64,7 +63,7 @@ export default {
       required: true,
     },
     area: {
-      type: undefined,
+      type: Object,
       required: true,
     },
     spot: {
@@ -118,13 +117,22 @@ export default {
     },
     // VideoリンクをTwitterにシェア
     shareTwitter(videoId) {
-      const spot_ens = this.spotEns.replace(/\s+/g, "");
+      const spot_ens = this.spotEns.replace(/\s+/g, '');
+      const area_ens = this.area.name_ens.replace(/\s+/g, '');
       var shareURL =
         'https://twitter.com/intent/tweet?text=' +
-        this.$t('share.dialog.content', { spot: this.spot, spot_ens: this.spotEns }) +
+        this.$t('share.dialog.content', {
+          spot: this.spot,
+          spot_ens: this.spotEns,
+          id: this.area.id,
+        }) +
         `%0a%0a%23${this.$t('share.dialog.spot_name', { spot: this.spot, spot_ens: spot_ens })}` +
+        `%0a%23${this.$t('share.dialog.area_name', {
+          area: this.area.name,
+          area_ens: area_ens,
+        })}` +
         `%0a%23${this.$t('share.dialog.travel')}` +
-        '%0a%23walkingtour' +
+        '%20%23walkingtour' +
         '%0a%23VtourHub' +
         `%0ayoutu.be/${videoId}`;
       window.open(shareURL, '_blank');

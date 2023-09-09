@@ -64,10 +64,6 @@ export default {
       type: String,
       required: true,
     },
-    area: {
-      type: String,
-      required: true,
-    },
     spot: {
       type: String,
       required: true,

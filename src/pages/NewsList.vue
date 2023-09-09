@@ -34,6 +34,9 @@
 import axios from '../plugins/axios';
 
 export default {
+  metaInfo: {
+    title: 'お知らせ',
+  },
   data() {
     return {
       newsLists: {

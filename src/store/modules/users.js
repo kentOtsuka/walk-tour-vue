@@ -65,8 +65,7 @@ const actions = {
     // stateに認証済みユーザーが入ればそれを返す
     if (state.authUser) return state.authUser;
     // ユーザー情報をサーバに問い合わせ、レスポンスをステートに設定し、そのレスポンスを返却する
-    const userResponse = await axios.get('/users/me').catch((err) => {
-      console.log(err.response);
+    const userResponse = await axios.get('/users/me').catch(() => {
       return null;
     });
     if (!userResponse) return null;

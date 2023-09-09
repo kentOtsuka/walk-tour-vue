@@ -177,6 +177,9 @@ import { FavoriteButton } from '../components/elements/button';
 
 export default {
   components: { Dialog, FavoriteButton },
+  metaInfo: {
+    title: 'ホットスポット',
+  },
   data() {
     return {
       // すべての地点その国、動画オブジェクトを格納する配列
@@ -265,9 +268,9 @@ export default {
     clickCount(spot, area) {
       axios
         .get(`/countries/${area.id}/spots/${spot.id}/edit`)
-        .then((res) => {
-          console.log(res.data.status);
-        })
+        // .then((res) => {
+        //   console.log(res.data.status);
+        // })
         .catch((error) => {
           console.log(error);
         });

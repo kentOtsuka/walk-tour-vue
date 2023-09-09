@@ -2,7 +2,7 @@
   <div>
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom color="blue darken-1">mdi-map-outline</v-icon>
-      {{ $t("top.world_map") }}
+      {{ $t('top.world_map') }}
     </h2>
     <v-divider class="mb-2 mx-auto" style="max-width: 1200px; width: 90%" />
     <div class="d-flex justify-center mt-5" style="margin: auto">
@@ -66,8 +66,13 @@ export default {
         })
         .catch((res) => {
           // 地点登録がない場合は遷移せずアラートで表示
-          var message = res.response.data.name + 'の登録情報はありません';
-          alert(message);
+          // 日本語
+          if (this.$i18n.locale === 'ja') {
+            alert(res.response.data.name + 'の登録情報はありません');
+            return;
+          }
+          // 英語
+          alert('There is no registration information for ' + res.response.data.name_ens);
         });
     },
   },

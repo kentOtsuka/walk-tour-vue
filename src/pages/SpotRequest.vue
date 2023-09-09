@@ -76,6 +76,9 @@ import axios from '../plugins/axios';
 import { mapActions } from 'vuex';
 
 export default {
+  metaInfo: {
+    title: 'スポットリクエスト',
+  },
   data() {
     return {
       valid: false,
@@ -89,7 +92,7 @@ export default {
       },
       spotRules: [
         (v) => v.length <= 20 || this.$t('validate.request_spot'),
-        (v) => v.length >= 2 || this.$t('validate.request_spot')
+        (v) => v.length >= 2 || this.$t('validate.request_spot'),
       ],
     };
   },

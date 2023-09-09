@@ -34,6 +34,10 @@ import { mapActions } from 'vuex';
 
 export default {
   components: { Header, Footer },
+  metaInfo: {
+    title: 'VtourHub - 気になる街へ行こう',
+    titleTemplate: '%s | VtourHub'
+  },
   methods: {
     ...mapActions('util', ['closeSnackbar']),
   },

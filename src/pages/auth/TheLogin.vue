@@ -66,6 +66,9 @@
 import { mapActions } from 'vuex';
 
 export default {
+  metaInfo: {
+    title: 'ログイン',
+  },
   data() {
     return {
       // ログインボタンの有効状態を表す(trueで有効)

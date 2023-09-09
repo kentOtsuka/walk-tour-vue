@@ -1,6 +1,7 @@
 {
   "ja": {
     "defaults": {
+      "top": "トップ",
       "login": "ログイン",
       "register": "新規登録",
       "my_page": "マイページ",
@@ -94,7 +95,8 @@
         "content": "%40VtourHub で気になる街へ行こう%0a%0a%23旅行 %23旅行好きと繋がりたい%0a%23travel%0a%23walkingtour%0a%23VtourHub%0avtourhub.jp/"
       },
       "dialog": {
-        "content": "%{spot}をオンライン旅行中✈️ %40VtourHub より%0a☞vtourhub.jp/",
+        "content": "%{spot}をオンライン旅行中✈️ %40VtourHub より%0a☞vtourhub.jp/countries/%{id}",
+        "area_name": "%{area}",
         "spot_name": "%{spot}",
         "travel": "旅行"
       }
@@ -102,6 +104,7 @@
   },
   "en": {
     "defaults": {
+      "top": "Top",
       "login": "Login",
       "register": "Register",
       "my_page": "Profile",
@@ -196,7 +199,8 @@
         "content": "Have a nice trip by online✈%0avia @VtourHub%0a%0a%23travel%20%23vacation%0a%23walkingtour%0a%23VtourHub%0avtourhub.jp/"
       },
       "dialog": {
-        "content": "Traveling to %{spot_ens} online✈️ via @VtourHub%0a☞vtourhub.jp/",
+        "content": "Traveling to %{spot_ens} online✈️ via @VtourHub%0a☞vtourhub.jp/countries/%{id}",
+        "area_name": "%{area_ens}",
         "spot_name": "%{spot_ens}",
         "travel": "travel"
       }

@@ -161,9 +161,7 @@ export default {
     },
     // Twitterシェアを実行
     share() {
-      var shareURL =
-        'https://twitter.com/intent/tweet?text=' +
-        this.$t("share.footer.content")
+      var shareURL = 'https://twitter.com/intent/tweet?text=' + this.$t('share.footer.content');
       window.open(shareURL, '_blank');
     },
   },
