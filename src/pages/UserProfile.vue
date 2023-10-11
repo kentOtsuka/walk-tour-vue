@@ -29,7 +29,7 @@
 
     <h2 class="mb-1 d-flex align-center justify-center">
       <v-icon left bottom color="pink">mdi-heart</v-icon>
-      Favorite Spot
+      {{ $t('defaults.favorite_spot') }}
     </h2>
 
     <v-divider class="mb-2" style="max-width: 700px; margin: auto" />
@@ -45,7 +45,7 @@
                 <v-img
                   :src="spotDetail.video.thumbnail"
                   alt="サムネイル"
-                  @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video)"
+                  @click="openDialog(spotDetail)"
                   style="cursor: pointer"
                 >
                 </v-img>
@@ -54,13 +54,13 @@
                   <v-list-item>
                     <v-list-item-content>
                       <template v-if="$i18n.locale === 'ja'">
-                        <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                        <v-list-item-title>{{ spotDetail.name }}</v-list-item-title>
                         <v-list-item-subtitle class="mt-1">{{
                           spotDetail.area.name
                         }}</v-list-item-subtitle>
                       </template>
                       <template v-if="$i18n.locale === 'en'">
-                        <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
+                        <v-list-item-title>{{ spotDetail.name_ens }}</v-list-item-title>
                         <v-list-item-subtitle class="mt-1">{{
                           spotDetail.area.name_ens
                         }}</v-list-item-subtitle>
@@ -71,7 +71,7 @@
                     <v-btn
                       color="blue darken-1 align-center"
                       text
-                      @click="setSpot(spotDetail.area, spotDetail.spot)"
+                      @click="setSpot(spotDetail.area, spotDetail)"
                       >{{ $t('defaults.spot_detail') }}</v-btn
                     >
                   </v-card-actions>
@@ -103,13 +103,13 @@
                     <v-list-item style="width: 160px">
                       <v-list-item-content class="mt-3">
                         <template v-if="$i18n.locale === 'ja'">
-                          <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                          <v-list-item-title>{{ spotDetail.name }}</v-list-item-title>
                           <v-list-item-subtitle class="mt-1">{{
                             spotDetail.area.name
                           }}</v-list-item-subtitle>
                         </template>
                         <template v-if="$i18n.locale === 'en'">
-                          <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
+                          <v-list-item-title>{{ spotDetail.name_ens }}</v-list-item-title>
                           <v-list-item-subtitle class="mt-1">{{
                             spotDetail.area.name_ens
                           }}</v-list-item-subtitle>
@@ -120,14 +120,14 @@
                     <v-btn
                       color="blue darken-1 align-center"
                       text
-                      @click="setSpot(spotDetail.area, spotDetail.spot)"
+                      @click="setSpot(spotDetail.area, spotDetail)"
                       >{{ $t('defaults.spot_detail') }}</v-btn
                     >
                   </div>
                   <v-img
                     :src="spotDetail.video.thumbnail"
                     alt="サムネイル"
-                    @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video)"
+                    @click="openDialog(spotDetail)"
                     style="cursor: pointer"
                   />
                 </div>
@@ -277,8 +277,8 @@ export default {
     // クリックしたカードの地点の国の詳細ページに遷移させる処理
     setSpot(area, spot) {
       // 地点のカウント数を+1する
-      this.clickCount(spot, area);
-      axios.get(`/countries/${spot.country_id}`).then((res) => {
+      this.clickCount(spot);
+      axios.get(`/countries/${area.id}`).then((res) => {
         this.$router.push({
           name: 'SpotResult',
           params: { id: res.data.area.id, spotId: spot.id },
@@ -286,10 +286,9 @@ export default {
       });
     },
     // カードがクリックされた時に+1カウントされる
-    clickCount(spot, area) {
+    clickCount(spot) {
       axios
-        .get(`/countries/${area.id}/spots/${spot.id}/edit`)
-        .then(() => {})
+        .get(`/spots/${spot.id}/edit`)
         .catch((error) => {
           console.log(error);
         });
@@ -299,24 +298,17 @@ export default {
       axios
         .get('/bookmarks')
         .then((res) => {
-          for (let i = 0; i < res.data.spots.length; i++) {
-            this.spotDetails.push({
-              id: i,
-              spot: res.data.spots[i],
-              area: res.data.areas[i],
-              video: res.data.videos[i],
-            });
-          }
+          this.spotDetails = res.data.spots
         })
         .catch((error) => {
           console.log(error);
         });
     },
     // お気に入り登録を解除する
-    unBookmark(id, spot) {
+    unBookmark(id) {
       // お気に入りスポットの配列から削除（非同期処理）
       this.spotDetails = this.spotDetails.filter((item) => item.id !== id);
-      axios.delete(`/bookmarks/${spot}`).catch((error) => {
+      axios.delete(`/bookmarks/${id}`).catch((error) => {
         console.log(error);
       });
     },
@@ -341,14 +333,14 @@ export default {
         });
     },
     // ダイアログの表示
-    openDialog(area, spot, video) {
+    openDialog(spot) {
       this.dialog = true;
-      this.title = video.title;
-      this.videoId = video.video_id;
-      this.viewCount = video.view_count;
-      this.publishedAt = video.published_at;
+      this.title = spot.video.title;
+      this.videoId = spot.video.video_id;
+      this.viewCount = spot.video.view_count;
+      this.publishedAt = spot.video.published_at;
       this.urlForEmbedVideo = `https://www.youtube.com/embed/${this.videoId}?autoplay=1&mute=1&loop=1&playlist=${this.videoId}`;
-      this.area = area;
+      this.area = spot.area;
       this.spot = spot;
     },
     // ダイアログを非表示にしdataを空にする

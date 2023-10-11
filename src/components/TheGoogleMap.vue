@@ -250,8 +250,8 @@ export default {
       // マーカー(地点)がクリックされた時にクリック数が+1カウントされる
       this.$emit('get-video', spot, area);
     },
-    clickCount(spot, area) {
-      this.$emit('click-count', spot, area);
+    clickCount(spot) {
+      this.$emit('click-count', spot);
     },
   },
 };

@@ -104,10 +104,14 @@ export default {
     ...mapActions('util', ['openSnackbar', 'closeSnackbar']),
     // DB内のすべての国名を取得
     setArea() {
-      axios.get('/countries').then((res) => {
-        for (let i = 0; i < res.data.all_areas.length; i++) {
-          this.areaName.push(res.data.all_areas[i].name);
-          this.areaNameEns.push(res.data.all_areas[i].name_ens);
+      axios.get('/countries', {
+        params: {
+            type: 'all',
+        },
+      }).then((res) => {
+        for (let i = 0; i < res.data.areas.length; i++) {
+          this.areaName.push(res.data.areas[i].name);
+          this.areaNameEns.push(res.data.areas[i].name_ens);
         }
       });
     },

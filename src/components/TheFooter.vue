@@ -155,9 +155,9 @@ export default {
     contact() {
       window.open('https://forms.gle/ywb5Q35iHSBmYM4s5', '_blank');
     },
-    // 公式Twitterを開く
+    // 開発者Twitterを開く
     twitter() {
-      window.open('https://twitter.com/VtourHub', '_blank');
+      window.open('https://twitter.com/O_H_K_N', '_blank');
     },
     // Twitterシェアを実行
     share() {

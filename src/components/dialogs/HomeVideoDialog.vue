@@ -66,7 +66,7 @@ export default {
       required: true,
     },
     viewCount: {
-      type: String,
+      type: Number,
       required: true,
     },
     publishedAt: {

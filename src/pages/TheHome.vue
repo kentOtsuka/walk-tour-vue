@@ -41,7 +41,7 @@ export default {
     },
     // 地点を全て取得
     getSpot() {
-      axios.get('/spots').then((res) => (this.spots = res.data.ranking.map((obj) => obj.spot)));
+      axios.get('/spots').then((res) => (this.spots = res.data.spots.map((obj) => obj.spot)));
     },
   },
 };
