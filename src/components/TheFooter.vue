@@ -157,7 +157,7 @@ export default {
     },
     // 開発者Twitterを開く
     twitter() {
-      window.open('https://twitter.com/O_H_K_N', '_blank');
+      window.open('https://twitter.com/kentotsuka', '_blank');
     },
     // Twitterシェアを実行
     share() {
