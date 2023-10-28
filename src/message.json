@@ -83,7 +83,8 @@
     },
     "news": {
       "updated_at": "更新日",
-      "content": "内容"
+      "content": "内容",
+      "nothings": "お知らせは特にありません"
     },
     "request": {
       "main_description": "本サービスの管理者に対して、地点の追加をリクエストすることができます。",
