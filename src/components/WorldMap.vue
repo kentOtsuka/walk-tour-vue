@@ -14,7 +14,7 @@
 <script>
 import axios from '../plugins/axios';
 window.jQuery = require('jquery');
-var $ = window.jQuery;
+let $ = window.jQuery;
 
 export default {
   mounted() {
@@ -37,7 +37,7 @@ export default {
         normalizeFunction: 'polynomial',
         // 国をクリックすると発火するアクション
         onRegionClick: (element, code) => {
-          var iso = code.toUpperCase();
+          let iso = code.toUpperCase();
           this.setArea(iso);
         },
       });
@@ -45,35 +45,36 @@ export default {
     // 地点登録のある国のみ色付けして表示する処理
     checkedArea() {
       axios.get('/countries').then((res) => {
-        var areas = res.data.iso;
-        for (let i = 0; i <= areas.length; i++) {
+        let areas = res.data.areas
+        for (let i = 0; i < areas.length; i++) {
           // iso二桁コードをもとに国の色付け
-          $('#vmap').vectorMap('set', 'colors', areas[i], '#5D99FF');
+          $('#vmap').vectorMap('set', 'colors', areas[i].iso.toLowerCase(), '#5D99FF');
         }
       });
     },
     // クリックされた国の詳細ページに遷移させる処理
     setArea(iso) {
       // iso二桁コードをもとにクリックされた国を取得
-      axios
-        .get('/set_country', {
-          params: {
-            iso: iso,
-          },
-        })
-        .then((res) => {
-          this.$router.push({ name: 'SpotResult', params: { id: res.data.id } });
-        })
-        .catch((res) => {
+      axios.get('/countries', {
+        params: {
+            type: 'all',
+        },
+      }).then((res) => {
+        let areas = res.data.areas;
+        let area = areas.find(area => area.iso == String(iso))
+        if (area.spots.length != 0) {
+          this.$router.push({ name: 'SpotResult', params: { id: area.id } });
+        } else {
           // 地点登録がない場合は遷移せずアラートで表示
           // 日本語
           if (this.$i18n.locale === 'ja') {
-            alert(res.response.data.name + 'の登録情報はありません');
+            alert(area.name + 'の登録情報はありません');
             return;
           }
           // 英語
-          alert('There is no registration information for ' + res.response.data.name_ens);
-        });
+          alert('There is no registration information for ' + area.name_ens);
+        }
+      })
     },
   },
 };

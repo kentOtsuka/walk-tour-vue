@@ -249,23 +249,27 @@ export default {
   methods: {
     // 3日前までに作成されたすべての地点とその国、動画を取得
     getSpot() {
-      axios.get('/spots').then((res) => {
-        for (let i = 0; i < res.data.create.length; i++) {
+      axios.get('/spots', {
+        params: {
+            type: 'recent',
+        },
+      }).then((res) => {
+        for (let i = 0; i < res.data.spots.length; i++) {
           // 取得した地点の中にユーザがお気に入り登録している地点があるかを判別する
-          if (this.spotBookmarks.includes(res.data.create[i].spot.id)) {
+          if (this.spotBookmarks.includes(res.data.spots[i].id)) {
             this.spotDetails.push({
               id: i,
-              spot: res.data.create[i].spot,
-              area: res.data.create[i].area,
-              video: res.data.create[i].video,
+              spot: res.data.spots[i],
+              area: res.data.spots[i].area,
+              video: res.data.spots[i].video,
               heart: true,
             });
           } else {
             this.spotDetails.push({
               id: i,
-              spot: res.data.create[i].spot,
-              area: res.data.create[i].area,
-              video: res.data.create[i].video,
+              spot: res.data.spots[i],
+              area: res.data.spots[i].area,
+              video: res.data.spots[i].video,
               heart: false,
             });
           }
@@ -275,7 +279,7 @@ export default {
     // クリックしたカードの地点の国の詳細ページに遷移させる処理
     setSpot(area, spot) {
       // 地点のカウント数を+1する
-      this.clickCount(spot, area);
+      this.clickCount(spot);
       axios.get(`/countries/${area.id}`).then((res) => {
         this.$router.push({
           name: 'SpotResult',
@@ -284,12 +288,9 @@ export default {
       });
     },
     // カードがクリックされた時に+1カウントされる
-    clickCount(spot, area) {
+    clickCount(spot) {
       axios
-        .get(`/countries/${area.id}/spots/${spot.id}/edit`)
-        // .then((res) => {
-        //   console.log(res.data.status);
-        // })
+        .get(`/spots/${spot.id}/edit`)
         .catch((error) => {
           console.log(error);
         });
@@ -308,26 +309,20 @@ export default {
         });
     },
     // お気に入りに登録する
-    bookmark(id, spot) {
+    bookmark(id) {
       this.spotDetails[id].heart = true;
       axios
-        .post('/bookmarks', { spot_id: spot })
-        // .then(res => {
-        //   console.log(res.data.status);
-        // })
+        .post('/bookmarks', { id: this.spotDetails[id].spot.id})
         .catch((error) => {
           console.log(error);
         });
     },
     // お気に入り登録を解除する
-    unBookmark(id, spot) {
+    unBookmark(id) {
       // お気に入りスポットの配列から削除（非同期処理）
       this.spotDetails[id].heart = false;
       axios
-        .delete(`/bookmarks/${spot}`)
-        // .then(res => {
-        //   console.log(res.data.status);
-        // })
+        .delete(`/bookmarks/${this.spotDetails[id].spot.id}`)
         .catch((error) => {
           console.log(error);
         });

@@ -19,9 +19,7 @@ export default {
   },
   methods: {
     clickButton() {
-      const { id, spot } = this.spotDetail;
-
-      this.$emit('click', id, spot.id);
+      this.$emit('click', this.spotDetail.id);
     },
   },
 };

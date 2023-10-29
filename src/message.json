@@ -6,6 +6,7 @@
       "register": "新規登録",
       "my_page": "マイページ",
       "hot_spot": "ホットスポット",
+      "favorite_spot": "お気に入り",
       "guide": "VtourHubでできること",
       "news": "お知らせ",
       "request_spot": "スポットをリクエスト",
@@ -18,7 +19,7 @@
       "terms": "利用規約",
       "contact": "お問い合わせ",
       "app_share": "Twitterシェア",
-      "twitter": "公式Twitter"
+      "twitter": "開発者Twitter"
     },
     "form": {
       "name": "お名前",
@@ -82,7 +83,8 @@
     },
     "news": {
       "updated_at": "更新日",
-      "content": "内容"
+      "content": "内容",
+      "nothings": "お知らせは特にありません"
     },
     "request": {
       "main_description": "本サービスの管理者に対して、地点の追加をリクエストすることができます。",
@@ -109,6 +111,7 @@
       "register": "Register",
       "my_page": "Profile",
       "hot_spot": "Hot Spot",
+      "favorite_spot": "Favorite Spot",
       "guide": "What's VtourHub?",
       "news": "News",
       "request_spot": "Spot Request",

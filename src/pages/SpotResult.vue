@@ -47,10 +47,10 @@
                 bottom
                 class="d-flex d-sm-none"
                 color="pink"
-                @click="unBookmark()"
+                @click="unBookmark"
                 >mdi-heart</v-icon
               >
-              <v-icon v-else right bottom class="d-flex d-sm-none" color="pink" @click="bookmark()"
+              <v-icon v-else right bottom class="d-flex d-sm-none" color="pink" @click="bookmark"
                 >mdi-heart-outline</v-icon
               >
             </template>
@@ -63,7 +63,7 @@
               bottom
               class="mb-2 d-none d-sm-flex"
               color="pink"
-              @click="unBookmark()"
+              @click="unBookmark"
               >mdi-heart</v-icon
             >
             <v-icon
@@ -72,7 +72,7 @@
               bottom
               class="mb-2 d-none d-sm-flex"
               color="pink"
-              @click="bookmark()"
+              @click="bookmark"
               >mdi-heart-outline</v-icon
             >
           </template>
@@ -159,7 +159,7 @@ export default {
         .get(`/countries/${this.id}`)
         .then((res) => {
           this.area = res.data.area;
-          this.spots = res.data.spots;
+          this.spots = this.area.spots;
         })
         .catch((error) => {
           console.log(error);
@@ -167,21 +167,13 @@ export default {
         });
     },
     // 地点に関する動画一覧ページに遷移する処理
-    getVideo(spot, area) {
+    getVideo(spot) {
       // マーカークリックと同時に'閲覧順'にフォーカスを当てる
       this.currentTab = 'viewTab';
       axios
-        .get(`/videos`, {
-          params: {
-            id: spot.id,
-            area_name: area.name,
-            iso: area.iso,
-            spot_name: spot.name,
-            spot_name_ens: spot.name_ens,
-          },
-        })
+        .get(`spots/${spot.id}/videos`)
         .then((res) => {
-          this.videos = res.data;
+          this.videos = res.data.videos;
           this.spotName = spot.name;
           this.spotNameEns = spot.name_ens;
           // お気に入り登録されているかを確認
@@ -199,7 +191,7 @@ export default {
         .get(`/countries/${this.id}`)
         .then((res) => {
           this.area = res.data.area;
-          this.spots = res.data.spots;
+          this.spots = this.area.spots;
           let i = 0;
           // APIで取得した地点の中でpropsで引き継いだ地点と同じものを探す
           while (i < this.spots.length) {
@@ -222,13 +214,10 @@ export default {
         });
     },
     // マーカー(地点)がクリックされた時に+1カウントされる
-    clickCount(spot, area) {
+    clickCount(spot) {
       this.markSpot = spot;
       axios
-        .get(`/countries/${area.id}/spots/${spot.id}/edit`)
-        // .then(res => {
-        //   console.log(res.data.status);
-        // })
+        .get(`/spots/${spot.id}/edit`)
         .catch((error) => {
           console.log(error);
         });
@@ -236,17 +225,9 @@ export default {
     // お気に入り済みかを確認
     bookmarked(spot) {
       axios
-        .get('/bookmarked', {
-          params: {
-            spot_id: spot.id,
-          },
-        })
+        .get(`/spots/${spot.id}`)
         .then((res) => {
-          if (res.data.status === 'yes') {
-            this.heart = true;
-          } else {
-            this.heart = false;
-          }
+          this.heart = res.data.spot.is_bookmarked
         })
         .catch((error) => {
           console.log(error);
@@ -257,19 +238,13 @@ export default {
       this.heart = true;
       if (this.markSpot.id === undefined) {
         axios
-          .post('/bookmarks', { spot_id: this.spot.id })
-          // .then(res => {
-          //   console.log(res.data.status);
-          // })
+          .post('/bookmarks', { id: this.spot.id })
           .catch((error) => {
             console.log(error);
           });
       } else {
         axios
-          .post('/bookmarks', { spot_id: this.markSpot.id })
-          // .then(res => {
-          //   console.log(res.data.status);
-          // })
+          .post('/bookmarks', { id: this.markSpot.id })
           .catch((error) => {
             console.log(error);
           });
@@ -281,18 +256,12 @@ export default {
       if (this.markSpot.id === undefined) {
         axios
           .delete(`/bookmarks/${this.spot.id}`)
-          // .then(res => {
-          //   console.log(res.data.status);
-          // })
           .catch((error) => {
             console.log(error);
           });
       } else {
         axios
           .delete(`/bookmarks/${this.markSpot.id}`)
-          // .then(res => {
-          //   console.log(res.data.status);
-          // })
           .catch((error) => {
             console.log(error);
           });
