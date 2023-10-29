@@ -1,18 +1,73 @@
 <template>
-  <v-container class="mb-16">
-    <h2 class="mb-1 d-flex align-center justify-center">
-      <v-icon left bottom color="red">mdi-fire</v-icon>
-      {{ $t('defaults.hot_spot') }}
+  <div v-if="spotDetails.length != 0">
+    <h2 class="d-flex align-center justify-center">
+      <v-icon left bottom color="yellow darken-1">mdi-new-box</v-icon>
+      {{ $t('top.new_spot') }}
     </h2>
+    <v-divider class="mb-2 mx-auto" style="max-width: 1200px; width: 90%" />
+    <!-- 画面幅がxs,smの時に表示 -->
+    <v-row class="mx-auto mb-2 hidden-md-and-up">
+      <v-col v-for="spotDetail in spotDetails" :key="spotDetail.id" cols="12" sm="12" md="4" lg="4">
+        <v-hover v-slot="{ hover }">
+          <v-card :elevation="hover ? 12 : 2" max-width="400px" style="margin: auto">
+            <v-img
+              :src="spotDetail.video.thumbnail"
+              alt="サムネイル"
+              @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video)"
+              style="cursor: pointer"
+            />
+            <template v-if="authUser">
+              <FavoriteButton
+                v-if="spotDetail.heart == true"
+                :is-favorite="true"
+                :spot-detail="spotDetail"
+                @click="unBookmark"
+              />
 
-    <v-divider class="mb-2" style="max-width: 700px; margin: auto" />
+              <FavoriteButton
+                v-if="spotDetail.heart == false"
+                :is-favorite="false"
+                :spot-detail="spotDetail"
+                @click="bookmark"
+              />
+            </template>
+            <div class="d-flex justify-space-between">
+              <v-list-item>
+                <v-list-item-content>
+                  <template v-if="$i18n.locale === 'ja'">
+                    <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                    <v-list-item-subtitle class="mt-1">{{
+                      spotDetail.area.name
+                    }}</v-list-item-subtitle>
+                  </template>
+                  <template v-if="$i18n.locale === 'en'">
+                    <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
+                    <v-list-item-subtitle class="mt-1">{{
+                      spotDetail.area.name_ens
+                    }}</v-list-item-subtitle>
+                  </template>
+                </v-list-item-content>
+              </v-list-item>
+              <v-card-actions>
+                <v-btn
+                  color="blue darken-1 align-center"
+                  text
+                  @click="setSpot(spotDetail.area, spotDetail.spot)"
+                  >{{ $t('defaults.spot_detail') }}</v-btn
+                >
+              </v-card-actions>
+            </div>
+          </v-card>
+        </v-hover>
+      </v-col>
+    </v-row>
 
-    <div class="d-flex justify-center">
-      <!-- 画面幅がxs,smの時に表示 -->
-      <v-row class="mx-auto hidden-md-and-up">
-        <v-col v-for="spotDetail in spotDetails" :key="spotDetail.id" cols="12" sm="6">
+    <!-- 画面幅がxlで表示 -->
+    <v-sheet class="mx-auto d-none d-xl-flex justify-center" max-width="1400">
+      <v-slide-group class="px-4" active-class="success" show-arrows height="400">
+        <v-slide-item v-for="spotDetail in spotDetails" :key="spotDetail.id">
           <v-hover v-slot="{ hover }">
-            <v-card :elevation="hover ? 12 : 2" max-width="400px" style="margin: auto">
+            <v-card :elevation="hover ? 12 : 2" width="300" class="ma-2" style="margin: auto">
               <v-img
                 :src="spotDetail.video.thumbnail"
                 alt="サムネイル"
@@ -37,18 +92,17 @@
               <div class="d-flex justify-space-between">
                 <v-list-item>
                   <v-list-item-content>
-                    <v-list-item-subtitle class="mb-2">
-                      {{ $t('defaults.spot_order', { number: spotDetail.id + 1 }) }}
-                    </v-list-item-subtitle>
                     <template v-if="$i18n.locale === 'ja'">
-                      <v-list-item-title class="my-1">{{ spotDetail.spot.name }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
+                      <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                      <v-list-item-subtitle class="mt-1">{{
+                        spotDetail.area.name
+                      }}</v-list-item-subtitle>
                     </template>
                     <template v-if="$i18n.locale === 'en'">
-                      <v-list-item-title class="my-1">{{
-                        spotDetail.spot.name_ens
-                      }}</v-list-item-title>
-                      <v-list-item-subtitle>{{ spotDetail.area.name_ens }}</v-list-item-subtitle>
+                      <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
+                      <v-list-item-subtitle class="mt-1">{{
+                        spotDetail.area.name_ens
+                      }}</v-list-item-subtitle>
                     </template>
                   </v-list-item-content>
                 </v-list-item>
@@ -63,94 +117,68 @@
               </div>
             </v-card>
           </v-hover>
-        </v-col>
-      </v-row>
+        </v-slide-item>
+      </v-slide-group>
+    </v-sheet>
 
-      <!-- 画面幅がmd, lg, xlで表示 -->
-      <v-row class="hidden-sm-and-down" style="max-width: 1000px; margin: auto">
-        <v-col
-          v-for="spotDetail in spotDetails"
-          :key="spotDetail.id"
-          cols="12"
-          lg="6"
-          md="12"
-          sm="12"
-        >
+    <!-- 画面幅がmd, lgで表示 -->
+    <v-sheet class="mx-auto d-none d-md-flex d-lg-flex d-xl-none justify-center" max-width="1080">
+      <v-slide-group class="px-4" active-class="success" show-arrows height="400">
+        <v-slide-item v-for="spotDetail in spotDetails" :key="spotDetail.id">
           <v-hover v-slot="{ hover }">
-            <v-card :elevation="hover ? 12 : 2" max-width="500px" style="margin: auto">
-              <div class="d-flex justify-space-between">
-                <div class="d-flex flex-column">
-                  <template v-if="authUser">
-                    <FavoriteButton
-                      v-if="spotDetail.heart == true"
-                      :is-favorite="true"
-                      :spot-detail="spotDetail"
-                      @click="unBookmark"
-                    />
+            <v-card :elevation="hover ? 12 : 2" width="300" class="ma-2" style="margin: auto">
+              <v-img
+                :src="spotDetail.video.thumbnail"
+                alt="サムネイル"
+                @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video)"
+                style="cursor: pointer"
+              />
+              <template v-if="authUser">
+                <FavoriteButton
+                  v-if="spotDetail.heart == true"
+                  :is-favorite="true"
+                  :spot-detail="spotDetail"
+                  @click="unBookmark"
+                />
 
-                    <FavoriteButton
-                      v-if="spotDetail.heart == false"
-                      :is-favorite="false"
-                      :spot-detail="spotDetail"
-                      @click="bookmark"
-                    />
-                  </template>
-                  <v-list-item style="width: 160px">
-                    <template v-if="authUser">
-                      <v-list-item-content class="pt-12">
-                        <v-list-item-subtitle class="mb-2">
-                          {{ $t('defaults.spot_order', { number: spotDetail.id + 1 }) }}
-                        </v-list-item-subtitle>
-                        <template v-if="$i18n.locale === 'ja'">
-                          <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
-                          <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
-                        </template>
-                        <template v-if="$i18n.locale === 'en'">
-                          <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
-                          <v-list-item-subtitle>{{
-                            spotDetail.area.name_ens
-                          }}</v-list-item-subtitle>
-                        </template>
-                      </v-list-item-content>
+                <FavoriteButton
+                  v-if="spotDetail.heart == false"
+                  :is-favorite="false"
+                  :spot-detail="spotDetail"
+                  @click="bookmark"
+                />
+              </template>
+              <div class="d-flex justify-space-between">
+                <v-list-item>
+                  <v-list-item-content>
+                    <template v-if="$i18n.locale === 'ja'">
+                      <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
+                      <v-list-item-subtitle class="mt-1">{{
+                        spotDetail.area.name
+                      }}</v-list-item-subtitle>
                     </template>
-                    <template v-else>
-                      <v-list-item-content>
-                        <v-list-item-subtitle class="mb-2">
-                          {{ $t('defaults.spot_order', { number: spotDetail.id + 1 }) }}
-                        </v-list-item-subtitle>
-                        <template v-if="$i18n.locale === 'ja'">
-                          <v-list-item-title>{{ spotDetail.spot.name }}</v-list-item-title>
-                          <v-list-item-subtitle>{{ spotDetail.area.name }}</v-list-item-subtitle>
-                        </template>
-                        <template v-if="$i18n.locale === 'en'">
-                          <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
-                          <v-list-item-subtitle>{{
-                            spotDetail.area.name_ens
-                          }}</v-list-item-subtitle>
-                        </template>
-                      </v-list-item-content>
+                    <template v-if="$i18n.locale === 'en'">
+                      <v-list-item-title>{{ spotDetail.spot.name_ens }}</v-list-item-title>
+                      <v-list-item-subtitle class="mt-1">{{
+                        spotDetail.area.name_ens
+                      }}</v-list-item-subtitle>
                     </template>
-                  </v-list-item>
-                  <v-divider />
+                  </v-list-item-content>
+                </v-list-item>
+                <v-card-actions>
                   <v-btn
-                    color="blue darken-1"
+                    color="blue darken-1 align-center"
                     text
                     @click="setSpot(spotDetail.area, spotDetail.spot)"
                     >{{ $t('defaults.spot_detail') }}</v-btn
                   >
-                </div>
-                <v-img
-                  :src="spotDetail.video.thumbnail"
-                  alt="サムネイル"
-                  @click="openDialog(spotDetail.area, spotDetail.spot, spotDetail.video)"
-                  style="cursor: pointer"
-                />
+                </v-card-actions>
               </div>
             </v-card>
           </v-hover>
-        </v-col>
-      </v-row>
-    </div>
+        </v-slide-item>
+      </v-slide-group>
+    </v-sheet>
 
     <!-- 動画のダイアログを表示 -->
     <v-dialog v-model="dialog" max-width="1200px">
@@ -166,25 +194,22 @@
         @reset-dialog="resetDialog"
       />
     </v-dialog>
-  </v-container>
+  </div>
 </template>
 
 <script>
 import axios from '../plugins/axios';
 import { mapGetters } from 'vuex';
 import Dialog from '../components/dialogs/HomeVideoDialog.vue';
-import { FavoriteButton } from '../components/elements/button';
+import { FavoriteButton } from './elements/button';
 
 export default {
   components: { Dialog, FavoriteButton },
-  metaInfo: {
-    title: 'ホットスポット',
-  },
   data() {
     return {
       // すべての地点その国、動画オブジェクトを格納する配列
       spotDetails: [],
-      // ユーザがお気に入り登録している地点のidを格納する配列
+      // 地点ランキング上位三つの各オブジェクトを格納する配列
       spotBookmarks: [],
       // ダイアログに渡すdata
       dialog: false,
@@ -222,15 +247,13 @@ export default {
     ...mapGetters('users', ['authUser']),
   },
   methods: {
-    // すべての地点とその国、動画を取得
+    // 3日前までに作成されたすべての地点とその国、動画を取得
     getSpot() {
-      axios.get('/spots').then((res) => {
-        // クリック数順に並び替え
-        res.data.spots
-          .sort((a, b) => {
-            return a.click_count - b.click_count;
-          })
-          .reverse();
+      axios.get('/spots', {
+        params: {
+            type: 'recent',
+        },
+      }).then((res) => {
         for (let i = 0; i < res.data.spots.length; i++) {
           // 取得した地点の中にユーザがお気に入り登録している地点があるかを判別する
           if (this.spotBookmarks.includes(res.data.spots[i].id)) {

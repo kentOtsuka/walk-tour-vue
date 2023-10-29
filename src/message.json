@@ -1,0 +1,212 @@
+{
+  "ja": {
+    "defaults": {
+      "top": "トップ",
+      "login": "ログイン",
+      "register": "新規登録",
+      "my_page": "マイページ",
+      "hot_spot": "ホットスポット",
+      "favorite_spot": "お気に入り",
+      "guide": "VtourHubでできること",
+      "news": "お知らせ",
+      "request_spot": "スポットをリクエスト",
+      "spot_order": "ランキング第%{number}位",
+      "spot_detail": "行ってみる！",
+      "videos": "%{spot}のVtour動画一覧",
+      "video_detail": "%{count}回視聴・%{published_at}",
+      "share": "Twitterに共有",
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約",
+      "contact": "お問い合わせ",
+      "app_share": "Twitterシェア",
+      "twitter": "開発者Twitter"
+    },
+    "form": {
+      "name": "お名前",
+      "email": "メールアドレス",
+      "password": "パスワード",
+      "password_confirmation": "パスワード確認",
+      "area": "国を選択",
+      "spot": "地名を入力",
+      "request_button": "リクエストを送る",
+      "no_data": "データがありません",
+      "login_success": "ログインしました",
+      "logout_success": "ログアウトしました",
+      "register_success": "新規登録が完了しました",
+      "edit_success": "プロフィールを編集しました",
+      "error": "予期せぬエラーが発生しました",
+      "login_error": "メールアドレスとパスワードが違います",
+      "register_error": "登録できませんでした"
+    },
+    "validate": {
+      "request_spot": "2〜20文字が有効です",
+      "name_presence": "お名前を入力してください",
+      "name_invalid": "2〜10文字が有効です",
+      "email_presence": "メールアドレスを入力してください",
+      "email_invalid": "メールアドレスが無効です",
+      "password_presence": "パスワードを入力してください",
+      "password_invalid": "8文字以上半角英数記号のみが有効です"
+    },
+    "top": {
+      "subtitle": "気になる街へ行こう",
+      "count": "%{areas}カ国 %{spots}地点を登録中",
+      "world_map": "地図から探す",
+      "new_spot": "Newスポット",
+      "ranking_button": "ランキング一覧を見てみる"
+    },
+    "autocomplete": {
+      "label": "国名から検索しよう",
+      "error_message": "検索ワードを選択してください"
+    },
+    "guide": {
+      "first_title": "1. 旅行気分を味わえる",
+      "first_content": "Youtube上にある#4kwalk, #walkingtourなどのバーチャルツアーの動画を活用し、いつでもどこでも旅行気分を味わうことができます。",
+      "second_title": "2. スポットをお気に入り登録",
+      "second_content": "ユーザー登録しログインすると、お気に入りのスポットをブックマーク登録できます。ブックマークは、マイページから確認できます。",
+      "third_title": "3. 自分だけの旅行ツアーを組める",
+      "third_content": "こちらの機能は只今準備中です。"
+    },
+    "menu": {
+      "home": "トップページ",
+      "login": "ログイン",
+      "logout": "ログアウト"
+    },
+    "profile": {
+      "attention": "スポットをお気に入り登録してみよう！",
+      "home_button": "トップページから探す",
+      "edit": "プロフィール編集"
+    },
+    "result": {
+      "attention": "マーカーをクリックしてください",
+      "popular": "閲覧順",
+      "new": "新着順"
+    },
+    "news": {
+      "updated_at": "更新日",
+      "content": "内容",
+      "nothings": "お知らせは特にありません"
+    },
+    "request": {
+      "main_description": "本サービスの管理者に対して、地点の追加をリクエストすることができます。",
+      "first_annotation": "※ リクエストされた地点の内、追加を見送ることもあるのでご了承ください。",
+      "second_annotation": "※ お知らせ欄から追加された地点を確認することができます。",
+      "send": "送信しました！"
+    },
+    "share": {
+      "footer": {
+        "content": "%40VtourHub で気になる街へ行こう%0a%0a%23旅行 %23旅行好きと繋がりたい%0a%23travel%0a%23walkingtour%0a%23VtourHub%0avtourhub.jp/"
+      },
+      "dialog": {
+        "content": "%{spot}をオンライン旅行中✈️ %40VtourHub より%0a☞vtourhub.jp/countries/%{id}",
+        "area_name": "%{area}",
+        "spot_name": "%{spot}",
+        "travel": "旅行"
+      }
+    }
+  },
+  "en": {
+    "defaults": {
+      "top": "Top",
+      "login": "Login",
+      "register": "Register",
+      "my_page": "Profile",
+      "hot_spot": "Hot Spot",
+      "favorite_spot": "Favorite Spot",
+      "guide": "What's VtourHub?",
+      "news": "News",
+      "request_spot": "Spot Request",
+      "spot_order": "No. %{number}",
+      "spot_detail": "go！",
+      "videos": "List of Vtour in %{spot}",
+      "video_detail": "%{count}views・%{published_at}",
+      "share": "Twitter Share",
+      "no_data": "No data available",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Use",
+      "contact": "Contact",
+      "app_share": "Twitter Share",
+      "twitter": "Official"
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "password_confirmation": "Confirm Password",
+      "area": "Select Country",
+      "spot": "Enter spot name",
+      "request_button": "Send",
+      "no_data": "No data available",
+      "login_success": "Logged in",
+      "logout_success": "Logged out",
+      "register_success": "New registration completed!",
+      "edit_success": "Profile has been edited.",
+      "error": "An unexpected error has occurred.",
+      "login_error": "Email and password are different",
+      "register_error": "Could not register"
+    },
+    "validate": {
+      "request_spot": "2-20 characters are valid",
+      "name_presence": "Enter your name",
+      "name_invalid": "2-10 characters are valid",
+      "email_presence": "Enter your email",
+      "email_invalid": "Invalid email",
+      "password_presence": "Enter your password",
+      "password_invalid": "Only alphanumeric symbols of at least 8 characters are valid"
+    },
+    "top": {
+      "subtitle": "Let's go to the city",
+      "count": "%{areas} spots in %{spots} countries are currently registered",
+      "world_map": "Search by Map",
+      "new_spot": "New Spot",
+      "ranking_button": "View Ranking List"
+    },
+    "autocomplete": {
+      "label": "Search by Country",
+      "error_message": "Please select a search word"
+    },
+    "guide": {
+      "first_title": "1. Travel Feeling",
+      "first_content": "You can take advantage of '#4kwalk', '#walkingtour' and other virtual tour videos on Youtube to feel like you are traveling anytime, anywhere.",
+      "second_title": "2. Add a spot as a favorite",
+      "second_content": "Once you have registered and logged in, you can register your favorite spots as bookmarks. Bookmarks can be viewed from My Page.",
+      "third_title": "3. Build your own travel tour",
+      "third_content": "This function is currently under preparation."
+    },
+    "menu": {
+      "home": "Top",
+      "login": "Login",
+      "logout": "Logout"
+    },
+    "profile": {
+      "attention": "Register a spot as a favorite!",
+      "home_button": "Back to Top",
+      "edit": "Edit Profile"
+    },
+    "result": {
+      "attention": "Click on the marker",
+      "popular": "popular",
+      "new": "recent"
+    },
+    "news": {
+      "updated_at": "date",
+      "content": "content"
+    },
+    "request": {
+      "main_description": "You may request the administrator of this service to add a spot.",
+      "first_annotation": "※ Please note that some of the requested spots may not be added.",
+      "second_annotation": "※ You can see the added spots from the Notices column.",
+      "send": "Your request has been sent!"
+    },
+    "share": {
+      "footer": {
+        "content": "Have a nice trip by online✈%0avia @VtourHub%0a%0a%23travel%20%23vacation%0a%23walkingtour%0a%23VtourHub%0avtourhub.jp/"
+      },
+      "dialog": {
+        "content": "Traveling to %{spot_ens} online✈️ via @VtourHub%0a☞vtourhub.jp/countries/%{id}",
+        "area_name": "%{area_ens}",
+        "spot_name": "%{spot_ens}",
+        "travel": "travel"
+      }
+    }
+  }
+}
